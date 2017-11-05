@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/admin/giangvien/add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/giangvien/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/trangchu/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/tiles/admin/template/footer.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/tiles/admin/template/header.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/tiles/admin/template/left-sidebar.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/tiles/admin/template/topbar.jsp=UTF-8
+encoding/<project>=UTF-8
