@@ -32,7 +32,11 @@
                             <div class="col-lg-12">
                                 <div class="card-box">
                                     <h4 class="m-t-0 header-title"><b>Recent Candidates</b></h4>
-
+									<div>
+										<a href='<c:url value='giangvien/add' />' class="btn btn-primary">
+											<span>Thêm giảng viên</span>
+										</a>
+									</div>	
                                     <div class="table-responsive">
                                         <table class="table table-hover m-0 mails table-actions-bar">
 
@@ -50,152 +54,29 @@
                                                         </ul>
                                                     </div>
                                                 </th>
+                                                <th>ID</th>
                                                 <th>Name</th>
-                                                <th>Location</th>
-                                                <th>Job Timing</th>
-                                                <th>Salary</th>
-                                                <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>
-													<img src="<c:url value='/resources/admin/boostrap/images/users/avatar-2.jpg' />" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Tomaslau</h5>
-                                                    <p class="m-b-0"><small>Web Designer</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> New York
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-clock text-success"></i> Full Time
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 3265
-                                                </td>
-
-                                                <td>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <img src="<c:url value='/resources/admin/boostrap/images/users/avatar-3.jpg'/> " alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Erwin E. Brown</h5>
-                                                    <p class="m-b-0"><small>Programmer</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> California
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-clock text-success"></i> Part Time
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 1365
-                                                </td>
-
-                                                <td>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="<c:url value='/resources/admin/boostrap/images/users/avatar-4.jpg'/> " alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Margeret V. Ligon</h5>
-                                                    <p class="m-b-0"><small>Web Designer</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> New York
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-clock text-success"></i> Full Time
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 115248
-                                                </td>
-
-                                                <td>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                	
-                                                    <img src="<c:url value='/resources/admin/boostrap/images/users/avatar-5.jpg'/>" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Jose D. Delacruz</h5>
-                                                    <p class="m-b-0"><small>Web Developer</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> New York
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-clock text-success"></i> Part Time
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 2451
-                                                </td>
-
-                                                <td>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <img src="<c:url value='/resources/admin/boostrap/images/users/avatar-8.jpg'/>" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
-                                                </td>
-
-                                                <td>
-                                                    <h5 class="m-b-0 m-t-0">Luke J. Sain</h5>
-                                                    <p class="m-b-0"><small>Web Designer</small></p>
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-map-marker text-primary"></i> Australia
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-clock text-success"></i> Part Time
-                                                </td>
-
-                                                <td>
-                                                    <i class="mdi mdi-currency-usd text-warning"></i> 3265
-                                                </td>
-
-                                                <td>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
-                                                </td>
-                                            </tr>
+                                            <c:forEach items="${list}" var="item">
+	                                            <tr>
+	                                                <td>
+														<img src="<c:url value='/resources/admin/boostrap/images/users/avatar-2.jpg' />" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+	                                                </td>
+	                                                <td>
+	                                                    <h5 class="m-b-0 m-t-0">${item.id}</h5>
+	                                                </td>
+	                                                <td>
+	                                                    <i class="mdi mdi-map-marker text-primary"></i> ${item.ten}
+	                                                </td>
+	                                                <td>
+	                                                    <a href='<c:url value='/giangvien/edit/${item.id}' />' class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
+	                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
+	                                                </td>
+	                                            </tr>
+											</c:forEach>
+                                            
 
                                             </tbody>
                                         </table>

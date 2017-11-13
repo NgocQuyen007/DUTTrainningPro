@@ -19,5 +19,15 @@ public class GiangVienDao {
 		String sql = "SELECT * FROM giang_vien";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<GiangVien>(GiangVien.class));
 	}
+
+	public int add(GiangVien giangvien) {
+		String sql = "INSERT INTO giang_vien(ten) VALUES(?)";
+		return jdbcTemplate.update(sql, new Object[]{giangvien.getTen()});
+	}
+
+	public GiangVien getItem(int id) {
+		String sql = "SELECT * FROM giang_vien WHERE id = ?";
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<GiangVien>(GiangVien.class), id);
+	}
 	
 }

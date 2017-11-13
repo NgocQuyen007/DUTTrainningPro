@@ -25,5 +25,8 @@
 	<definition name="admin.giangvien.add" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/giangvien/add.jsp"></put-attribute>
 	</definition>
+	<definition name="admin.giangvien.edit" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/giangvien/edit.jsp"></put-attribute>
+	</definition>
 	
 </tiles-definitions>

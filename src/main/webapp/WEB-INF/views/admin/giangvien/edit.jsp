@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Thêm Giảng Viên</h4>
+                                    <h4 class="page-title">Sửa Giảng Viên</h4>
                                     <ol class="breadcrumb p-0 m-0">
                                         <li>
                                             <a href="#">DUT</a>
@@ -33,15 +33,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form id="default-wizard" method="POST" action='<c:url value='/giangvien/add' />'>
+                                    <form id="default-wizard" method="POST" action='<c:url value='/giangvien/edit' />'>
                                         <fieldset title="1">
-                                            <legend>Add Information Division</legend>
+                                            <legend>Sứa Information Division</legend>
 
                                             <div class="row m-t-20">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label for="firstname">Division Name</label>
-                                                        <input type="text" name="ten"class="form-control" id="firstname" placeholder="">
+                                                        <input type="text" value="${giangvien.ten}" name="ten"class="form-control" id="firstname" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
