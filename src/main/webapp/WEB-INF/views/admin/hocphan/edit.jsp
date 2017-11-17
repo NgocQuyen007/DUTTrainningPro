@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Thêm Học Phần</h4>
+                                    <h4 class="page-title">Sửa Học Phần</h4>
                                     <ol class="breadcrumb p-0 m-0">
                                         <li>
                                             <a href="#">DUT</a>
@@ -21,7 +21,7 @@
                                             <a href="#">Học Phần</a>
                                         </li>
                                         <li class="active">
-                                            Thêm
+                                            Sửa
                                         </li>
                                     </ol>
                                     <div class="clearfix"></div>
@@ -34,9 +34,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form:form id="default-wizard" action="add" method="post" modelAttribute="hocphan">
+                                    <form:form id="default-wizard" method="post" modelAttribute="hocphan" action="edit" >
                                         <fieldset title="1">
-                                            <legend>Thêm Học Phần</legend>                                           
+                                            <legend>Sửa Học Phần</legend>                                           
                                             <div class="row m-t-20">
                                                 <div class="col-sm-6">
                                                 	<form:input type="hidden" path="id"></form:input>
@@ -60,13 +60,13 @@
                                                         <label for="loai_hoc_phan">Khối Kiến Thức</label>
                                                         <form:select class="form-control select2" id="khoi_kien_thuc_id" path="khoi_kien_thuc_id">
 															<c:forEach items="${requestScope.listkkt}" var="kkt">
-																<form:option value="${kkt.id }">${kkt.ten}</form:option>
+																<form:option selected="${hocphan.khoi_kien_thuc_id == kkt.id ? 'selected' : '' }" value="${kkt.id }">${kkt.ten}</form:option>
 															</c:forEach>
 														</form:select>
                                                     </div>
 													<div class="form-group">
                                                         <label for="khoi_kien_thuc_id">Số Tín Chỉ</label>
-                                                        <form:input type="text" class="form-control" id="so_tin_chi" path="so_tin_chi" placeholder="" value="" />
+                                                        <form:input type="text" class="form-control" id="so_tin_chi" path="so_tin_chi" placeholder=""/>
                                                     </div>
                                                 </div>
                                             </div>

@@ -32,9 +32,13 @@
                             <div class="col-lg-12">
                                 <div class="card-box">
                                     <h4 class="m-t-0 header-title"><b>Danh Sách Học Phần</b></h4>
+                                        <c:if test = "${message != null}">
+                                        	<div class="alert alert-success" role="alert">${message}</div>
+                                        </c:if>
                                         <table class="table table-hover m-0 mails table-actions-bar">
                                             <thead>
                                             <tr>
+                                            	<th>STT</th>
                                                 <th>Tên Tiếng Việt</th>
                                                 <th>Tên Tiếng Anh</th>
                                                 <th>Mã Học Phần</th>
@@ -43,9 +47,12 @@
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
-                                            <tbody>                                                                                        
+                                            <tbody>
+                                            	<%int j = 1; %>                                                                                        
 		                                        <c:forEach items="${requestScope.list}" var="i">
 		                                            <tr>
+		                                            	<td><%=j++%></td>
+		                                            	
 		                                                <td>${i.vi_name}</td>
 		
 		                                                <td>${i.en_name}</td>
@@ -57,8 +64,8 @@
 		                                                <td>${i.so_tin_chi}</td>
 		
 		                                                <td>
-		                                                	<a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    		<a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
+		                                                	<a href="hocphan/edit/${i.id}" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
+                                                    		<a href="hocphan/delete/${i.id}" class="table-action-btn"><i class="mdi mdi-close"></i></a>
 		                                                </td>
 													</tr> 
 												</c:forEach>	                                                                                  		
@@ -76,3 +83,5 @@
                 </footer>
 
             </div>
+            
+            

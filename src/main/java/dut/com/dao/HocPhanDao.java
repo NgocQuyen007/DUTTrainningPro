@@ -33,10 +33,10 @@ public class HocPhanDao {
 	}
 	
 	public void update(HocPhan hp){
-		String sql = "UPDATE hoc_phan set vi_name=?, en_name=?,  ma_hoc_phan=?, loai_hoc_phan=?"
-				+ "khoi_kien_thuc_id=?, de_cuong_chi_tiet_id=?, so_tin_chi=? where id=?";
+		String sql = "UPDATE hoc_phan SET vi_name=?, en_name=?,  ma_hoc_phan=?, loai_hoc_phan=?,"
+				+ "khoi_kien_thuc_id=?, so_tin_chi=? where id=?";
 		jdbcTemplate.update(sql,hp.getVi_name(),hp.getEn_name(),hp.getMa_hoc_phan(),
-				hp.getLoai_hoc_phan(),hp.getKhoi_kien_thuc_id(),hp.getDe_cuong_chi_tiet_id(),hp.getSo_tin_chi(),hp.getId());
+				hp.getLoai_hoc_phan(),hp.getKhoi_kien_thuc_id(),hp.getSo_tin_chi(),hp.getId());
 	}
 	
 	public void delete(int id){

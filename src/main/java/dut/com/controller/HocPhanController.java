@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +28,7 @@ public class HocPhanController {
 	KhoiKienThucDao daokkt;
 	
 	@GetMapping
-	public String index(Model model){
+	public String index(ModelMap model){
 		List<HocPhan> list = new ArrayList<HocPhan>();
 		list = daohp.getAll();
 		model.addAttribute("list",list);
@@ -36,7 +36,7 @@ public class HocPhanController {
 	}
 	
 	@RequestMapping(path="add", method=RequestMethod.GET)
-	public String add(Model model){
+	public String add(ModelMap model){
 		HocPhan hocphan = new HocPhan();
 		List<KhoiKienThuc> list = new ArrayList<KhoiKienThuc>();
 		list = daokkt.getAll();
@@ -49,7 +49,30 @@ public class HocPhanController {
 	public String save(@ModelAttribute("hocphan") HocPhan hocphan, ModelMap model){
 		System.out.print(hocphan.toString());
 		daohp.add(hocphan);
-		model.addAttribute("message", "Đã thêm học phần thành công");
-		return "admin.hocphan.add";
+		return "redirect:/hocphan";
+	}
+	
+	@RequestMapping(path="edit/{id}", method=RequestMethod.GET)
+	public String edit(@PathVariable("id") int id, ModelMap model){
+		HocPhan hocphan = new HocPhan();
+		hocphan = daohp.getHocPhanById(id);
+		List<KhoiKienThuc> list = new ArrayList<KhoiKienThuc>();
+		list = daokkt.getAll();
+		model.addAttribute("listkkt", list);
+		model.addAttribute("hocphan", hocphan);
+		return "admin.hocphan.edit";
+	}
+	
+	@RequestMapping(path="edit/edit", method=RequestMethod.POST)
+	public String edit(@ModelAttribute("hocphan") HocPhan hocphan, ModelMap model){
+		System.out.println(hocphan.toString());
+		daohp.update(hocphan);
+		return "redirect:/hocphan";
+	}
+	
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+	public String delete(@PathVariable("id") int id) {
+		daohp.delete(id);
+		return "redirect:/hocphan";
 	}
 }
