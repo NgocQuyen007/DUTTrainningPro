@@ -26,8 +26,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/admin/giangvien/add.jsp"></put-attribute>
 	</definition>
 	
-	
+	<!-- Học phần -->	
 	<definition name="admin.hocphan.index" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/hocphan/index.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.hocphan.add" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/hocphan/add.jsp"></put-attribute>
 	</definition>
 </tiles-definitions>

@@ -37,8 +37,9 @@
                                             <tr>
                                                 <th>Tên Tiếng Việt</th>
                                                 <th>Tên Tiếng Anh</th>
-                                                <th>Job Timing</th>
-                                                <th>Salary</th>
+                                                <th>Mã Học Phần</th>
+                                                <th>Loại Học Phần</th>
+                                                <th>Số Tín Chỉ</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -49,9 +50,11 @@
 		
 		                                                <td>${i.en_name}</td>
 		
-		                                                <td></td>
+		                                                <td>${i.ma_hoc_phan}</td>
 		
-		                                                <td></td>
+		                                                <td>${i.loai_hoc_phan}</td>
+		                                                
+		                                                <td>${i.so_tin_chi}</td>
 		
 		                                                <td>
 		                                                	<a href="#" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>

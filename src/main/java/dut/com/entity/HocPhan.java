@@ -11,6 +11,8 @@ public class HocPhan {
 	private String ma_hoc_phan;
 	private String loai_hoc_phan;
 	private int khoi_kien_thuc_id;
+	private int de_cuong_chi_tiet_id;
+	private int so_tin_chi;
 	
 	public HocPhan() {
 		super();
@@ -35,6 +37,20 @@ public class HocPhan {
 		this.ma_hoc_phan = ma_hoc_phan;
 		this.loai_hoc_phan = loai_hoc_phan;
 		this.khoi_kien_thuc_id = khoi_kien_thuc_id;
+	}
+
+	public HocPhan(int id, String vi_name, String en_name, String ma_hoc_phan,
+			String loai_hoc_phan, int khoi_kien_thuc_id,
+			int de_cuong_chi_tiet_id, int so_tin_chi) {
+		super();
+		this.id = id;
+		this.vi_name = vi_name;
+		this.en_name = en_name;
+		this.ma_hoc_phan = ma_hoc_phan;
+		this.loai_hoc_phan = loai_hoc_phan;
+		this.khoi_kien_thuc_id = khoi_kien_thuc_id;
+		this.de_cuong_chi_tiet_id = de_cuong_chi_tiet_id;
+		this.so_tin_chi = so_tin_chi;
 	}
 
 	public int getId() {
@@ -83,6 +99,22 @@ public class HocPhan {
 
 	public void setKhoi_kien_thuc_id(int khoi_kien_thuc_id) {
 		this.khoi_kien_thuc_id = khoi_kien_thuc_id;
+	}
+
+	public int getDe_cuong_chi_tiet_id() {
+		return de_cuong_chi_tiet_id;
+	}
+
+	public void setDe_cuong_chi_tiet_id(int de_cuong_chi_tiet_id) {
+		this.de_cuong_chi_tiet_id = de_cuong_chi_tiet_id;
+	}
+
+	public int getSo_tin_chi() {
+		return so_tin_chi;
+	}
+
+	public void setSo_tin_chi(int so_tin_chi) {
+		this.so_tin_chi = so_tin_chi;
 	}
 
 	@Override
