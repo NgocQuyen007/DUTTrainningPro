@@ -31,53 +31,93 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="m-t-0 header-title"><b>Recent Candidates</b></h4>
 									<div>
-										<a href='<c:url value='giangvien/add' />' class="btn btn-primary">
+										<c:if test="${param['msg'] eq 'add'}">
+											<div class="alert alert-danger action-success" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  THÊM THÀNH CÔNG
+												</div>
+										</c:if>
+										<c:if test="${param['msg'] eq 'edit'}">
+											<div class="alert alert-danger action-success" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  SỬA THÀNH CÔNG
+												</div>
+										</c:if>
+										<c:if test="${param['msg'] eq 'del'}">
+											<div class="alert alert-danger action-success" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  XÓA THÀNH CÔNG
+												</div>
+										</c:if>
+										<a href='<c:url value='/giangvien/add' />' class="btn btn-primary">
 											<span>Thêm giảng viên</span>
-										</a>
+										</a> <br />
 									</div>	
                                     <div class="table-responsive">
-                                        <table class="table table-hover m-0 mails table-actions-bar">
-
+                                        <table class="table table-hover m-0 mails table-actions-bar table-striped">
                                             <thead>
                                             <tr>
-                                                <th>
-                                                    <div class="btn-group dropdown">
-                                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="caret"></i></button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Action</a></li>
-                                                            <li><a href="#">Another action</a></li>
-                                                            <li><a href="#">Something else here</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="#">Separated link</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </th>
-                                                <th>ID</th>
-                                                <th>Name</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Họ tên</th>
+                                                <th>Ngày sinh</th>
+                                                <th>Giới tính</th>
+                                                <th>Email</th>
+                                                <th>SĐT</th>
+                                                <th>Cấp bậc</th>
+                                                <th>Khoa</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${list}" var="item">
+                                            <c:forEach items="${giangviens}" var="item">
 	                                            <tr>
+	                                            	<c:if test="${item.avatar eq ''}">
+		                                                <td>
+															<img src="<c:url value='/resources/admin/bootstrap/images/users/avatar-2.jpg' />" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+		                                                </td>
+	                                                </c:if>
+	                                                <c:if test="${item.avatar ne ''}">
+		                                                <td>
+															<img src="${pageContext.request.contextPath}/files/${item.avatar}"  alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+		                                                </td>
+	                                                </c:if>
 	                                                <td>
-														<img src="<c:url value='/resources/admin/boostrap/images/users/avatar-2.jpg' />" alt="contact-img" title="contact-img" class="img-circle thumb-sm" />
+	                                                    <i class="text-primary"></i> ${item.ten}
 	                                                </td>
 	                                                <td>
-	                                                    <h5 class="m-b-0 m-t-0">${item.id}</h5>
+	                                                    <i class="text-primary"></i> ${item.ngaySinh}
 	                                                </td>
 	                                                <td>
-	                                                    <i class="mdi mdi-map-marker text-primary"></i> ${item.ten}
+	                                                    <c:choose>
+	                                                    	<c:when test="${item.gioiTinh==true}">
+	                                                    		Nam
+	                                                    	</c:when>
+	                                                    	<c:otherwise>
+	                                                    		Nữ
+	                                                    	</c:otherwise>
+	                                                    </c:choose> 
+	                                                </td>
+	                                                <td>
+	                                                    <i class="text-primary"></i> ${item.email}
+	                                                </td>
+	                                                <td>
+	                                                    <i class="text-primary"></i> ${item.soDienThoai}
+	                                                </td>
+	                                                <td>
+	                                                    <i class="text-primary"></i> ${item.hocVi.hocVi}
+	                                                </td>
+	                                                <td>
+	                                                    <i class="mdi mdi-map-marker text-primary"></i> ${item.khoa.ten}
 	                                                </td>
 	                                                <td>
 	                                                    <a href='<c:url value='/giangvien/edit/${item.id}' />' class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-	                                                    <a href="#" class="table-action-btn"><i class="mdi mdi-close"></i></a>
+	                                                    <a href='<c:url value='/giangvien/del/${item.id}' />' onclick="return confirm('Are you sure to delete this item?');" class="table-action-btn"><i class="mdi mdi-close"></i></a>
 	                                                </td>
 	                                            </tr>
 											</c:forEach>
-                                            
-
                                             </tbody>
                                         </table>
                                     </div>

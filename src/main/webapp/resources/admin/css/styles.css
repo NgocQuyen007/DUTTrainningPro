@@ -1,0 +1,15 @@
+.action-success {
+	background-color: #64c5b1 !important; 
+	font-weight: bold !important; 
+	border-color: white !important;
+}
+
+.pass-fail{
+	font-weight: bold;
+	color: red;
+}
+
+.pass-success{
+	font-weight: bold;
+	color: #6cb33e;
+}

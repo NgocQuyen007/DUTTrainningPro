@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>			
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>		
           <!-- ========== Left Sidebar Start ========== -->
             <div class="left side-menu">
                 <div class="slimscroll-menu" id="remove-scroll">
@@ -39,8 +40,8 @@
 							<li>
                                 <a href="javascript: void(0);"><i class="fi-help"></i> <span> Quản Lí Giảng Viên </span><span class="menu-arrow"></span></a>
 								<ul class="nav-second-level nav" aria-expanded="true">
-									<li><a href="dsgiangvien.jsp">Danh Sách Giảng Viên</a></li>
-									<li><a href="themgiangvien.jsp">Thêm Giảng Viên</a></li>
+									<li><a href='<c:url value="/giangvien" />'>Danh Sách Giảng Viên</a></li>
+									<li><a href='<c:url value="/giangvien/add" />'>Thêm Giảng Viên</a></li>
 								</ul>
                             </li>
                         </ul>
