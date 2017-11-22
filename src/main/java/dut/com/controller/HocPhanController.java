@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,10 +47,13 @@ public class HocPhanController {
 	}
 	
 	@RequestMapping(path="add", method=RequestMethod.POST)
-	public String save(@ModelAttribute("hocphan") HocPhan hocphan, ModelMap model){
+	public String save(@ModelAttribute("hocphan") HocPhan hocphan, ModelMap model, BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			return "redirect:/hocphan/add?msg=1";
+		}
 		System.out.print(hocphan.toString());
 		daohp.add(hocphan);
-		return "redirect:/hocphan";
+		return "redirect:/hocphan/?msg=add";
 	}
 	
 	@RequestMapping(path="edit/{id}", method=RequestMethod.GET)
@@ -63,16 +67,19 @@ public class HocPhanController {
 		return "admin.hocphan.edit";
 	}
 	
-	@RequestMapping(path="edit/edit", method=RequestMethod.POST)
-	public String edit(@ModelAttribute("hocphan") HocPhan hocphan, ModelMap model){
+	@RequestMapping(path="edit/{id}", method=RequestMethod.POST)
+	public String edit(@ModelAttribute("hocphan") HocPhan hocphan, @PathVariable int id, ModelMap model, BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			return "redirect:/hocphan/edit/"+id+"?msg=2";
+		}
 		System.out.println(hocphan.toString());
 		daohp.update(hocphan);
-		return "redirect:/hocphan";
+		return "redirect:/hocphan/?msg=edit";
 	}
 	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") int id) {
 		daohp.delete(id);
-		return "redirect:/hocphan";
+		return "redirect:/hocphan?msg=del";
 	}
 }

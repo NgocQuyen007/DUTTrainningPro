@@ -32,9 +32,27 @@
                             <div class="col-lg-12">
                                 <div class="card-box">
                                     <h4 class="m-t-0 header-title"><b>Danh Sách Học Phần</b></h4>
-                                        <c:if test = "${message != null}">
-                                        	<div class="alert alert-success" role="alert">${message}</div>
-                                        </c:if>
+                                        <c:if test="${param['msg'] eq 'add'}">
+											<div class="alert alert-danger action-success" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  THÊM THÀNH CÔNG
+												</div>
+										</c:if>
+										<c:if test="${param['msg'] eq 'edit'}">
+											<div class="alert alert-danger action-success" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  SỬA THÀNH CÔNG
+												</div>
+										</c:if>
+										<c:if test="${param['msg'] eq 'del'}">
+											<div class="alert alert-danger action-success" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  XÓA THÀNH CÔNG
+												</div>
+										</c:if>
                                         <table class="table table-hover m-0 mails table-actions-bar">
                                             <thead>
                                             <tr>
@@ -64,8 +82,8 @@
 		                                                <td>${i.so_tin_chi}</td>
 		
 		                                                <td>
-		                                                	<a href="hocphan/edit/${i.id}" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    		<a href="hocphan/delete/${i.id}" class="table-action-btn"><i class="mdi mdi-close"></i></a>
+		                                                	<a href="<c:url value='/hocphan/edit/${i.id}' />" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
+                                                    		<a href="<c:url value='/hocphan/delete/${i.id}' />" class="table-action-btn"><i class="mdi mdi-close"></i></a>
 		                                                </td>
 													</tr> 
 												</c:forEach>	                                                                                  		

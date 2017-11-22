@@ -34,9 +34,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form:form id="default-wizard" method="post" modelAttribute="hocphan" action="edit" >
+                                <c:url var="addUrl" value='/hocphan/edit/${hocphan.id}'/>
+                                    <form:form id="default-wizard" method="post" modelAttribute="hocphan" action='${addUrl}'>
                                         <fieldset title="1">
-                                            <legend>Sửa Học Phần</legend>                                           
+                                            <legend>Sửa Học Phần</legend>
+                                            <c:if test="${param['msg'] eq '2'}">
+												<div class="alert alert-danger" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  Chỉnh sửa học phần thất bại
+												</div>
+											</c:if>                                           
                                             <div class="row m-t-20">
                                                 <div class="col-sm-6">
                                                 	<form:input type="hidden" path="id"></form:input>

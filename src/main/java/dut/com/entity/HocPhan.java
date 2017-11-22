@@ -19,7 +19,7 @@ public class HocPhan {
 	}
 
 	public HocPhan(int id, String vi_name, String en_name, String ma_hoc_phan,
-			String loai_hoc_phan, int khoi_kien_thuc_id) {
+			String loai_hoc_phan, int khoi_kien_thuc_id, int so_tin_chi) {
 		super();
 		this.id = id;
 		this.vi_name = vi_name;
@@ -27,6 +27,7 @@ public class HocPhan {
 		this.ma_hoc_phan = ma_hoc_phan;
 		this.loai_hoc_phan = loai_hoc_phan;
 		this.khoi_kien_thuc_id = khoi_kien_thuc_id;
+		this.so_tin_chi = so_tin_chi;
 	}
 
 	public HocPhan(String vi_name, String en_name, String ma_hoc_phan,
@@ -122,9 +123,10 @@ public class HocPhan {
 		return "HocPhan [id=" + id + ", vi_name=" + vi_name + ", en_name="
 				+ en_name + ", ma_hoc_phan=" + ma_hoc_phan + ", loai_hoc_phan="
 				+ loai_hoc_phan + ", khoi_kien_thuc_id=" + khoi_kien_thuc_id
-				+ "]";
+				+ ", de_cuong_chi_tiet_id=" + de_cuong_chi_tiet_id
+				+ ", so_tin_chi=" + so_tin_chi + "]";
 	}
-	
+
 	
 	
 }

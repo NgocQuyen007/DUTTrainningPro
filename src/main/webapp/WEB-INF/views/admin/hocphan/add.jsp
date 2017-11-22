@@ -36,6 +36,13 @@
                                 <div class="card-box">
                                     <form:form id="default-wizard" action="add" method="post" modelAttribute="hocphan">
                                         <fieldset title="1">
+                                        	<c:if test="${param['msg'] eq '1'}">
+												<div class="alert alert-danger" role="alert">
+												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+												  <span class="sr-only">Error:</span>
+												  Thêm học phần thất bại
+												</div>
+											</c:if>
                                             <legend>Thêm Học Phần</legend>                                           
                                             <div class="row m-t-20">
                                                 <div class="col-sm-6">

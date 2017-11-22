@@ -3,6 +3,8 @@ package dut.com.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import dut.com.dao.rowmapper.HocPhanRowMapper;
 import dut.com.entity.HocPhan;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,11 @@ public class HocPhanDao {
 	
 	public List<HocPhan> getAll(){
 		String sql = "SELECT * FROM hoc_phan";
-		return jdbcTemplate.query(sql, new HocPhanMapper());
+		return jdbcTemplate.query(sql, new HocPhanRowMapper());
 	}
 	public HocPhan getHocPhanById(int id){
 		String sql = "SELECT * FROM hoc_phan WHERE id = ?";
-		return jdbcTemplate.queryForObject(sql, new Object[]{id}, new HocPhanMapper());
+		return jdbcTemplate.queryForObject(sql, new Object[]{id}, new HocPhanRowMapper());
 	}
 	
 	public void add(HocPhan hp){
@@ -42,19 +44,5 @@ public class HocPhanDao {
 	public void delete(int id){
 		String sql = "DELETE FROM hoc_phan where id=?";
 		jdbcTemplate.update(sql,id);
-	}
-	public class HocPhanMapper implements RowMapper<HocPhan>{
-		public HocPhan mapRow(ResultSet rs, int rowNum) throws SQLException {
-			HocPhan hp = new HocPhan();
-			hp.setId(rs.getInt(1));
-			hp.setVi_name(rs.getString(2));
-			hp.setEn_name(rs.getString(3));
-			hp.setMa_hoc_phan(rs.getString(4));
-			hp.setLoai_hoc_phan(rs.getString(5));
-			hp.setKhoi_kien_thuc_id(rs.getInt(6));
-			hp.setDe_cuong_chi_tiet_id(rs.getInt(7));
-			hp.setSo_tin_chi(rs.getInt(8));
-            return hp;
-		}
 	}
 }
