@@ -12,23 +12,19 @@
       <script src="<c:url value='/resources/admin/bootstrap/js/jquery.slimscroll.js'/>"></script>
       <script src="<c:url value='/resources/assets/main.js'/>"></script>
 
-      <!-- Counter js  
-	      <script src="../plugins/waypoints/jquery.waypoints.min.js'/>"></script>
-	      <script src="../plugins/counterup/jquery.counterup.min.js'/>"></script>
-      -->
-
-      <!--C3 Chart  
-	      <script type="text/javascript" src="../plugins/d3/d3.min.js'/>"></script>
-	      <script type="text/javascript" src="../plugins/c3/c3.min.js'/>"></script>
-      -->
-
-      <!--Echart Chart 
-	  <script src="../plugins/echart/echarts-all.js'/>"></script>
-	  -->
-
       <!-- Dashboard init -->
       <script src="<c:url value='/resources/admin/bootstrap/pages/jquery.dashboard.js'/>"></script>
 
       <!-- App js -->
       <script src="<c:url value='/resources/admin/bootstrap/js/jquery.core.js'/>"></script>
       <script src="<c:url value='/resources/admin/bootstrap/js/jquery.app.js'/>"></script>
+      
+      <!-- Datepicker JS-->
+      <script src="<c:url value='/resources/admin/js/jquery-1.12.4.js'/>"></script>
+      <script src="<c:url value='/resources/admin/js/jquery-ui.js'/>"></script>
+      <script>
+		  $( function() {
+			  $('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+		  } );
+	  </script>
+	  <script src="<c:url value='/resources/admin/js/custom.js'/>"></script>

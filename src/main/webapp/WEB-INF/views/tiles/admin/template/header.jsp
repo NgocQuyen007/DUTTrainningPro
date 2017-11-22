@@ -23,3 +23,7 @@
 	 <link href="<c:url value='/resources/admin/bootstrap/css/menu.css' />" rel="stylesheet" type="text/css" />
 	 <link href="<c:url value='/resources/admin/bootstrap/css/responsive.css' />" rel="stylesheet" type="text/css" />
 	 
+	 <!-- Datepicker CSS -->
+	 <link rel="stylesheet" href="<c:url value='/resources/admin/css/jquery-ui.css' />">
+	 <link href="<c:url value='/resources/admin/css/styles.css' />" rel="stylesheet" type="text/css" />
+	 
