@@ -10,6 +10,7 @@
       <script src="<c:url value='/resources/admin/bootstrap/js/metisMenu.min.js'/>"></script>
       <script src="<c:url value='/resources/admin/bootstrap/js/waves.js'/>"></script>
       <script src="<c:url value='/resources/admin/bootstrap/js/jquery.slimscroll.js'/>"></script>
+      <script src="<c:url value='/resources/assets/main.js'/>"></script>
 
       <!-- Counter js  
 	      <script src="../plugins/waypoints/jquery.waypoints.min.js'/>"></script>
