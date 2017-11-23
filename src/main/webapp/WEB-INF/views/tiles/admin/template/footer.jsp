@@ -10,6 +10,7 @@
       <script src="<c:url value='/resources/admin/bootstrap/js/metisMenu.min.js'/>"></script>
       <script src="<c:url value='/resources/admin/bootstrap/js/waves.js'/>"></script>
       <script src="<c:url value='/resources/admin/bootstrap/js/jquery.slimscroll.js'/>"></script>
+      <script src="<c:url value='/resources/assets/main.js'/>"></script>
 
       <!-- Dashboard init -->
       <script src="<c:url value='/resources/admin/bootstrap/pages/jquery.dashboard.js'/>"></script>
