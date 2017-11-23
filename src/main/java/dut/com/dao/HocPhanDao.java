@@ -1,7 +1,5 @@
 package dut.com.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import dut.com.dao.rowmapper.HocPhanRowMapper;
@@ -9,7 +7,6 @@ import dut.com.entity.HocPhan;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
