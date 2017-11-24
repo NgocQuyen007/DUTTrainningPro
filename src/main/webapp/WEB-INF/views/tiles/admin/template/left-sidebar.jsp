@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>		
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>		
           <!-- ========== Left Sidebar Start ========== -->
             <div class="left side-menu">
                 <div class="slimscroll-menu" id="remove-scroll">
@@ -24,8 +24,8 @@
                             <li>
                                 <a href="javascript: void(0);" aria-expanded="true"><i class="fi-briefcase"></i> <span> Quản Lí Học Phần </span><span class="menu-arrow"></span></a>
 								<ul class="nav-second-level nav" aria-expanded="true">
-									<li><a href="dshocphan.jsp">Danh Sách Học Phần</a></li>
-                                    <li><a href="themhocphan.jsp">Thêm Học Phần</a></li>
+									<li><a href='<c:url value="/hocphan" />'>Danh Sách Học Phần</a></li>
+                                    <li><a href='<c:url value="/hocphan/add" />'>Thêm Học Phần</a></li>
 								</ul>
                             </li>
 
