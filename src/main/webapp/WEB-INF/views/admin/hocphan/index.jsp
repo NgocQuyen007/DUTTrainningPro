@@ -83,7 +83,7 @@
 		
 		                                                <td>
 		                                                	<a href="<c:url value='/hocphan/edit/${i.id}' />" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    		<a href="<c:url value='/hocphan/delete/${i.id}' />" onclick="return confirm('Are you sure to delete this item?');" class="table-action-btn"><i class="mdi mdi-close"></i></a>
+                                                    		<a href="<c:url value='/hocphan/delete/${i.id}' />" onclick="return confirm('Are you sure to delete this item?');"  class="table-action-btn"><i class="mdi mdi-close"></i></a>
 		                                                </td>
 													</tr> 
 												</c:forEach>	                                                                                  		
