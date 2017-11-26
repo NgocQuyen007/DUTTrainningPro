@@ -51,7 +51,7 @@ public class MucTieuHocPhanController {
 	public String create(@PathVariable("decuongId") int id, @PathVariable("hocphanId") int hpId, ModelMap map){
 		map.addAttribute("cdrCTDT", cdrCTDTDao.getItems());
 		map.addAttribute("decuongId", id);
-		map.addAttribute("hocphan", hpDao.getItem(hpId));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
 		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		map.addAttribute("chuanDauRa", mtduCTDTDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		

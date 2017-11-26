@@ -20,7 +20,7 @@
                                             <a href="#">Học Phần</a>
                                         </li>
                                         <li>
-                                            <a href="#">${hocphan.viName}</a>
+                                            <a href="#">${hocphan.vi_name}</a>
                                         </li>
                                         <li class="active">
                                             <a href="#">Đề Cương</a>
@@ -37,16 +37,16 @@
                             <div class="col-md-12">
                                 <div class="card-box">
                                     <fieldset title="1">
-                                            <legend>Đề Cương Học Phần <span class="label label-info">${hocphan.viName}</span></legend>
+                                            <legend>Đề Cương Học Phần <span class="label label-info">${hocphan.vi_name}</span></legend>
                                             <div class="row m-t-20">
                                             	<div class="form-group">
                                             		<div class="form-group col-sm-6">
                                                         <label for="hocphan">Tên Học Phần</label>
-                                                    	<div>${hocphan.viName}</div>
+                                                    	<div>${hocphan.vi_name}</div>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label for="hocphan">Subject's Name</label>
-                                                    	<div>${hocphan.enName}</div>
+                                                    	<div>${hocphan.en_name}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">

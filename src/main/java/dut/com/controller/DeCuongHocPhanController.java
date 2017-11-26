@@ -40,7 +40,7 @@ public class DeCuongHocPhanController {
 	@GetMapping("/add")
 	public String create(@PathVariable("hocphanId") int id, ModelMap map){
 		map.addAttribute("listGV", gvDao.getItems());
-		map.addAttribute("hocphan", hpDao.getItem(id));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(id));
 		
 		return "admin.decuonghocphan.add";
 	}
@@ -50,7 +50,7 @@ public class DeCuongHocPhanController {
 		map.addAttribute("decuonghocphan", dchpDao.getItemByHocPhanId(hpId));
 		map.addAttribute("giangvien", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienId()));
 		map.addAttribute("giangvienass", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienAssId()));
-		map.addAttribute("hocphan", hpDao.getItem(hpId));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
 		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		
