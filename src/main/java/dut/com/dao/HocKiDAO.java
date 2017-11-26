@@ -26,7 +26,7 @@ public class HocKiDAO {
 	}
 	
 	public List<HocKi> getItemsFromListId(int ctdtId){
-		String sql = "SELECT * FROM hoc_ky where id in (SELECT distinct(hoc_ki_id) FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?)";
+		String sql = "SELECT * FROM hoc_ky where id in (SELECT distinct(hoc_ki_id) FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?) ORDER BY id";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<HocKi>(HocKi.class), ctdtId);
 	}
 }

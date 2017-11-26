@@ -66,8 +66,8 @@ public class CTDTController {
 	public String edit(ModelMap map, @PathVariable("id") int id) {
 		CTDT ctdt = ctdtDAO.getById(id);
 		map.addAttribute("ctdt", ctdt);
-		map.addAttribute("hocKis", hocKiDAO.getItems());
-		map.addAttribute("hocPhans", hocPhanDAO.getAll());
+		map.addAttribute("hocKis", ctdtDAO.getHocKiRemain(id));
+		map.addAttribute("hocPhans", ctdtDAO.getHocPhanRemain(id));
 		return "admin.ctdt.edit";
 	}
 	
@@ -78,6 +78,18 @@ public class CTDTController {
 			HocPhanCTDT hpCTDT = new HocPhanCTDT(ctdtId, Integer.parseInt(hocPhan[i]), hocKiId);
 			hpCTDTDAO.add(hpCTDT);
 		}
+		return "redirect:/ctdt/"+ctdtId+"/edit";
+	}
+	
+	@RequestMapping(path="addHPToHK", method=RequestMethod.POST)
+	public String addHPToHK(@RequestParam("ctdtId") int ctdtId, @RequestParam("hocKiId") int hocKiId, @RequestParam("hocPhanId") int hocPhanId){
+		ctdtDAO.addHocPhanCTDT(new HocPhanCTDT(ctdtId, hocPhanId, hocKiId));
+		return "redirect:/ctdt/"+ctdtId+"/edit";
+	}
+	
+	@RequestMapping(path="delHPInHK", method=RequestMethod.POST)
+	public String delHPInHK(@RequestParam("ctdtId") int ctdtId, @RequestParam("hocKiId") int hocKiId, @RequestParam("hocPhanId") int hocPhanId){
+		ctdtDAO.delHocPhanCTDT(new HocPhanCTDT(ctdtId, hocPhanId, hocKiId));
 		return "redirect:/ctdt/"+ctdtId+"/edit";
 	}
 

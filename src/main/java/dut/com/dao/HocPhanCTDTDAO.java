@@ -33,7 +33,7 @@ public class HocPhanCTDTDAO {
 		String sql  = "SELECT * FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<HocPhanCTDT>(HocPhanCTDT.class), ctdtId);
 	}
-//	
+
 //	public List<Integer> getHocKiPluck(int ctdtId){
 //		String sql = "SELECT distinct(hoc_ki_id) FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?";
 //		List<Integer> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Integer>(Integer.class), ctdtId);

@@ -55,11 +55,9 @@ public class CTDTDAO {
 //		List<HocPhanCTDT> hocPhanCTDTList = hocPhanCTDTDAO.getItems(id);
 //		List<Integer> hocKiIds = hocPhanCTDTDAO.getHocKiPluck(id);
 		List<HocKi> hocKis = hocKiDAO.getItemsFromListId(id);
-		System.out.println(hocKis.size());
 		List<HocPhanHocKiCTDT> hocPhanHocKiCTDTs = new ArrayList<HocPhanHocKiCTDT>();
 		for (HocKi hocKi : hocKis) {
 			List<HocPhan> dsHP = ctdtDAO.getHocPhanByHocKi(id, hocKi.getId());
-			System.out.println("dshp: " + dsHP.size());
 			hocPhanHocKiCTDTs.add(new HocPhanHocKiCTDT(hocKi, dsHP));
 		}
 		ctdt.setHocPhanHocKiCTDTs(hocPhanHocKiCTDTs);
@@ -67,9 +65,39 @@ public class CTDTDAO {
 	}
 	
 	public List<HocPhan> getHocPhanByHocKi(int ctdtId, int hocKiId){
-		System.out.println("get HP: " + hocKiId);
 		String sql = "SELECT hp.* FROM hoc_phan_ctdt hc JOIN hoc_phan hp ON hc.hoc_phan_id = hp.id where hc.chuong_trinh_dao_tao_id = ? AND hc.hoc_ki_id = ?;";
 		return jdbcTemplate.query(sql, new HocPhanRowMapper(), ctdtId, hocKiId);
+	}
+	
+	public List<HocKi> getHocKiRemain(int id){
+		String sql = "select * from hoc_ky where id not in (SELECT distinct(hoc_ki_id) FROM trainningpro.hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?);";
+		List<HocKi> rs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<HocKi>(HocKi.class), id);
+		return rs;
+	}
+	public List<HocPhan> getHocPhanRemain(int id){
+		String sql = "select * from hoc_phan where id not in (select distinct(hoc_phan_id) from hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?);";
+		return jdbcTemplate.query(sql, new HocPhanRowMapper(), id);
+	}
+
+	public boolean addHocPhanCTDT(HocPhanCTDT hocPhanCTDT) {
+		try {
+			String sql = "INSERT INTO hoc_phan_ctdt(chuong_trinh_dao_tao_id, hoc_phan_id, hoc_ki_id) VALUES(?,?,?)";
+			jdbcTemplate.update(sql, new Object[]{ hocPhanCTDT.getCtdtId(), hocPhanCTDT.getHocPhanId(), hocPhanCTDT.getHocKiId() });
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean delHocPhanCTDT(HocPhanCTDT hocPhanCTDT) {
+		try {
+			String sql = "DELETE from hoc_phan_ctdt WHERE chuong_trinh_dao_tao_id = ? AND hoc_phan_id=? AND hoc_ki_id=?";
+			jdbcTemplate.update(sql, new Object[]{ hocPhanCTDT.getCtdtId(), hocPhanCTDT.getHocPhanId(), hocPhanCTDT.getHocKiId() });
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
 	}
 	
 }

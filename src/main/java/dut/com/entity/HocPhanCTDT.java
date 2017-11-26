@@ -78,6 +78,13 @@ public class HocPhanCTDT {
 	public void setHocPhanCTDTList(ArrayList<HocPhanCTDT> hocPhanCTDTList) {
 		this.hocPhanCTDTList = hocPhanCTDTList;
 	}
+
+	@Override
+	public String toString() {
+		return "HocPhanCTDT [id=" + id + ", ctdtId=" + ctdtId + ", hocPhanId=" + hocPhanId + ", hocKiId=" + hocKiId
+				+ "]";
+	}
+	
 	
 	
 }
