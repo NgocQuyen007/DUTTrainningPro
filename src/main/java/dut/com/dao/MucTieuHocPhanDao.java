@@ -32,8 +32,8 @@ public class MucTieuHocPhanDao {
 				// TODO Auto-generated method stub
 				PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		        statement.setString(1, mucTieuHocPhan.getTen());
-		        statement.setString(2, mucTieuHocPhan.getTDNLuc());
-		        statement.setInt(3, mucTieuHocPhan.getDCCTId());
+		        statement.setString(2, mucTieuHocPhan.getTrinhDoNangLuc());
+		        statement.setInt(3, mucTieuHocPhan.getDeCuongChiTietId());
 		        statement.setString(4, mucTieuHocPhan.getMoTa());
 		        return statement;
 			}
@@ -58,5 +58,10 @@ public class MucTieuHocPhanDao {
 	public List<MucTieuHocPhan> getItemsByDeCuongId(int decuongId){
 		String sql = "SELECT * FROM muc_tieu_hoc_phan where de_cuong_chi_tiet_id = ?";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<MucTieuHocPhan>(MucTieuHocPhan.class), decuongId);
+	}
+	
+	public int update(int id, String moTa, String trinhDo) {
+		String sql = "UPDATE muc_tieu_hoc_phan SET mota = '" + moTa + "', trinh_do_nang_luc = '" + trinhDo + "' where id = " + id;
+		return jdbcTemplate.update(sql);
 	}
 }

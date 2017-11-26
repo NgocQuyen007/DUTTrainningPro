@@ -76,7 +76,7 @@
                                                 </div>
                                                 <div class="form-group col-sm-12">
                                                 	<label for="mo_ta">Mô Tả</label>
-                                                	<textarea class="form-control" rows="5" name="moTa" id="mo_ta"></textarea>
+                                                	<textarea class="form-control" rows="5" name="moTa" id="mo_ta" required></textarea>
                                                 </div>
                                             </div>
                                         </fieldset>
