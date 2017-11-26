@@ -19,7 +19,4 @@ public class KhoaDao {
 		String sql  = "SELECT * FROM khoa";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Khoa>(Khoa.class));
 	}
-
-	
-	
 }
