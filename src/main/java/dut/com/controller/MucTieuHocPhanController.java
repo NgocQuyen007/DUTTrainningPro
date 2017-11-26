@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dut.com.dao.DeCuongHocPhanDao;
 import dut.com.entity.DeCuongHocPhan;
@@ -50,7 +51,9 @@ public class MucTieuHocPhanController {
 	public String create(@PathVariable("decuongId") int id, @PathVariable("hocphanId") int hpId, ModelMap map){
 		map.addAttribute("cdrCTDT", cdrCTDTDao.getItems());
 		map.addAttribute("decuongId", id);
-		map.addAttribute("hocphan", hpDao.getItem(hpId));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
+		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
+		map.addAttribute("chuanDauRa", mtduCTDTDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		
 		return "admin.muctieuhocphan.add";
 	}
@@ -80,4 +83,19 @@ public class MucTieuHocPhanController {
 		
 		return "redirect:/hocphan/" + hpId + "/decuong/";
 	}
+	
+	@RequestMapping(path="/{muctieuId}/edit", method=RequestMethod.POST)
+	@ResponseBody
+	public String update(
+			@PathVariable("hocphanId") int hpId, @PathVariable("decuongId") int decuongId, @PathVariable("muctieuId") int muctieuId,
+			HttpServletRequest request
+			) {
+		int check = mthpDao.update(muctieuId, request.getParameter("moTa"), request.getParameter("trinhDoNangLuc"));
+		if (check > 0) {
+			return "{\"success\":1}";
+		}
+		
+		return "{\"error\":1}";
+	}
+	
 }
