@@ -31,6 +31,12 @@
 	<definition name="admin.ctdt.add" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/ctdt/add.jsp"></put-attribute>
 	</definition>
+	<definition name="admin.ctdt.index" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/ctdt/index.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.ctdt.edit" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/ctdt/edit.jsp"></put-attribute>
+	</definition>
 	
 	<!--  Đề Cương Học Phần  -->
 	<definition name="admin.decuonghocphan.add" extends="admin-definition">

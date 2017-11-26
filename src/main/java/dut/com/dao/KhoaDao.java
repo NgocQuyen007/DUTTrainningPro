@@ -19,6 +19,11 @@ public class KhoaDao {
 		String sql  = "SELECT * FROM khoa";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Khoa>(Khoa.class));
 	}
+	
+	public Khoa getKhoaById(int id) {
+		String sql = "SELECT * FROM khoa WHERE id = ?";
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Khoa>(Khoa.class), new Object[]{id});
+	}
 
 	
 	

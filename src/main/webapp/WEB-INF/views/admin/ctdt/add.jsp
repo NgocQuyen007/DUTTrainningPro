@@ -24,77 +24,48 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card-box">
-						<form id="default-wizard">
+						<form method="post" action='<c:url value='/ctdt/create' />' id="default-wizard">
 							<fieldset title="Học kì 1" style="margin-bottom: 20px;">
-								<legend>Học kì 1</legend>
+								<legend>THÊM CHƯƠNG TRÌNH ĐÀO TẠO</legend>
 
 								<div class="row">
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="firstname">Môn học</label>
+											<label for="firstname">Khoa</label>
+											<select class="form-control" name="khoaId" >
+												<c:forEach items="${khoas}" var="khoa">															
+													<option value="${khoa.id}">${khoa.ten}</option>
+												</c:forEach>
+											</select>
 										</div>
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group">
-											<label for="lastname">Mã học phần</label>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="lastname">Số tín chỉ</label>
+											<label for="firstname">Tên CTĐT</label>
+											<input type="text" name="ten" class="form-control" required="required">
 										</div>
 									</div>
 								</div>
-
-								<div id="div-add-hp">
-									<div class="row">
-										<div class="col-sm-4">
-											<div class="form-group">
-												<select style="width: 100%;">
-													<option>Giải tích</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="form-group">
-												<label for="lastname">MHP1</label>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="form-group">
-												<label for="lastname">1</label>
-											</div>
-										</div>
-									</div>
-
-									<div class="row">
-										<div class="col-sm-4">
-											<div class="form-group">
-												<select style="width: 100%;">
-													<option>Giải tích</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="form-group">
-												<label for="lastname">MHP1</label>
-											</div>
-										</div>
-										<div class="col-sm-4">
-											<div class="form-group">
-												<label for="lastname">1</label>
-											</div>
-										</div>
-									</div>
-								</div>
-
-
+								
 								<div class="row">
-									<div class="col-sm-4">
-										<button id="add-hp" onclick="addHP()" type="button" style="width: 100%;">Thêm học phần</button>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="firstname">Loại</label>
+											<select class="form-control" name="loaiId" >
+												<c:forEach items="${loais}" var="loai">															
+													<option value="${loai.id}">${loai.ten}</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="firstname">Niên khóa</label>
+											<input type="text" name="nienKhoa" class="form-control" required="required">
+										</div>
 									</div>
 								</div>
-
 							</fieldset>
 							<button type="submit" class="btn btn-primary stepy-finish"
 								style="margin-top: 15px;">Lưu</button>
@@ -112,10 +83,5 @@
 
 </div>
 
-<script>
-	function addHP() {
-		document.getElementById("div-add-hp").innerHTML = '';
-	}
-</script>
 
 
