@@ -39,7 +39,12 @@
 	                                        			<h3>Xem Chi Tiết Học Phần</h3>
 	                                        		</div>
 	                                        		<div class="col-sm-3">
-	                                        			<a href="<c:url value=''/>"><button class="btn btn-primary stepy-finish">Xem đề cương học phần</button></a>
+	                                        			<c:if test="${decuong > 0}">
+	                                        				<a href="<c:url value='/hocphan/${hocphan.id}/decuong/'/>"><button class="btn btn-primary stepy-finish">Xem đề cương học phần</button></a>
+	                                        			</c:if>
+	                                        			<c:if test="${decuong == 0}">
+	                                        				<a href="<c:url value='/hocphan/${hocphan.id}/decuong/add/'/>"><button class="btn btn-primary stepy-finish">Thêm đề cương học phần</button></a>
+	                                        			</c:if>
 	                                        		</div>      			                                     	
                                            	</div>
                                         	                                                                                     

@@ -31,9 +31,14 @@ public class DeCuongHocPhanDao {
 	}
 	
 	public DeCuongHocPhan getItemByHocPhanId(int id) {
-		String sql = "SELECT * FROM de_cuong_hoc_phan where hoc_phan_id = ?";
+		String sql = "SELECT * FROM de_cuong_hoc_phan where hoc_phan_id = " + id;
 		
-		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<DeCuongHocPhan>(DeCuongHocPhan.class), id);
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<DeCuongHocPhan>(DeCuongHocPhan.class));
 	}
 	
+	public int checkExist(int id) {
+		String sql = "SELECT count(*) from de_cuong_hoc_phan where hoc_phan_id = " + id;
+		
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
 }
