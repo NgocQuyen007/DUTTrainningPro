@@ -25,6 +25,14 @@ public class GiangVienDao {
 					+ " ORDER BY k.ten ASC";
 		return jdbcTemplate.query(sql, new GiangVienRowMapper());
 	}
+	public List<GiangVien> getItems(int idKhoa){
+		String sql  = " SELECT gv.*, k.id idkhoa, k.ten tenkhoa, hv.hoc_vi tenHocVi "
+					+ " FROM giang_vien gv"
+					+ " JOIN khoa k    ON gv.khoa_id = k.id"
+					+ " JOIN hoc_vi hv ON gv.hocvi_id = hv.id"
+					+ " WHERE k.id = ?";
+		return jdbcTemplate.query(sql, new GiangVienRowMapper(), idKhoa);
+	}
 
 	public int add(GiangVien giangvien) {	
 		final String sql = "INSERT INTO giang_vien(ten, ngay_sinh, gioi_tinh, email, so_dien_thoai, username, password, avatar, hocvi_id, khoa_id) VALUES(?,?,?,?,?,?,?,?,?,?)";
