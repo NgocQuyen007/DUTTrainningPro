@@ -36,6 +36,19 @@ public class HocPhanController {
 		return "admin.hocphan.index";
 	}
 	
+	@RequestMapping(path="/{pageid}", method=RequestMethod.GET)
+	public String viewpage(@PathVariable int pageid, ModelMap model){
+		 int total = 10;  
+	        if(pageid==1){}  
+	        else{  
+	            pageid=(pageid-1)*total+1;  
+	        }  
+		List<HocPhan> list = new ArrayList<HocPhan>();
+		list = daohp.getHocPhanByPage(pageid, total);
+		model.addAttribute("list",list);
+		return "admin.hocphan.index";
+	}
+	
 	@RequestMapping(path="add", method=RequestMethod.GET)
 	public String add(ModelMap model){
 		HocPhan hocphan = new HocPhan();
@@ -51,7 +64,12 @@ public class HocPhanController {
 		if(bindingResult.hasErrors()){
 			return "redirect:/hocphan/add?msg=1";
 		}
-		System.out.print(hocphan.toString());
+		List<HocPhan> list = daohp.getAll();
+		for(HocPhan hp : list){
+			if(hp.getMa_hoc_phan().equals(hocphan.getMa_hoc_phan())){
+				return "redirect:/hocphan/add?msg=MaHocPhanUnique";
+			}
+		}
 		daohp.add(hocphan);
 		return "redirect:/hocphan/?msg=add";
 	}
@@ -72,9 +90,19 @@ public class HocPhanController {
 		if(bindingResult.hasErrors()){
 			return "redirect:/hocphan/edit/"+id+"?msg=2";
 		}
-		System.out.println(hocphan.toString());
 		daohp.update(hocphan);
 		return "redirect:/hocphan/?msg=edit";
+	}
+	
+	@RequestMapping(path="show/{id}", method=RequestMethod.GET)
+	public String show(@PathVariable("id") int id, ModelMap model){
+		HocPhan hocphan = new HocPhan();
+		hocphan = daohp.getHocPhanById(id);
+		KhoiKienThuc kkt = new KhoiKienThuc();
+		kkt = daokkt.getKhoiKienThucById(hocphan.getKhoi_kien_thuc_id());
+		model.addAttribute("hocphan", hocphan);
+		model.addAttribute("kkt", kkt);
+		return "admin.hocphan.show";
 	}
 	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)

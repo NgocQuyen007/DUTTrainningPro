@@ -57,4 +57,7 @@
 	<definition name="admin.hocphan.edit" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/hocphan/edit.jsp"></put-attribute>
 	</definition>
+	<definition name="admin.hocphan.show" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/hocphan/show.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
