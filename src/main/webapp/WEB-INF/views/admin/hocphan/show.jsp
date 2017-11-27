@@ -33,8 +33,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                        <fieldset title="1">                                       	
-                                            <legend>Xem Chi Tiết Học Phần</legend>                                           
+                                        <fieldset title="1">
+                                        	<div class="row">
+	                                        		<div class="col-sm-9">
+	                                        			<h3>Xem Chi Tiết Học Phần</h3>
+	                                        		</div>
+	                                        		<div class="col-sm-3">
+	                                        			<a href="<c:url value=''/>"><button class="btn btn-primary stepy-finish">Xem đề cương học phần</button></a>
+	                                        		</div>      			                                     	
+                                           	</div>
+                                        	                                                                                     
                                             <div class="row m-t-20">
                                                 <div class="col-sm-12">
                                                     <div class="col-sm-4">
