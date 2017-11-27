@@ -53,6 +53,9 @@
 												  XÓA THÀNH CÔNG
 												</div>
 										</c:if>
+										<a href='<c:url value='/hocphan/add' />' class="btn btn-primary">
+											<span>Thêm Học phần</span>
+										</a>
                                         <table class="table table-hover m-0 mails table-actions-bar">
                                             <thead>
                                             <tr>
