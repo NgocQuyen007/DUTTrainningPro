@@ -127,6 +127,41 @@
 														</a>
                                                 	</div>
                                                 </div>
+                                                <div class="form-group col-sm-12">
+                                                	<label>Nguồn Học Liệu</label>
+                                                	<c:choose>
+                                                		<c:when test="${not empty nguonhoclieu}">
+                                                		 <table class="table text-center table-bordered" id="muc-tieu-hoc-phan-table">
+														    <thead>
+														      <tr>
+														        <th class="col-md-4 text-center">Tên Học Liệu</th>
+														        <th class="col-md-2 text-center">Loại Học Liệu</th>
+														      </tr>
+														    </thead>
+														    <tbody>
+														    	<c:forEach items="${nguonhoclieu}" var="item" varStatus="loop">
+															    	<tr>
+																        <td>
+																        	<span>${item.tenHocLieu}</span>"
+																        </td>
+																        <td>
+																        	<span>
+																        		<c:if test="${item.loaiHocLieuId == 1}">Giáo Trình</c:if>
+																        		<c:if test="${item.loaiHocLieuId == 2}">Tài Liệu Khác</c:if>
+																        	</span>
+																        </td>
+																    </tr>
+															    </c:forEach>
+														    </tbody>
+													  	</table>
+													  	</c:when>
+                                                	</c:choose>
+                                                	<div class="form-group">
+                                                		<a href='<c:url value='/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/nguonhoclieu/add' />' class="btn btn-primary">
+															<span>Thêm Nguồn Học Liệu</span>
+														</a>
+                                                	</div>
+                                                </div>
                                          </div>
                                     </fieldset>
 

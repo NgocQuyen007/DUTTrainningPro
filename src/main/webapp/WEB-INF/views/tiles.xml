@@ -57,4 +57,9 @@
 	<definition name="admin.hocphan.edit" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/hocphan/edit.jsp"></put-attribute>
 	</definition>
+	
+	<!-- Nguon hoc lieu -->
+	<definition name="admin.nguonhoclieu.add" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/nguonhoclieu/add.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
