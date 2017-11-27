@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dut.com.dao.HocPhanDao;
 import dut.com.dao.KhoiKienThucDao;
+import dut.com.dao.DeCuongHocPhanDao;
 import dut.com.entity.HocPhan;
 import dut.com.entity.KhoiKienThuc;
+import dut.com.entity.DeCuongHocPhan;
 
 @Controller
 @RequestMapping("hocphan")
@@ -28,10 +30,26 @@ public class HocPhanController {
 	@Autowired
 	KhoiKienThucDao daokkt;
 	
+	@Autowired
+	DeCuongHocPhanDao dchpDao;
+	
 	@GetMapping
 	public String index(ModelMap model){
 		List<HocPhan> list = new ArrayList<HocPhan>();
 		list = daohp.getAll();
+		model.addAttribute("list",list);
+		return "admin.hocphan.index";
+	}
+	
+	@RequestMapping(path="/{pageid}", method=RequestMethod.GET)
+	public String viewpage(@PathVariable int pageid, ModelMap model){
+		 int total = 10;  
+	        if(pageid==1){}  
+	        else{  
+	            pageid=(pageid-1)*total+1;  
+	        }  
+		List<HocPhan> list = new ArrayList<HocPhan>();
+		list = daohp.getHocPhanByPage(pageid, total);
 		model.addAttribute("list",list);
 		return "admin.hocphan.index";
 	}
@@ -51,7 +69,12 @@ public class HocPhanController {
 		if(bindingResult.hasErrors()){
 			return "redirect:/hocphan/add?msg=1";
 		}
-		System.out.print(hocphan.toString());
+		List<HocPhan> list = daohp.getAll();
+		for(HocPhan hp : list){
+			if(hp.getMa_hoc_phan().equals(hocphan.getMa_hoc_phan())){
+				return "redirect:/hocphan/add?msg=MaHocPhanUnique";
+			}
+		}
 		daohp.add(hocphan);
 		return "redirect:/hocphan/?msg=add";
 	}
@@ -72,9 +95,21 @@ public class HocPhanController {
 		if(bindingResult.hasErrors()){
 			return "redirect:/hocphan/edit/"+id+"?msg=2";
 		}
-		System.out.println(hocphan.toString());
 		daohp.update(hocphan);
 		return "redirect:/hocphan/?msg=edit";
+	}
+	
+	@RequestMapping(path="show/{id}", method=RequestMethod.GET)
+	public String show(@PathVariable("id") int id, ModelMap model){
+		HocPhan hocphan = new HocPhan();
+		hocphan = daohp.getHocPhanById(id);
+		KhoiKienThuc kkt = new KhoiKienThuc();
+		kkt = daokkt.getKhoiKienThucById(hocphan.getKhoi_kien_thuc_id());
+		int countDCHP = dchpDao.checkExist(id);
+		model.addAttribute("hocphan", hocphan);
+		model.addAttribute("kkt", kkt);
+		model.addAttribute("decuong", countDCHP);
+		return "admin.hocphan.show";
 	}
 	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)

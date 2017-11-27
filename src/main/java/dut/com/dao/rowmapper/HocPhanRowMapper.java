@@ -16,7 +16,7 @@ public class HocPhanRowMapper implements RowMapper<HocPhan>{
 		hp.setMa_hoc_phan(rs.getString(4));
 		hp.setLoai_hoc_phan(rs.getString(5));
 		hp.setKhoi_kien_thuc_id(rs.getInt(6));
-		hp.setSo_tin_chi(rs.getInt(7));
+		hp.setSo_tin_chi(rs.getFloat(7));
         return hp;
 	}
 }

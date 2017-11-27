@@ -24,7 +24,7 @@
                             <li>
                                 <a href="javascript: void(0);" aria-expanded="true"><i class="fi-briefcase"></i> <span> Quản Lí Học Phần </span><span class="menu-arrow"></span></a>
 								<ul class="nav-second-level nav" aria-expanded="true">
-									<li><a href='<c:url value="/hocphan" />'>Danh Sách Học Phần</a></li>
+									<li><a href='<c:url value="/hocphan/1" />'>Danh Sách Học Phần</a></li>
                                     <li><a href='<c:url value="/hocphan/add" />'>Thêm Học Phần</a></li>
 								</ul>
                             </li>

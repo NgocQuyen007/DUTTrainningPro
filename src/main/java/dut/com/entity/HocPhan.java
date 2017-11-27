@@ -12,14 +12,14 @@ public class HocPhan {
 	private String loai_hoc_phan;
 	private int khoi_kien_thuc_id;
 	private int de_cuong_chi_tiet_id;
-	private int so_tin_chi;
+	private float so_tin_chi;
 	
 	public HocPhan() {
 		super();
 	}
 
 	public HocPhan(int id, String vi_name, String en_name, String ma_hoc_phan,
-			String loai_hoc_phan, int khoi_kien_thuc_id, int so_tin_chi) {
+			String loai_hoc_phan, int khoi_kien_thuc_id, float so_tin_chi) {
 		super();
 		this.id = id;
 		this.vi_name = vi_name;
@@ -42,7 +42,7 @@ public class HocPhan {
 
 	public HocPhan(int id, String vi_name, String en_name, String ma_hoc_phan,
 			String loai_hoc_phan, int khoi_kien_thuc_id,
-			int de_cuong_chi_tiet_id, int so_tin_chi) {
+			int de_cuong_chi_tiet_id, float so_tin_chi) {
 		super();
 		this.id = id;
 		this.vi_name = vi_name;
@@ -110,11 +110,11 @@ public class HocPhan {
 		this.de_cuong_chi_tiet_id = de_cuong_chi_tiet_id;
 	}
 
-	public int getSo_tin_chi() {
+	public float getSo_tin_chi() {
 		return so_tin_chi;
 	}
 
-	public void setSo_tin_chi(int so_tin_chi) {
+	public void setSo_tin_chi(float so_tin_chi) {
 		this.so_tin_chi = so_tin_chi;
 	}
 
