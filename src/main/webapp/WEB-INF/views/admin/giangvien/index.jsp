@@ -31,13 +31,13 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-									<div>
-										<c:if test="${param['msg'] eq 'add'}">
-											<div class="alert alert-danger action-success" role="alert">
-												  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-												  <span class="sr-only">Error:</span>
-												  THÊM THÀNH CÔNG
-												</div>
+                                		
+                                		<c:if test="${param['msg'] eq 'add'}">
+												<div class="alert alert-danger action-success" role="alert">
+													  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+													  <span class="sr-only">Error:</span>
+													  THÊM THÀNH CÔNG
+													</div>
 										</c:if>
 										<c:if test="${param['msg'] eq 'edit'}">
 											<div class="alert alert-danger action-success" role="alert">
@@ -53,10 +53,27 @@
 												  XÓA THÀNH CÔNG
 												</div>
 										</c:if>
-										<a href='<c:url value='/giangvien/add' />' class="btn btn-primary">
-											<span>Thêm giảng viên</span>
-										</a> <br />
-									</div>	
+                                
+										<div class="body-header-left" >
+											<a href='<c:url value='/giangvien/add' />' class="btn btn-primary">
+												<span>Thêm giảng viên</span>
+											</a>
+											
+										</div>
+										
+										<div class="col-md-4 body-header-right">
+                                                   <div class="form-group">
+													<select class="form-control soption" id="idKhoa" onChange="SearchProcessing()">
+														<c:forEach items="${khoas}" var="khoa">
+															<option class="soption" value="${khoa.id}">${khoa.ten}</option>
+														</c:forEach>
+														<option value="" class="sdisable" disabled selected>=== Tìm kiếm theo KHOA ===</option>
+													</select>
+                                                   </div>
+										</div>
+										
+										<div style="clear: both;"></div>
+										
                                     <div class="table-responsive">
                                         <table class="table table-hover m-0 mails table-actions-bar table-striped">
                                             <thead>
@@ -71,7 +88,7 @@
                                                 <th>Khoa</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id='TimKiemKhoa'>
                                             <c:forEach items="${giangviens}" var="item">
 	                                            <tr>
 	                                            	<c:if test="${item.avatar eq ''}">
@@ -113,8 +130,8 @@
 	                                                    <i class="mdi mdi-map-marker text-primary"></i> ${item.khoa.ten}
 	                                                </td>
 	                                                <td>
-	                                                    <a href='<c:url value='/giangvien/edit/${item.id}' />' class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-	                                                    <a href='<c:url value='/giangvien/del/${item.id}' />' onclick="return confirm('Are you sure to delete this item?');" class="table-action-btn"><i class="mdi mdi-close"></i></a>
+	                                                    <a href='<c:url value='/giangvien/edit/${item.id}' />' class="btn-xs btn-warning"><i class="mdi mdi-pencil"></i></a>
+	                                                    <a href='<c:url value='/giangvien/del/${item.id}' />' class="btn-xs btn-danger" onclick="return confirm('Are you sure to delete this item?');" class="table-action-btn"><i class="mdi mdi-close"></i></a>
 	                                                </td>
 	                                            </tr>
 											</c:forEach>

@@ -13,3 +13,21 @@
 	font-weight: bold;
 	color: #6cb33e;
 }
+
+.body-header-left{
+	float:left;
+}
+
+.body-header-right{
+	float:right;
+}
+
+.soption{
+	background-color: #4489e4;
+	color: white;
+	cursor: pointer;
+}
+.sdisable{
+	background-color: white !important;
+	color: gray !important;
+}

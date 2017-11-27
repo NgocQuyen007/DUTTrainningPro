@@ -20,6 +20,13 @@
 	<definition name="admin.giangvien.index" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/giangvien/index.jsp"></put-attribute>
 	</definition>
+	<definition name="admin.giangvien.index.search.khoa" extends="admin-definition">
+		<put-attribute name="header" value="" />
+		<put-attribute name="topbar" value="" />
+		<put-attribute name="left-sidebar" value="" />
+		<put-attribute name="content" value="/WEB-INF/views/admin/giangvien/search.jsp"></put-attribute>					
+		<put-attribute name="footer" value="" />
+	</definition>
 	<definition name="admin.giangvien.add" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/giangvien/add.jsp"></put-attribute>
 	</definition>
