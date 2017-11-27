@@ -41,8 +41,16 @@ public class GiangVienController {
 	HocViDao hocviDao;
 
 	@GetMapping
-	public String index(ModelMap map) {
-		System.out.println("MAP AVAVAVA: " + dao.getItems().get(1).getAvatar());
+	public String index(ModelMap map, HttpServletRequest request) {
+		String sidKhoa = request.getParameter("idKhoa"); 
+		if(sidKhoa != null){
+			// Tìm kiếm theo khoa sử dụng Ajax
+			int idKhoa = Integer.parseInt(request.getParameter("idKhoa"));
+			map.addAttribute("khoas", khoaDao.getItems());
+			map.addAttribute("giangviens", dao.getItems(idKhoa));
+			return "admin.giangvien.index.search.khoa";
+		}
+		map.addAttribute("khoas", khoaDao.getItems());
 		map.addAttribute("giangviens", dao.getItems());
 		return "admin.giangvien.index";
 	}
@@ -55,10 +63,14 @@ public class GiangVienController {
 	}
 
 	@RequestMapping(path = "add", method = RequestMethod.POST)
-	public String add(@Valid @ModelAttribute GiangVien giangvien,BindingResult bindingResult,@RequestParam(value="delete_picture",required=false) String key, @RequestParam("idHocVi") int idHocVi,@RequestParam("idKhoa") int idKhoa,  @RequestParam("picture") CommonsMultipartFile commonsMultipartFile, HttpServletRequest request) {
-		System.out.println("ADD: " + giangvien.toString());
+	public String add(@Valid @ModelAttribute("giangvien") GiangVien giangvien,BindingResult bindingResult,@RequestParam(value="delete_picture",required=false) String key, @RequestParam("idHocVi") int idHocVi,@RequestParam("idKhoa") int idKhoa,  @RequestParam("picture") CommonsMultipartFile commonsMultipartFile, HttpServletRequest request,ModelMap map) {
+		System.out.println("ADD POST: " + giangvien.toString());
 		if(bindingResult.hasErrors()){
-			return "redirect:/giangvien/add?msg=1";
+			map.addAttribute("giangvien", giangvien);
+			map.addAttribute("khoas", khoaDao.getItems());
+			map.addAttribute("hocvis", hocviDao.getItems());
+			return "admin.giangvien.add";
+			// return "redirect:/giangvien/add?msg=1";
 		}
 		
 		Khoa khoa = new Khoa();
@@ -94,7 +106,7 @@ public class GiangVienController {
 						commonsMultipartFile.transferTo(new File(urldir + File.separator + picture));
 					} catch (IllegalStateException | IOException e) {}
 				}
-				return "redirect:/giangvien/?msg=add";
+				return "redirect:/giangvien?msg=add";
 			}
 		} catch(DataIntegrityViolationException ex){
 			// Exception Unique
@@ -119,15 +131,9 @@ public class GiangVienController {
 	@RequestMapping(path = "edit/{id}", method = RequestMethod.POST)
 	public String edit(@Valid @ModelAttribute GiangVien giangvien,BindingResult bindingResult,@PathVariable int id,@RequestParam(value="delete_picture",required=false) String key, @RequestParam("idHocVi") int idHocVi,@RequestParam("idKhoa") int idKhoa,  @RequestParam("picture") CommonsMultipartFile commonsMultipartFile, HttpServletRequest request) {
 		
-		System.out.println("EDIT: " + giangvien.toString());
-		System.out.println("EDIT A");
-		
 		if(bindingResult.hasErrors()){
-			System.out.println("EDIT BB");
 			return "redirect:/giangvien/edit/"+id+"?msg=2";
 		}
-		
-		System.out.println("EDIT C");
 		
 		String picture = commonsMultipartFile.getOriginalFilename();
 		String old_picture = dao.getItem(id).getAvatar();
@@ -173,7 +179,7 @@ public class GiangVienController {
 						commonsMultipartFile.transferTo(new File(urldir + File.separator + picture));
 					} catch (IllegalStateException | IOException e) {}
 				}
-				return "redirect:/giangvien/?msg=edit";
+				return "redirect:/giangvien?msg=edit";
 			}
 		} catch(DataIntegrityViolationException ex){
 			// Exception Unique

@@ -27,4 +27,6 @@
 			  $('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
 		  } );
 	  </script>
+	  
 	  <script src="<c:url value='/resources/admin/js/custom.js'/>"></script>
+	  <script src="<c:url value='/resources/admin/js/jquery.validate.js'/>"></script>

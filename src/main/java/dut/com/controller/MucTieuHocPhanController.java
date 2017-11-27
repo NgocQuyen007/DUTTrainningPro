@@ -1,34 +1,23 @@
 package dut.com.controller;
 
-import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
+import dut.com.dao.ChuanDauRaCTDTDao;
 import dut.com.dao.DeCuongHocPhanDao;
-import dut.com.entity.DeCuongHocPhan;
 import dut.com.dao.GiangVienDao;
-import dut.com.entity.GiangVien;
 import dut.com.dao.HocPhanDao;
 import dut.com.dao.MucTieuDUCTDTDao;
-import dut.com.entity.HocPhan;
 import dut.com.dao.MucTieuHocPhanDao;
-import dut.com.entity.MucTieuHocPhan;
 import dut.com.entity.MucTieuDUCTDT;
-import dut.com.dao.ChuanDauRaCTDTDao;
-import dut.com.entity.ChuanDauRaCTDT;
+import dut.com.entity.MucTieuHocPhan;
 
 @Controller
 @RequestMapping("/hocphan/{hocphanId}/decuong/{decuongId}/muctieu")
@@ -50,7 +39,9 @@ public class MucTieuHocPhanController {
 	public String create(@PathVariable("decuongId") int id, @PathVariable("hocphanId") int hpId, ModelMap map){
 		map.addAttribute("cdrCTDT", cdrCTDTDao.getItems());
 		map.addAttribute("decuongId", id);
-		map.addAttribute("hocphan", hpDao.getItem(hpId));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
+		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
+		map.addAttribute("chuanDauRa", mtduCTDTDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		
 		return "admin.muctieuhocphan.add";
 	}
@@ -80,4 +71,19 @@ public class MucTieuHocPhanController {
 		
 		return "redirect:/hocphan/" + hpId + "/decuong/";
 	}
+	
+	@RequestMapping(path="/{muctieuId}/edit", method=RequestMethod.POST)
+	@ResponseBody
+	public String update(
+			@PathVariable("hocphanId") int hpId, @PathVariable("decuongId") int decuongId, @PathVariable("muctieuId") int muctieuId,
+			HttpServletRequest request
+			) {
+		int check = mthpDao.update(muctieuId, request.getParameter("moTa"), request.getParameter("trinhDoNangLuc"));
+		if (check > 0) {
+			return "{\"success\":1}";
+		}
+		
+		return "{\"error\":1}";
+	}
+	
 }

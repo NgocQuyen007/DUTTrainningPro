@@ -46,11 +46,11 @@
                                             	<div class="form-group">
                                             		<div class="form-group col-sm-6">
                                                         <label for="hocphan">Tên Học Phần</label>
-                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.viName}" disabled>
+                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.vi_name}" disabled>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label for="hocphan">Subject's Name</label>
-                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.enName}" disabled>
+                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.en_name}" disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,12 +65,40 @@
 											      </tr>
 											    </thead>
 											    <tbody>
+											    	<c:choose>
+		                                            	<c:when test="${not empty muctieuhp}">
+		                                            		<c:forEach items="${muctieuhp}" var="item" varStatus="loop">
+														    	<tr id="old-row" disabled>
+															        <td class="muc-tieu">
+															        	<span class="form-control" disabled>${item.ten}</span>
+															        </td>
+															        <td>
+															        	<span class="form-control" disabled>
+															        		${item.moTa}
+															        	</span>
+															        </td>
+															        <td>
+															        	<span class="form-control" disabled>
+															        		${chuanDauRa.get(loop.count-1).chuanDauRa}
+															        	</span>
+															        </td>
+															        <td>
+															        	<span class="form-control" disabled>
+															        		${item.trinhDoNangLuc}
+															        	</span>
+															        </td>
+															        <td>
+															        </td>
+															    </tr>
+														    </c:forEach>
+		                                            	</c:when>
+		                                            </c:choose>
 											      <tr id="standard-row">
 											        <td class="muc-tieu">
 											        	<input type="text" id="muc-tieu" name="ten" class="form-control" value="G1"/>
 											        </td>
 											        <td>
-											        	<textarea class="form-control" rows="2" name="moTa" id="mo_ta"></textarea>
+											        	<textarea class="form-control" rows="2" name="moTa" id="mo_ta" required></textarea>
 											        </td>
 											        <td>
 											        	<c:forEach items="${cdrCTDT}" var="item">
@@ -80,7 +108,7 @@
                                                      	</c:forEach>
 											        </td>
 											        <td>
-											        	<input type="text" class="form-control" name="trinhDoNangLuc">
+											        	<input type="text" class="form-control" name="trinhDoNangLuc" required>
 											        </td>
 											        <td>
 											        	<button type="button" id="delete-row" class="btn-xs btn-danger hidden">

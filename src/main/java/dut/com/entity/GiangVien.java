@@ -1,5 +1,6 @@
 package dut.com.entity;
 
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -18,14 +19,15 @@ public class GiangVien {
 	
 	@NotEmpty(message="Email is not Empty")
 	@Size(max=45, min=6, message="Email is from 6 to 45 lettes")
+	@Pattern(regexp="[\\w&&[^0-9]][\\w.]{8,30}[@][a-zA-Z]{3,8}[.][a-z]{2,8}[.]?[a-z]*[a-z]$", message="Email is not valid !")
 	private String email;
 	
 	@NotEmpty(message="SDT is not Empty")
-	@Size(max=20, message="SDT one have less than 20 digits")
+	@Pattern(regexp="[0-9]{9,12}", message="SDT is from 9 to 12 digits")
 	private String soDienThoai;
 	
 	@NotEmpty(message="TaiKhoan is not Empty")
-	@Size(max=45, min=6, message="TaiKhoan is from 6 to 45 lettes")
+	@Pattern(regexp="[\\w]{6,45}", message="TaiKhoan is from 6 to 45 lettes, format [a-zA-Z0-9_]")
 	private String username;
 	
 	private String password;

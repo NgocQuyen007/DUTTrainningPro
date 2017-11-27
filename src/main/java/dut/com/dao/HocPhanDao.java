@@ -52,6 +52,11 @@ public class HocPhanDao {
 				hp.getLoai_hoc_phan(),hp.getKhoi_kien_thuc_id(),hp.getSo_tin_chi(),hp.getId());
 	}
 	
+	public List<HocPhan> getHocPhanByPage(int pageid, int total){
+		String sql="select * from hoc_phan limit "+(pageid-1)+","+total;
+		return jdbcTemplate.query(sql, new HocPhanRowMapper());
+	}
+	
 	public void delete(int id){
 		String sql = "DELETE FROM hoc_phan where id=?";
 		jdbcTemplate.update(sql,id);

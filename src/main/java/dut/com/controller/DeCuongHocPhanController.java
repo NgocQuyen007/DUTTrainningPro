@@ -1,10 +1,6 @@
 package dut.com.controller;
 
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import dut.com.dao.DeCuongHocPhanDao;
-import dut.com.entity.DeCuongHocPhan;
 import dut.com.dao.GiangVienDao;
-import dut.com.entity.GiangVien;
 import dut.com.dao.HocPhanDao;
+import dut.com.dao.MucTieuDUCTDTDao;
 import dut.com.dao.MucTieuHocPhanDao;
-import dut.com.entity.HocPhan;
+import dut.com.entity.DeCuongHocPhan;
 
 @Controller
 @RequestMapping("/hocphan/{hocphanId}/decuong")
@@ -33,11 +27,13 @@ public class DeCuongHocPhanController {
 	HocPhanDao hpDao;
 	@Autowired
 	MucTieuHocPhanDao mthpDao;
+	@Autowired
+	MucTieuDUCTDTDao mtductdtDao;
 	
 	@GetMapping("/add")
 	public String create(@PathVariable("hocphanId") int id, ModelMap map){
 		map.addAttribute("listGV", gvDao.getItems());
-		map.addAttribute("hocphan", hpDao.getItem(id));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(id));
 		
 		return "admin.decuonghocphan.add";
 	}
@@ -47,9 +43,10 @@ public class DeCuongHocPhanController {
 		map.addAttribute("decuonghocphan", dchpDao.getItemByHocPhanId(hpId));
 		map.addAttribute("giangvien", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienId()));
 		map.addAttribute("giangvienass", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienAssId()));
-		map.addAttribute("hocphan", hpDao.getItem(hpId));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
 		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
-		System.out.println(dchpDao.getItemByHocPhanId(hpId).getId());
+		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
+		
 		return "admin.decuonghocphan.show";
 	}
 	

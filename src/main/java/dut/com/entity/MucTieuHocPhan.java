@@ -8,6 +8,8 @@ public class MucTieuHocPhan {
 	private int deCuongChiTietId;
 	private String moTa;
 	
+	
+	
 	public MucTieuHocPhan() {
 		
 	}
@@ -19,43 +21,55 @@ public class MucTieuHocPhan {
 		this.moTa = moTa;
 	}
 	
+	
+	
+	
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getTen() {
-		return this.ten;
+		return ten;
 	}
-	
+
 	public void setTen(String ten) {
 		this.ten = ten;
 	}
-	
-	public String getMoTa() {
-		return this.moTa;
+
+	public String getTrinhDoNangLuc() {
+		return trinhDoNangLuc;
 	}
-	
+
+	public void setTrinhDoNangLuc(String trinhDoNangLuc) {
+		this.trinhDoNangLuc = trinhDoNangLuc;
+	}
+
+	public int getDeCuongChiTietId() {
+		return deCuongChiTietId;
+	}
+
+	public void setDeCuongChiTietId(int deCuongChiTietId) {
+		this.deCuongChiTietId = deCuongChiTietId;
+	}
+
+	public String getMoTa() {
+		return moTa;
+	}
+
 	public void setMoTa(String moTa) {
 		this.moTa = moTa;
 	}
-	
-	public int getDCCTId() {
-		return this.deCuongChiTietId;
+
+	@Override
+	public String toString() {
+		return "MucTieuHocPhan [id=" + id + ", ten=" + ten + ", trinhDoNangLuc=" + trinhDoNangLuc
+				+ ", deCuongChiTietId=" + deCuongChiTietId + ", moTa=" + moTa + "]";
 	}
 	
-	public void setDCCTId(int id) {
-		this.deCuongChiTietId = id;
-	}
 	
-	public String getTDNLuc() {
-		return this.trinhDoNangLuc;
-	}
 	
-	public void setTDNLuc(String TDNLuc) {
-		this.trinhDoNangLuc = TDNLuc;
-	}
 }

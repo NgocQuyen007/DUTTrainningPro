@@ -47,11 +47,11 @@
                                             	<div class="form-group">
                                             		<div class="form-group col-sm-6">
                                                         <label for="hocphan">Tên Học Phần</label>
-                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.viName}" disabled>
+                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.vi_name}" disabled>
                                                     </div>
                                                     <div class="form-group col-sm-6">
                                                         <label for="hocphan">Subject's Name</label>
-                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.enName}" disabled>
+                                                    	<input type="text" class="form-control" id="hocphan" placeholder="${hocphan.en_name}" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -76,7 +76,7 @@
                                                 </div>
                                                 <div class="form-group col-sm-12">
                                                 	<label for="mo_ta">Mô Tả</label>
-                                                	<textarea class="form-control" rows="5" name="moTa" id="mo_ta"></textarea>
+                                                	<textarea class="form-control" rows="5" name="moTa" id="mo_ta" required></textarea>
                                                 </div>
                                             </div>
                                         </fieldset>

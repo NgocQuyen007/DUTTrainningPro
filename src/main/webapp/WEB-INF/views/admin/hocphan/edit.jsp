@@ -1,3 +1,62 @@
+<script type="text/javascript">
+            function checkform(form){                            
+                    // BƯỚC 1: Lấy dữ liệu từ form
+                    var vi_name       = $.trim($('#vi_name').val());
+                    var en_name       = $.trim($('#en_name').val());
+                    var ma_hoc_phan   = $.trim($('#ma_hoc_phan').val());
+                    var loai_hoc_phan = $.trim($('#loai_hoc_phan').val());
+                    var so_tin_chi = $.trim($('#so_tin_chi').val());
+             
+                    // BƯỚC 2: Validate dữ liệu
+                    // Biến cờ hiệu
+                    var flag = true;
+             
+                    // vi_name
+                    if (vi_name == ''){
+                        $('#vi_name_error').text('Tên tiếng việt học phần không được để trống.');                      
+                        flag = false;
+                    }
+                    else{
+                        $('#vi_name_error').text('');
+                    }
+             
+                    // en_name
+                    if (en_name == ''){
+                        $('#en_name_error').text('Tên tiếng anh học phần không được để trống.');
+                        flag = false;
+                    }
+                    else{
+                        $('#en_name_error').text('');
+                    }
+             
+                    // ma_hoc_phan
+                    if (ma_hoc_phan == ''){
+                        $('#ma_hoc_phan_error').text('Mã học phần không được để trống.');
+                        flag = false;
+                    }
+                    else{
+                        $('#ma_hoc_phan_error').text('');
+                    }
+                    
+                 // loai_hoc_phan
+                    if (loai_hoc_phan == ''){
+                        $('#loai_hoc_phan_error').text('Loại học phần không được để trống.');
+                        flag = false;
+                    }
+                    else{
+                        $('#loai_hoc_phan_error').text('');
+                    }
+                 // so_tin_chi
+                    if (so_tin_chi <= 0){
+                        $('#so_tin_chi_error').text('Số tín chỉ phải dương.');
+                        flag = false;
+                    }
+                    else{
+                        $('#so_tin_chi_error').text('');
+                    }
+                    return flag;       
+            }
+</script>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -35,7 +94,7 @@
                             <div class="col-md-12">
                                 <div class="card-box">
                                 <c:url var="addUrl" value='/hocphan/edit/${hocphan.id}'/>
-                                    <form:form id="default-wizard" method="post" modelAttribute="hocphan" action='${addUrl}'>
+                                    <form:form onsubmit="return checkform(this);" id="default-wizard" method="post" modelAttribute="hocphan" action='${addUrl}'>
                                         <fieldset title="1">
                                             <legend>Sửa Học Phần</legend>
                                             <c:if test="${param['msg'] eq '2'}">
@@ -44,27 +103,31 @@
 												  <span class="sr-only">Error:</span>
 												  Chỉnh sửa học phần thất bại
 												</div>
-											</c:if>                                           
+											</c:if>                                          
                                             <div class="row m-t-20">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
                                                 	<form:input type="hidden" path="id"></form:input>
-                                                    <div class="form-group">
+                                                    <div class="col-sm-4">
                                                         <label for="vi_name">Tên Tiếng Việt</label>
                                                         <form:input type="text" class="form-control" id="vi_name" path="vi_name" placeholder=""/>
+                                                        <span style="color: red" id="vi_name_error"></span>
                                                     </div>
-													<div class="form-group">
+													<div class="col-sm-4">
                                                         <label for="vi_name">Tên Tiếng Anh</label>
                                                         <form:input type="text" class="form-control" id="en_name" path="en_name"  placeholder=""/>
+                                                        <span style="color: red" id="en_name_error"></span>
                                                     </div>
-													<div class="form-group">
+													<div class="col-sm-4">
                                                         <label for="en_name">Mã Học Phần</label>
-                                                        <form:input type="text" class="form-control" id="ma_hoc_phan" path="ma_hoc_phan" placeholder=""/>
+                                                        <form:input type="text" class="form-control" id="ma_hoc_phan" path="ma_hoc_phan"/>
+                                                        <span style="color: red" id="ma_hoc_phan_error"></span>
                                                     </div>
-													<div class="form-group">
+													<div style="margin-top: 15px" class="col-sm-4">
                                                         <label for="ma_hoc_phan">Loại Học Phần</label>
                                                         <form:input type="text" class="form-control" id="loai_hoc_phan" path="loai_hoc_phan" placeholder=""/>
+                                                        <span style="color: red" id="loai_hoc_phan_error"></span>
                                                     </div>
-													<div class="form-group">
+													<div style="margin-top: 15px" class="col-sm-4">
                                                         <label for="loai_hoc_phan">Khối Kiến Thức</label>
                                                         <form:select class="form-control select2" id="khoi_kien_thuc_id" path="khoi_kien_thuc_id">
 															<c:forEach items="${requestScope.listkkt}" var="kkt">
@@ -72,14 +135,15 @@
 															</c:forEach>
 														</form:select>
                                                     </div>
-													<div class="form-group">
+													<div style="margin-top: 15px" class="col-sm-4">
                                                         <label for="khoi_kien_thuc_id">Số Tín Chỉ</label>
-                                                        <form:input type="text" class="form-control" id="so_tin_chi" path="so_tin_chi" placeholder=""/>
+                                                        <form:input type="number" step="0.5" class="form-control" id="so_tin_chi" path="so_tin_chi" placeholder=""/>
+                                                        <span style="color: red" id="so_tin_chi_error"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <button type="submit" class="btn btn-primary stepy-finish">Submit</button>
+                                        <button style="margin-top: 11px;margin-left: 10px;" type="submit" class="btn btn-primary stepy-finish">Submit</button>
                                     </form:form>
 
                                 </div>
