@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dut.com.dao.HocPhanDao;
 import dut.com.dao.KhoiKienThucDao;
+import dut.com.dao.DeCuongHocPhanDao;
 import dut.com.entity.HocPhan;
 import dut.com.entity.KhoiKienThuc;
+import dut.com.entity.DeCuongHocPhan;
 
 @Controller
 @RequestMapping("hocphan")
@@ -27,6 +29,9 @@ public class HocPhanController {
 	
 	@Autowired
 	KhoiKienThucDao daokkt;
+	
+	@Autowired
+	DeCuongHocPhanDao dchpDao;
 	
 	@GetMapping
 	public String index(ModelMap model){
@@ -100,8 +105,10 @@ public class HocPhanController {
 		hocphan = daohp.getHocPhanById(id);
 		KhoiKienThuc kkt = new KhoiKienThuc();
 		kkt = daokkt.getKhoiKienThucById(hocphan.getKhoi_kien_thuc_id());
+		int countDCHP = dchpDao.checkExist(id);
 		model.addAttribute("hocphan", hocphan);
 		model.addAttribute("kkt", kkt);
+		model.addAttribute("decuong", countDCHP);
 		return "admin.hocphan.show";
 	}
 	

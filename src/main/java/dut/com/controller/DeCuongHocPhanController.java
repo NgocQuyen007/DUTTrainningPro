@@ -14,6 +14,7 @@ import dut.com.dao.GiangVienDao;
 import dut.com.dao.HocPhanDao;
 import dut.com.dao.MucTieuDUCTDTDao;
 import dut.com.dao.MucTieuHocPhanDao;
+import dut.com.dao.NguonHocLieuDao;
 import dut.com.entity.DeCuongHocPhan;
 
 @Controller
@@ -29,6 +30,8 @@ public class DeCuongHocPhanController {
 	MucTieuHocPhanDao mthpDao;
 	@Autowired
 	MucTieuDUCTDTDao mtductdtDao;
+	@Autowired
+	NguonHocLieuDao nhlDao;
 	
 	@GetMapping("/add")
 	public String create(@PathVariable("hocphanId") int id, ModelMap map){
@@ -46,6 +49,7 @@ public class DeCuongHocPhanController {
 		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
 		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
+		map.addAttribute("nguonhoclieu", nhlDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
 		
 		return "admin.decuonghocphan.show";
 	}
