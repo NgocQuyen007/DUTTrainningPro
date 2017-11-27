@@ -99,5 +99,40 @@ public class CTDTDAO {
 		}
 		
 	}
+
+	public boolean delelteCTDT(int id) {
+		try {
+			String sql = "DELETE from hoc_phan_ctdt WHERE chuong_trinh_dao_tao_id = ?";
+			jdbcTemplate.update(sql, new Object[]{ id });
+			sql = "DELETE from chuong_trinh_dao_tao WHERE id = ?";
+			jdbcTemplate.update(sql, new Object[]{ id });
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
+
+	public boolean update(CTDT ctdt) {
+		try {
+			String sql = "UPDATE chuong_trinh_dao_tao SET ten=?, khoa_id=?, nien_khoa=?, loai_id=? WHERE id=?";
+			jdbcTemplate.update(sql, new Object[]{ctdt.getTen(), ctdt.getKhoaId(), ctdt.getNienKhoa(), ctdt.getLoaiId(), ctdt.getId() });
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
+
+	public boolean delHocKiCTDT(int ctdtId, int hocKiId) {
+		try {
+			String sql = "DELETE from hoc_phan_ctdt WHERE chuong_trinh_dao_tao_id = ? AND hoc_ki_id=?";
+			jdbcTemplate.update(sql, new Object[]{ ctdtId, hocKiId });
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
 	
 }

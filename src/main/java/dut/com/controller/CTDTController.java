@@ -61,6 +61,13 @@ public class CTDTController {
 		ctdtDAO.add(ctdt);
 		return "redirect:/ctdt";
 	}
+	
+	@RequestMapping(path="update", method=RequestMethod.POST)
+	public String update(@RequestParam("id") int id, @RequestParam("khoaId") int khoaId, @RequestParam("loaiId") int loaiId, @RequestParam("ten") String ten, @RequestParam("nienKhoa") String nienKhoa){
+		CTDT ctdt = new CTDT(id, ten, nienKhoa, khoaId, loaiId);
+		ctdtDAO.update(ctdt);
+		return "redirect:/ctdt/"+id+"/edit";
+	}
 //	ctdt/id/edit
 	@RequestMapping(path = "{id}/edit", method = RequestMethod.GET)
 	public String edit(ModelMap map, @PathVariable("id") int id) {
@@ -68,15 +75,19 @@ public class CTDTController {
 		map.addAttribute("ctdt", ctdt);
 		map.addAttribute("hocKis", ctdtDAO.getHocKiRemain(id));
 		map.addAttribute("hocPhans", ctdtDAO.getHocPhanRemain(id));
+		map.addAttribute("khoas", khoaDao.getItems());
+		map.addAttribute("loais", loaiCTDTDao.getLoaiCTDT());
 		return "admin.ctdt.edit";
 	}
 	
 	@RequestMapping(path="addHP", method=RequestMethod.POST)
 	public String addHP(@RequestParam("ctdtId") int ctdtId, @RequestParam("hocKiId") int hocKiId, HttpServletRequest request){
-		String hocPhan[] = request.getParameterValues("hocPhan");
-		for(int i=0; i<hocPhan.length; i++){
-			HocPhanCTDT hpCTDT = new HocPhanCTDT(ctdtId, Integer.parseInt(hocPhan[i]), hocKiId);
-			hpCTDTDAO.add(hpCTDT);
+		if (request.getParameterValues("hocPhan") != null) {
+			String hocPhan[] = request.getParameterValues("hocPhan");
+			for(int i=0; i<hocPhan.length; i++){
+				HocPhanCTDT hpCTDT = new HocPhanCTDT(ctdtId, Integer.parseInt(hocPhan[i]), hocKiId);
+				hpCTDTDAO.add(hpCTDT);
+			}
 		}
 		return "redirect:/ctdt/"+ctdtId+"/edit";
 	}
@@ -92,5 +103,17 @@ public class CTDTController {
 		ctdtDAO.delHocPhanCTDT(new HocPhanCTDT(ctdtId, hocPhanId, hocKiId));
 		return "redirect:/ctdt/"+ctdtId+"/edit";
 	}
-
+	
+	@RequestMapping(path = "{id}/delete", method = RequestMethod.GET)
+	public String delete(ModelMap map, @PathVariable("id") int id) {
+		ctdtDAO.delelteCTDT(id);
+		return "redirect:/ctdt";
+	}
+	
+	@RequestMapping(path="delHocKi", method=RequestMethod.POST)
+	public String delHocKi(@RequestParam("ctdtId") int ctdtId, @RequestParam("hocKiId") int hocKiId){
+		ctdtDAO.delHocKiCTDT(ctdtId, hocKiId);
+		return "redirect:/ctdt/"+ctdtId+"/edit";
+	}
+	
 }

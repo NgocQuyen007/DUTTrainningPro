@@ -67,6 +67,16 @@ public class CTDT {
 		this.khoaId = khoaId;
 		this.loaiId = loaiId;
 	}
+	
+	
+	public CTDT(int id, String ten, String nienKhoa, int khoaId, int loaiId) {
+		super();
+		this.id = id;
+		this.ten = ten;
+		this.nienKhoa = nienKhoa;
+		this.khoaId = khoaId;
+		this.loaiId = loaiId;
+	}
 	public CTDT() {
 		super();
 	}
