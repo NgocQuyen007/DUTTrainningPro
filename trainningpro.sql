@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: trainningpro
 -- ------------------------------------------------------
--- Server version	5.7.16-log
+-- Server version	5.7.20-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -80,22 +80,17 @@ DROP TABLE IF EXISTS `chuong_trinh_dao_tao`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `chuong_trinh_dao_tao` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `nien_khoa_id` int(10) unsigned NOT NULL,
-  `hoc_ki_id` int(10) unsigned NOT NULL,
   `khoa_id` int(10) unsigned NOT NULL,
   `loai_id` int(10) unsigned NOT NULL,
   `ten` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`,`loai_id`,`khoa_id`,`nien_khoa_id`,`hoc_ki_id`),
+  `nien_khoa` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`,`loai_id`,`khoa_id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_education_program_NienKhoa1_idx` (`nien_khoa_id`),
-  KEY `fk_education_program_semesters1_idx` (`hoc_ki_id`),
   KEY `fk_education_program_faculties1_idx` (`khoa_id`),
   KEY `fk_education_program_category1_idx` (`loai_id`),
-  CONSTRAINT `fk_education_program_NienKhoa1` FOREIGN KEY (`nien_khoa_id`) REFERENCES `nien_khoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_education_program_category1` FOREIGN KEY (`loai_id`) REFERENCES `loai` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_education_program_faculties1` FOREIGN KEY (`khoa_id`) REFERENCES `khoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_education_program_semesters1` FOREIGN KEY (`hoc_ki_id`) REFERENCES `hoc_ky` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_education_program_faculties1` FOREIGN KEY (`khoa_id`) REFERENCES `khoa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,6 +99,7 @@ CREATE TABLE `chuong_trinh_dao_tao` (
 
 LOCK TABLES `chuong_trinh_dao_tao` WRITE;
 /*!40000 ALTER TABLE `chuong_trinh_dao_tao` DISABLE KEYS */;
+INSERT INTO `chuong_trinh_dao_tao` VALUES (4,1,1,'test',NULL),(6,1,1,'asdf','sdf'),(7,1,1,'Công nghệ Thông tin CNPM','2013'),(9,6,2,'cnpm','1121ssss');
 /*!40000 ALTER TABLE `chuong_trinh_dao_tao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,9 +121,9 @@ CREATE TABLE `de_cuong_hoc_phan` (
   KEY `fk_de_cuong_chi_tiet_giang_vien1_idx` (`giang_vien_ass_id`),
   KEY `fk_de_cuong_chi_tiet_hoc_phan1_idx` (`hoc_phan_id`),
   CONSTRAINT `fk_de_cuong_chi_tiet_giang_vien1` FOREIGN KEY (`giang_vien_ass_id`) REFERENCES `giang_vien` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_hoc_phan_de_cuong_chi_tiet1` FOREIGN KEY (`hoc_phan_id`) REFERENCES `hoc_phan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_hoc_phan_de_cuong_chi_tiet1` FOREIGN KEY (`hoc_phan_id`) REFERENCES `hoc_phan` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_subject_outlines_lecturers1` FOREIGN KEY (`giang_vien_id`) REFERENCES `giang_vien` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +159,7 @@ CREATE TABLE `giang_vien` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_lecturers_faculties1_idx` (`khoa_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +168,7 @@ CREATE TABLE `giang_vien` (
 
 LOCK TABLES `giang_vien` WRITE;
 /*!40000 ALTER TABLE `giang_vien` DISABLE KEYS */;
-INSERT INTO `giang_vien` VALUES (1,'Le Thi My Hanh','2009-04-07',0,'ltmhanh@dut.udn.vn','0123456789','ltmhanh','secret','19112017225316.png',1,4),(2,'Mai Van Ha','2009-04-07',1,'mvha@dut.udn.vn','0123456789','mvha','secret','19112017225316.png',2,4),(3,'Nguyen Van Nguyen','2009-04-07',1,'nvnguyen@dut.udn.vn','0123456789','nvnguyen','secret','19112017225316.png',2,4),(4,'Dao Thi My Hanh','2009-04-07',0,'dtmhanh@dut.udn.vn','0123456789','dtmhanh','secret','19112017225316.png',3,4),(5,'Nguyen Van A','2009-04-07',1,'nva@dut.udn.vn','0123456789','nguyenvana','secret','19112017225316.png',2,5),(6,'Nguyen Thi B','2009-04-07',0,'ntb@dut.udn.vn','0123456789','nguyenthib','secret','19112017225316.png',2,4),(7,'Le Van C','2009-04-07',1,'lvc@dut.udn.vn','0123456789','levanc','secret','19112017225316.png',4,4),(20,'Lê Văn Bình','2017-11-14',1,'levanbinh@gmail.com','12345678','admin1234','e10adc3949ba59abbe56e057f20f883e','19112017235230.jpg',1,1),(23,'Lò Văn Năm','2017-11-15',0,'234567','56789','234567','f46c1daad76f1b91574b0d48ec1db4d3','20112017232734.jpg',1,1),(24,'đõ quang hèo','2017-11-30',1,'yghuygjikghujik','sdasdsadsadasd','đasadasdasdasd','34d261467a3c0c9d3a4ae2cf9db7cb5c','',1,1),(25,'lỗ Tấn Trường','2017-11-01',0,'7452yhujiokpl','rthrthtrh','lkjkljkljkj','2cc5afe1962b565ba56728211978f4ca','20112017004421.jpg',2,1),(26,'Không được khóc','2017-11-14',1,'khocnhe@email','uhuhuhuh','uhuhuhuhki','55a0dfca662117092a6aa66487384621','20112017232437.jpg',1,1),(28,'Test Sửa','2017-11-16',1,'1313ádasd','095863256','vdvdvdv','0c8480602955d962d97c3d8cd85b86a9','20112017233054.jpg',1,1),(29,'rtyuilkjhghj','2017-11-15',1,'jujjhjghjhg','nghnhnh','hhhnhnhhh','bf8c375d03ce2948301ce30fbfc5d5a8','',1,1),(30,'Tẹo Tẹo','2017-11-21',1,'sdasdsdsadfbbecSt','1234yyu','teoteo','54b07c0989d3b2845cfd9f3c8a44886d','',1,14),(31,'Võ Đức Hoàng','1988-11-20',1,'hoangkasu@gmail.com','0125569848','hoangaka','e10adc3949ba59abbe56e057f20f883e','21112017001234.jpg',2,4),(32,'Lê Châu','2017-11-15',1,'kokokok@gmail.com','0936978033','lechaudt','40365b6766f16121eb07a99aa7179e90','',5,8);
+INSERT INTO `giang_vien` VALUES (1,'Le Thi My Hanh','2009-04-07',0,'ltmhanh@dut.udn.vn','0123456789','ltmhanh','secret','19112017225316.png',1,4),(2,'Mai Van Ha','2009-04-07',1,'mvha@dut.udn.vn','0123456789','mvha','secret','19112017225316.png',2,4),(3,'Nguyen Van Nguyen','2009-04-07',1,'nvnguyen@dut.udn.vn','0123456789','nvnguyen','secret','19112017225316.png',2,4),(4,'Dao Thi My Hanh','2009-04-07',0,'dtmhanh@dut.udn.vn','0123456789','dtmhanh','secret','19112017225316.png',3,4),(5,'Nguyen Van A','2009-04-07',1,'nva@dut.udn.vn','0123456789','nguyenvana','secret','19112017225316.png',2,5),(6,'Nguyen Thi B','2009-04-07',0,'ntb@dut.udn.vn','0123456789','nguyenthib','secret','19112017225316.png',2,4),(7,'Le Van C','2009-04-07',1,'lvc@dut.udn.vn','0123456789','levanc','secret','19112017225316.png',4,4),(20,'Lê Văn Bình','2017-11-14',1,'levanbinh@gmail.com','12345678','admin1234','e10adc3949ba59abbe56e057f20f883e','19112017235230.jpg',1,1),(23,'Lò Văn Năm','2017-11-15',0,'234567','56789','234567','f46c1daad76f1b91574b0d48ec1db4d3','20112017232734.jpg',1,1),(24,'đõ quang hèo','2017-11-30',1,'yghuygjikghujik','sdasdsadsadasd','đasadasdasdasd','34d261467a3c0c9d3a4ae2cf9db7cb5c','',1,1),(25,'lỗ Tấn Trường','2017-11-01',0,'7452yhujiokpl','rthrthtrh','lkjkljkljkj','2cc5afe1962b565ba56728211978f4ca','20112017004421.jpg',2,1),(26,'Không được khóc','2017-11-14',1,'khocnhe@email','uhuhuhuh','uhuhuhuhki','55a0dfca662117092a6aa66487384621','20112017232437.jpg',1,1),(28,'Test Sửa','2017-11-16',1,'1313ádasd','095863256','vdvdvdv','0c8480602955d962d97c3d8cd85b86a9','20112017233054.jpg',1,1),(29,'rtyuilkjhghj','2017-11-15',1,'jujjhjghjhg','nghnhnh','hhhnhnhhh','bf8c375d03ce2948301ce30fbfc5d5a8','',1,1),(30,'Tẹo Tẹo','2017-11-21',1,'sdasdsdsadfbbecSt','1234yyu','teoteo','54b07c0989d3b2845cfd9f3c8a44886d','',1,14),(31,'Võ Đức Hoàng','1988-11-20',1,'hoangkasu@gmail.com','0125569848','hoangaka','e10adc3949ba59abbe56e057f20f883e','21112017001234.jpg',2,4),(32,'Lê Châu','2017-11-15',1,'kokokok@gmail.com','0936978033','lechaudt','40365b6766f16121eb07a99aa7179e90','',5,8),(33,'adfasdf','2017-11-15',1,'ádfasdfsdf','adfsdfasdfsdfdsfa','fasdfasdfsdfasdfsdf','9342ff6d1b339df41675127697ea9091','',1,1),(34,'Truong Thanh Huu','2017-11-01',1,'truongthanhhhuu@gmail.com','12123123123','adasdadasdadasd','a87ddd71d9eef30b4136635e8b4310dd','',1,1);
 /*!40000 ALTER TABLE `giang_vien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +211,7 @@ CREATE TABLE `hoc_phan` (
   `ma_hoc_phan` varchar(45) DEFAULT NULL,
   `loai_hoc_phan` varchar(45) DEFAULT NULL,
   `khoi_kien_thuc_id` int(11) NOT NULL,
-  `so_tin_chi` int(11) DEFAULT NULL,
+  `so_tin_chi` float DEFAULT NULL,
   PRIMARY KEY (`id`,`khoi_kien_thuc_id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_hoc_phan_khoi_kien_thuc1_idx` (`khoi_kien_thuc_id`),
@@ -229,7 +225,7 @@ CREATE TABLE `hoc_phan` (
 
 LOCK TABLES `hoc_phan` WRITE;
 /*!40000 ALTER TABLE `hoc_phan` DISABLE KEYS */;
-INSERT INTO `hoc_phan` VALUES (1,'Hinh Hoa','Graphics',NULL,'Bat buoc',1,NULL),(2,'Giai tich','Analytics',NULL,'Bat buoc',1,NULL),(3,'Ve ky thuat',NULL,NULL,'Bat buoc',1,NULL),(4,'Tu tuong Mac Lenin','Mac Lenin',NULL,'Bat buoc',1,NULL),(5,'Nguyen ly 1',NULL,NULL,'Bat buoc',1,NULL),(6,'Nguyen ly 2','Analytics',NULL,'Bat buoc',1,NULL),(7,'Tin hoc dai cuong','Analytics',NULL,'Bat buoc',1,NULL),(8,'TH Tin hoc dai cuong','Analytics',NULL,'Bat buoc',1,NULL),(9,'Co so nganh mang',NULL,NULL,'Bat buoc',2,NULL),(10,'Cong nghe phan mem',NULL,NULL,'Bat buoc',2,NULL),(11,'Quan ly du an',NULL,NULL,'Tu chon',3,NULL),(12,'Chuyen de CNPM',NULL,NULL,'Tu chon',3,NULL),(13,'Do an CSNM',NULL,NULL,'Bat buoc',2,NULL),(14,'Do an CNPM',NULL,NULL,'Bat buoc',3,NULL),(15,'Thuc tap cong nhan',NULL,NULL,'Bat buoc',4,NULL),(16,'Thuc tap tot nghiep',NULL,NULL,'Bat buoc',6,NULL),(17,'Phap luat dai cuong',NULL,NULL,'Bat buoc',4,NULL);
+INSERT INTO `hoc_phan` VALUES (3,'Ve ky thuat',NULL,NULL,'Bat buoc',1,NULL),(4,'Tu tuong Mac Lenin','Mac Lenin',NULL,'Bat buoc',1,NULL),(5,'Nguyen ly 1',NULL,NULL,'Bat buoc',1,NULL),(6,'Nguyen ly 2','Analytics',NULL,'Bat buoc',1,NULL),(7,'Tin hoc dai cuong','Analytics',NULL,'Bat buoc',1,NULL),(8,'TH Tin hoc dai cuong','Analytics',NULL,'Bat buoc',1,NULL),(9,'Co so nganh mang',NULL,NULL,'Bat buoc',2,NULL),(10,'Cong nghe phan mem',NULL,NULL,'Bat buoc',2,NULL),(11,'Quan ly du an',NULL,NULL,'Tu chon',3,NULL),(12,'Chuyen de CNPM',NULL,NULL,'Tu chon',3,NULL),(13,'Do an CSNM',NULL,NULL,'Bat buoc',2,NULL),(14,'Do an CNPM',NULL,NULL,'Bat buoc',3,NULL),(15,'Thuc tap cong nhan',NULL,NULL,'Bat buoc',4,NULL),(16,'Thuc tap tot nghiep',NULL,NULL,'Bat buoc',6,NULL),(17,'Phap luat dai cuong',NULL,NULL,'Bat buoc',4,NULL);
 /*!40000 ALTER TABLE `hoc_phan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,10 +239,11 @@ DROP TABLE IF EXISTS `hoc_phan_ctdt`;
 CREATE TABLE `hoc_phan_ctdt` (
   `chuong_trinh_dao_tao_id` int(10) unsigned NOT NULL,
   `hoc_phan_id` int(10) unsigned NOT NULL,
+  `hoc_ki_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`chuong_trinh_dao_tao_id`,`hoc_phan_id`),
   KEY `fk_subjects_has_education_program_education_program1_idx` (`chuong_trinh_dao_tao_id`),
   KEY `fk_hoc_phan_ctdt_hoc_phan1_idx` (`hoc_phan_id`),
-  CONSTRAINT `fk_hoc_phan_ctdt_hoc_phan1` FOREIGN KEY (`hoc_phan_id`) REFERENCES `hoc_phan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_hoc_phan_ctdt_hoc_phan1` FOREIGN KEY (`hoc_phan_id`) REFERENCES `hoc_phan` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_subjects_has_education_program_education_program1` FOREIGN KEY (`chuong_trinh_dao_tao_id`) REFERENCES `chuong_trinh_dao_tao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -257,6 +254,7 @@ CREATE TABLE `hoc_phan_ctdt` (
 
 LOCK TABLES `hoc_phan_ctdt` WRITE;
 /*!40000 ALTER TABLE `hoc_phan_ctdt` DISABLE KEYS */;
+INSERT INTO `hoc_phan_ctdt` VALUES (6,3,2),(6,4,2),(6,5,2),(6,6,1),(6,7,1),(6,9,8),(6,10,8),(6,13,10),(6,14,1),(6,16,3),(6,17,3),(7,3,3),(7,4,5),(7,5,5),(7,6,5),(7,7,2),(7,8,6),(7,9,7),(7,10,2),(7,11,5),(7,12,4),(7,13,1),(7,14,4),(7,15,6),(7,16,1),(7,17,1);
 /*!40000 ALTER TABLE `hoc_phan_ctdt` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,7 +344,7 @@ CREATE TABLE `loai` (
   `ten` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -355,6 +353,7 @@ CREATE TABLE `loai` (
 
 LOCK TABLES `loai` WRITE;
 /*!40000 ALTER TABLE `loai` DISABLE KEYS */;
+INSERT INTO `loai` VALUES (1,'CLC'),(2,'LT');
 /*!40000 ALTER TABLE `loai` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,7 +369,7 @@ CREATE TABLE `loai_hoc_lieu` (
   `ten_loai` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -379,6 +378,7 @@ CREATE TABLE `loai_hoc_lieu` (
 
 LOCK TABLES `loai_hoc_lieu` WRITE;
 /*!40000 ALTER TABLE `loai_hoc_lieu` DISABLE KEYS */;
+INSERT INTO `loai_hoc_lieu` VALUES (1,'qqqq'),(2,'www');
 /*!40000 ALTER TABLE `loai_hoc_lieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,7 +396,7 @@ CREATE TABLE `muc_tieu_dap_ung_ctdt` (
   KEY `fk_muc_tieu_hoc_phan_has_chuan_dau_ra_ctdt_chuan_dau_ra_ctd_idx` (`chuan_dau_ra_ctdt_id`),
   KEY `fk_muc_tieu_hoc_phan_has_chuan_dau_ra_ctdt_muc_tieu_hoc_pha_idx` (`muc_tieu_hoc_phan_id`),
   CONSTRAINT `fk_muc_tieu_hoc_phan_has_chuan_dau_ra_ctdt_chuan_dau_ra_ctdt1` FOREIGN KEY (`chuan_dau_ra_ctdt_id`) REFERENCES `chuan_dau_ra_ctdt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_muc_tieu_hoc_phan_has_chuan_dau_ra_ctdt_muc_tieu_hoc_phan1` FOREIGN KEY (`muc_tieu_hoc_phan_id`) REFERENCES `muc_tieu_hoc_phan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_muc_tieu_hoc_phan_has_chuan_dau_ra_ctdt_muc_tieu_hoc_phan1` FOREIGN KEY (`muc_tieu_hoc_phan_id`) REFERENCES `muc_tieu_hoc_phan` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -425,8 +425,8 @@ CREATE TABLE `muc_tieu_hoc_phan` (
   PRIMARY KEY (`id`,`de_cuong_chi_tiet_id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_muc_tieu_hoc_phan_de_cuong_chi_tiet1_idx` (`de_cuong_chi_tiet_id`),
-  CONSTRAINT `fk_muc_tieu_hoc_phan_de_cuong_chi_tiet1` FOREIGN KEY (`de_cuong_chi_tiet_id`) REFERENCES `de_cuong_hoc_phan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_muc_tieu_hoc_phan_de_cuong_chi_tiet1` FOREIGN KEY (`de_cuong_chi_tiet_id`) REFERENCES `de_cuong_hoc_phan` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -473,16 +473,17 @@ DROP TABLE IF EXISTS `nguon_hoc_lieu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `nguon_hoc_lieu` (
-  `id` int(11) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ten_hoc_lieu` varchar(150) NOT NULL,
   `de_cuong_chi_tiet_id` int(11) NOT NULL,
   `loai_hoc_lieu_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`de_cuong_chi_tiet_id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_nguon_hoc_lieu_de_cuong_chi_tiet1_idx` (`de_cuong_chi_tiet_id`),
   KEY `fk_nguon_hoc_lieu_loai_hoc_lieu1_idx` (`loai_hoc_lieu_id`),
-  CONSTRAINT `fk_nguon_hoc_lieu_de_cuong_chi_tiet1` FOREIGN KEY (`de_cuong_chi_tiet_id`) REFERENCES `de_cuong_hoc_phan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_nguon_hoc_lieu_de_cuong_chi_tiet1` FOREIGN KEY (`de_cuong_chi_tiet_id`) REFERENCES `de_cuong_hoc_phan` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_nguon_hoc_lieu_loai_hoc_lieu1` FOREIGN KEY (`loai_hoc_lieu_id`) REFERENCES `loai_hoc_lieu` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -507,7 +508,7 @@ CREATE TABLE `nien_khoa` (
   `ctdt_mac_dinh` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -516,6 +517,7 @@ CREATE TABLE `nien_khoa` (
 
 LOCK TABLES `nien_khoa` WRITE;
 /*!40000 ALTER TABLE `nien_khoa` DISABLE KEYS */;
+INSERT INTO `nien_khoa` VALUES (1,'2013',1),(2,'2014',NULL),(3,'2015',NULL),(4,'2016',NULL);
 /*!40000 ALTER TABLE `nien_khoa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,4 +554,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:13:02
+-- Dump completed on 2017-11-27 22:04:00
