@@ -56,7 +56,7 @@
                                         <table class="table table-hover m-0 mails table-actions-bar">
                                             <thead>
                                             <tr>
-                                            	<th>STT</th>
+                                            	<th>ID</th>
                                                 <th>Tên Tiếng Việt</th>
                                                 <th>Tên Tiếng Anh</th>
                                                 <th>Mã Học Phần</th>
@@ -69,7 +69,7 @@
                                             	<%int j = 1; %>                                                                                        
 		                                        <c:forEach items="${requestScope.list}" var="i">
 		                                            <tr>
-		                                            	<td><%=j++%></td>
+		                                            	<td>${i.id}</td>
 		                                            	
 		                                                <td>${i.vi_name}</td>
 		
@@ -81,14 +81,21 @@
 		                                                
 		                                                <td>${i.so_tin_chi}</td>
 		
-		                                                <td>
-		                                                	<a href="<c:url value='/hocphan/edit/${i.id}' />" class="table-action-btn"><i class="mdi mdi-pencil"></i></a>
-                                                    		<a href="<c:url value='/hocphan/delete/${i.id}' />" onclick="return confirm('Are you sure to delete this item?');"  class="table-action-btn"><i class="mdi mdi-close"></i></a>
+		                                                <td style="width: 113px;">
+		                                                	<a href="<c:url value='/hocphan/show/${i.id} ' />" class="btn-xs btn-success"><i class="mdi mdi-open-in-new"></i></a>
+		                                                	<a href="<c:url value='/hocphan/edit/${i.id}' />" class="btn-xs btn-warning"><i class="mdi mdi-pencil"></i></a>
+                                                    		<a href="<c:url value='/hocphan/delete/${i.id}' />" class="btn-xs btn-danger" onclick="return confirm('Are you sure to delete this item?');"  class="table-action-btn"><i class="mdi mdi-close"></i></a>
 		                                                </td>
 													</tr> 
 												</c:forEach>	                                                                                  		
                                             </tbody>
                                         </table>
+                                        <ul class="pagination">
+										  <li><a href="<c:url value='/hocphan/1' />">1</a></li>
+										  <li><a href="<c:url value='/hocphan/2' />">2</a></li>
+										  <li><a href="<c:url value='/hocphan/3' />">3</a></li>
+										  <li><a href="<c:url value='/hocphan/4' />">4</a></li>
+										</ul>
                                     </div>
                                 </div> 							                        
                         </div>
