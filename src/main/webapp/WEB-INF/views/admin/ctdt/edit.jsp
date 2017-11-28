@@ -115,7 +115,7 @@
 												<label for="firstname">Môn học</label>
 											</div>
 										</div>
-										<!-- <div class="col-sm-4">
+										<div class="col-sm-4">
 											<div class="form-group">
 												<label for="lastname">Mã học phần</label>
 											</div>
@@ -124,32 +124,29 @@
 											<div class="form-group">
 												<label for="lastname">Số tín chỉ</label>
 											</div>
-										</div> -->
+										</div>
 									</div>
 									
 									<div id="div-add-hp">
 										<div class="row">
 											<div class="col-sm-4">
 												<div class="form-group">
-													<select class="form-control" name="hocPhan" onchange="checkDup()">
+													<select class="form-control" name="hocPhan" onchange="checkDup(this)" required>
+														<option></option>
 														<c:forEach items="${hocPhans}" var="hocPhan">															
 															<option value="${hocPhan.id}">${hocPhan.vi_name}</option>
 														</c:forEach>
 													</select>
 												</div>
 											</div>
-										</div>
-									</div>
-	
-									<div id="hoc-phan" style="display: none;">
-										<div class="row">
 											<div class="col-sm-4">
 												<div class="form-group">
-													<select class="form-control" name="hocPhan"  onchange="checkDup()">
-														<c:forEach items="${hocPhans}" var="hocPhan">															
-															<option value="${hocPhan.id}">${hocPhan.vi_name}</option>
-														</c:forEach>
-													</select>
+													<label for="lastname" class="hp-mhp"></label>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label for="lastname" class="hp-stc"></label>
 												</div>
 											</div>
 										</div>
@@ -174,13 +171,34 @@
 						    <p class="text-danger">Không còn học phần nào để thêm!</p>
 						  </c:otherwise>
 						</c:choose>
-					
-					
-						
 
 					</div>
 				</div>
 			</div>
+			<div id="hoc-phan" style="display: none;">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<select class="form-control" name="hocPhan"  onchange="checkDup(this)" required>
+								<option></option>
+								<c:forEach items="${hocPhans}" var="hocPhan">															
+								<option value="${hocPhan.id}">${hocPhan.vi_name}</option>
+							</c:forEach>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="lastname" class="hp-mhp"></label>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="lastname" class="hp-stc"></label>
+							</div>
+						</div>
+					</div>
+				</div>
 			<!-- End row -->
 			<c:forEach items="${ctdt.hocPhanCTDTList}" var="hpCTDT">
 				<p>${hpCTDT.hocPhanId}</p>
@@ -243,42 +261,52 @@
 									</div>
 									
 								</c:forEach>
-								<div class="row edit-hk-${hpInHK.hocKi.id} }" style="display: none;">
-									<form action="<c:url value='/ctdt/addHPToHK' />" method="post">
-										<input type="hidden" name="ctdtId" value="${ctdt.id}">
-										<input type="hidden" name="hocKiId" value="${hpInHK.hocKi.id}">
-										<div class="col-sm-4">
-											<div class="form-group">
-												<select class="form-control" name="hocPhanId">
-													<c:forEach items="${hocPhans}" var="hocPhan">															
-														<option value="${hocPhan.id}">${hocPhan.vi_name}</option>
-													</c:forEach>
-												</select>
-											</div>
-											
-										</div>
-									<div class="col-sm-6">
-					 			 		<c:choose>
-											<c:when test="${hocPhans.size() > 0}">
-												<button type="submit" class="btn btn-success" style="width: auto;">Thêm học phần</button>
-											</c:when>
-										  	<c:otherwise>
-										    	<p class="text-primary">Không còn học phần nào để thêm!</p>
-										  	</c:otherwise>
-									  	</c:choose>
-								  	</div>
-								  	</form>
-									
-									
-									<div class="col-sm-2">
-										<form action="<c:url value='/ctdt/delHocKi' />" method="post">
+								<div class="edit-hk-${hpInHK.hocKi.id}" style="display: none;">
+									<div class="row edit-hk-${hpInHK.hocKi.id}" style="display: none;">
+										<form action="<c:url value='/ctdt/addHPToHK' />" method="post">
 											<input type="hidden" name="ctdtId" value="${ctdt.id}">
 											<input type="hidden" name="hocKiId" value="${hpInHK.hocKi.id}">
-											<div class="col-sm-6">
-												<button type="submit" class="btn btn-danger" style="width: auto;">Xóa học kì</button>
+											<div class="col-sm-4">
+												<div class="form-group">
+													<select class="form-control" name="hocPhanId" onChange="fill_hp_properties(this);" required>
+														<option></option>
+														<c:forEach items="${hocPhans}" var="hocPhan">															
+															<option value="${hocPhan.id}">${hocPhan.vi_name}</option>
+														</c:forEach>
+													</select>
+												</div>
 											</div>
-										</form>
-										
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label for="lastname" class="hp-mhp"></label>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="form-group">
+													<label for="lastname" class="hp-stc"></label>
+												</div>
+											</div>
+											<div class="col-sm-10">
+							 			 		<c:choose>
+													<c:when test="${hocPhans.size() > 0}">
+														<button type="submit" class="btn btn-success" style="width: auto;">Thêm học phần</button>
+													</c:when>
+												  	<c:otherwise>
+												    	<p class="text-primary">Không còn học phần nào để thêm!</p>
+												  	</c:otherwise>
+											  	</c:choose>
+										  	</div>
+									  	</form>
+									</div>
+									<div class="row">
+										<div class="col-sm-10"></div>
+										<div class="col-sm-2">
+											<form action="<c:url value='/ctdt/delHocKi' />" method="post">
+												<input type="hidden" name="ctdtId" value="${ctdt.id}">
+												<input type="hidden" name="hocKiId" value="${hpInHK.hocKi.id}">
+												<button type="submit" class="btn btn-danger pull-right" style="width: auto;">Xóa học kì</button>
+											</form>
+										</div>
 									</div>
 								</div>
 							</fieldset>
@@ -295,11 +323,41 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-function checkDup(){
+
+var hocPhanJS = [
+	<c:forEach items="${hocPhans}" var="hp"  varStatus="status">  
+		{ id: "${hp.id}", vi_name: "${hp.vi_name}", ma_hoc_phan: "${hp.ma_hoc_phan}", so_tin_chi: "${hp.so_tin_chi}" }
+		<c:if test="${!status.last}">    
+		  ,    
+		 </c:if>  
+	</c:forEach>  
+];
+
+
+function fill_hp_properties(sel){
+	if (sel != undefined){
+		var p = sel.parentElement.parentElement.parentElement;
+		var mhp = p.getElementsByClassName("hp-mhp")[0];
+		var stc = p.getElementsByClassName("hp-stc")[0];
+		var ind = sel.options[sel.selectedIndex].value;
+		var rs;
+		for(var i=0; i<hocPhanJS.length; i++){
+			if (hocPhanJS[i]["id"] == ind){
+				rs = hocPhanJS[i];
+				mhp.innerHTML = rs["ma_hoc_phan"];
+				stc.innerHTML = rs["so_tin_chi"];
+				console.log(rs);
+				break;
+			}
+		}
+	}
+}
+
+function checkDup(sel){
 	var arr = [];
-	
 	$('#div-add-hp option:selected').each(function(index, element){
-		arr[index] = element.value;
+		if (element.value != "")
+			arr[index] = element.value;
 	});
 	sorted_arr = arr.slice().sort();
 	
@@ -310,10 +368,11 @@ function checkDup(){
 	        break;
 	    }
 	}
-	console.log(i);
 	if (i+1 == sorted_arr.length){
 		$('#add-hk-error').css({"display": "none"});
 	}
+	
+	fill_hp_properties(sel);
 }
 
 function showUpEdit(hkId) {
@@ -341,7 +400,6 @@ function showUpEdit(hkId) {
 } */
 
 function enableEditCTDT() {
-	console.log($('.edit-ctdt-param').is('[disabled=true]'));
 	if ($('.edit-ctdt-param').is(':disabled')){
 		$('.edit-ctdt-param').prop("disabled", false);
 		$('#save-ctdt-btn').css({"display": "block"});
