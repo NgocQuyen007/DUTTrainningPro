@@ -162,6 +162,57 @@
 														</a>
                                                 	</div>
                                                 </div>
+                                                <div class="form-group col-sm-12">
+                                                	<label>Nguồn Học Liệu</label>
+                                                	<c:choose>
+		                                            	<c:when test="${not empty chuandaurahp}">
+		                                            		<table class="table text-center table-bordered" id="muc-tieu-hoc-phan-table">
+															    <thead>
+															      <tr>
+															        <th class="col-md-1 text-center">Chuẩn đầu ra (L.O.x.x) [1]</th>
+															        <th class="col-md-2 text-center">Mô tả chuẩn đầu ra [2]</th>
+															        <th class="col-md-2 text-center">Mục tiêu của học phần (3)</th>
+															        <th class="col-md-2 text-center">Mức độ giảng dạy I, T, U (4)</th>
+															      </tr>
+															    </thead>
+														    	<tbody>
+			                                            		<c:forEach items="${chuandaurahp}" var="item" varStatus="loop">
+															    	<tr id="old-row" disabled>
+																        <td class="ten">
+																        	<span class="form-control" disabled>${item.ten}</span>
+																        </td>
+																        <td>
+																        	<span class="form-control" disabled>
+																        		${item.moTa}
+																        	</span>
+																        </td>
+																        <td>
+																        	<span class="form-control" disabled>
+																        		<c:forEach items="${muctieutuongung}" var="item2" varStatus="loop">
+																        			
+															        				<c:if test="${item2.chuanDauRaId == item.id}">
+															        					${item2.mucTieuHocPhan}
+															        				</c:if>
+																        		</c:forEach>
+																        	</span>
+																        </td>
+																        <td>
+																        	<span class="form-control" disabled>
+																        		${item.mucDoGiangDay}
+																        	</span>
+																        </td>
+																    </tr>
+															    </c:forEach>
+															    </tbody>
+															    </table>
+		                                            	</c:when>
+		                                            </c:choose>
+                                                	<div class="form-group">
+                                                		<a href='<c:url value='/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/chuandaurahp/add' />' class="btn btn-primary">
+															<span>Thêm Chuẩn Đầu Ra Học Phần</span>
+														</a>
+                                                	</div>
+                                                </div>
                                          </div>
                                     </fieldset>
 
