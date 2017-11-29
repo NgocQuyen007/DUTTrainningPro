@@ -18,6 +18,7 @@ import dut.com.dao.HocPhanDao;
 import dut.com.dao.KhoaDao;
 import dut.com.dao.LoaiCTDTDAO;
 import dut.com.entity.CTDT;
+import dut.com.entity.HocPhan;
 import dut.com.entity.HocPhanCTDT;
 
 @Controller
@@ -114,6 +115,21 @@ public class CTDTController {
 	public String delHocKi(@RequestParam("ctdtId") int ctdtId, @RequestParam("hocKiId") int hocKiId){
 		ctdtDAO.delHocKiCTDT(ctdtId, hocKiId);
 		return "redirect:/ctdt/"+ctdtId+"/edit";
+	}
+	
+	@RequestMapping(path="delHPInHKAjax", method=RequestMethod.POST)
+	public String delHPInHKAjax(@RequestParam("ctdtId") int ctdtId, @RequestParam("hocKiId") int hocKiId, @RequestParam("hocPhanId") int hocPhanId){
+		ctdtDAO.delHocPhanCTDT(new HocPhanCTDT(ctdtId, hocPhanId, hocKiId));
+		return "admin.ctdt.delHPInHKAjax";
+	}
+	
+	@RequestMapping(path="addHPToHKAjax", method=RequestMethod.POST)
+	public String addHPToHKAjax(ModelMap map, @RequestParam("ctdtId") int ctdtId, @RequestParam("hocKiId") int hocKiId, @RequestParam("hocPhanId") int hocPhanId){
+		ctdtDAO.addHocPhanCTDT(new HocPhanCTDT(ctdtId, hocPhanId, hocKiId));
+		map.addAttribute("hocPhan", hocPhanDAO.getHocPhanById(hocPhanId));
+		map.addAttribute("ctdtId", ctdtId);
+		map.addAttribute("hocKiId", hocKiId);
+		return "admin.ctdt.addHPToHKAjax";
 	}
 	
 }

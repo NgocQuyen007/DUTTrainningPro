@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/admin/ctdt/addHPToHKAjax.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/giangvien/add.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/giangvien/index.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/trangchu/index.jsp=UTF-8
