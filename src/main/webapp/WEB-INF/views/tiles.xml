@@ -12,6 +12,11 @@
 		<put-attribute name="content" value="" />					
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/admin/template/footer.jsp" />
 	</definition>
+	
+	<definition name="blank-definition" template="/WEB-INF/views/tiles/admin/layouts/blank.jsp">
+		<put-attribute name="content" value="" />					
+	</definition>
+	
 	<!-- Trang chủ -->
 	<definition name="admin.trangchu.index" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/trangchu/index.jsp"></put-attribute>
@@ -43,6 +48,13 @@
 	</definition>
 	<definition name="admin.ctdt.edit" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/ctdt/edit.jsp"></put-attribute>
+	</definition>
+	<definition name="admin.ctdt.delHPInHKAjax" extends="blank-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/ctdt/delHPInHKAjax.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="admin.ctdt.addHPToHKAjax" extends="blank-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/ctdt/addHPToHKAjax.jsp"></put-attribute>
 	</definition>
 	
 	<!--  Đề Cương Học Phần  -->
