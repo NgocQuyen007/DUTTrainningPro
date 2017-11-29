@@ -97,7 +97,6 @@
 			<div class="row" style="display: none;" id="add-hk-form">
 				<div class="col-md-12">
 					<div class="card-box">
-					
 						<c:choose>
 						  <c:when test="${hocPhans.size() > 0}">
 						    <form id="default-wizard" action="<c:url value='/ctdt/addHP' />" method="post">
@@ -144,9 +143,16 @@
 													<label for="lastname" class="hp-mhp"></label>
 												</div>
 											</div>
-											<div class="col-sm-4">
+											<div class="col-sm-2">
 												<div class="form-group">
 													<label for="lastname" class="hp-stc"></label>
+												</div>
+											</div>
+											<div class="col-sm-2">
+												<div class="form-group">
+													<button type="button" class="btn-xs btn-danger" onclick="delHP(this)">
+										        		<span class="fa fa-remove"></span>
+										        	</button>
 												</div>
 											</div>
 										</div>
@@ -192,9 +198,16 @@
 								<label for="lastname" class="hp-mhp"></label>
 							</div>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-2">
 							<div class="form-group">
 								<label for="lastname" class="hp-stc"></label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<button type="button" class="btn-xs btn-danger" onclick="delHP(this)">
+					        		<span class="fa fa-remove"></span>
+					        	</button>
 							</div>
 						</div>
 					</div>
@@ -207,96 +220,70 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card-box">
-							<fieldset title="${hpInHK.hocKi.ten}" style="margin-bottom: 20px;">
+							<fieldset title="${hpInHK.hocKi.ten}" style="margin-bottom: 20px;" class="table">
 								<legend>${hpInHK.hocKi.ten}</legend>
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="firstname">Môn học</label>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label for="lastname">Mã học phần</label>
-										</div>
-									</div>
-									<div class="col-sm-2">
-										<div class="form-group">
-											<label for="lastname">Số tín chỉ</label>
-										</div>
-									</div>
-									<div class="col-sm-2">
-										<div class="form-group">
-											<button onclick="showUpEdit(${hpInHK.hocKi.id})" type="button" class="btn btn-default pull-right" style="width: auto;">Sửa</button>
-										</div>
-									</div>
+								<div class="table-responsive">
+                                 	<table class="table table-hover m-0 mails table-actions-bar table-striped">
+	                                     <thead>
+	                                     <tr>
+	                                         <th>Môn học</th>
+	                                         <th>Mã học phần</th>
+	                                         <th>Số tín chỉ</th>
+	                                         <th><button onclick="showUpEdit(${hpInHK.hocKi.id})" type="button" class="btn btn-default pull-right" style="width: auto;">Sửa</button></th>
+	                                     </tr>
+	                                     </thead>
+	                                     <tbody id="tbody-${hpInHK.hocKi.id}">
+	                                     	<c:forEach items="${hpInHK.dsHocPhan}" var="hpp">
+	                                     		<tr>
+	                                     			<td><i class="text-primary"></i> ${hpp.vi_name}</td>
+	                                     			<td><i class="text-primary"></i> ${hpp.ma_hoc_phan}</td>
+	                                     			<td><i class="text-primary"></i> ${hpp.so_tin_chi}</td>
+	                                     			<td>
+	                                     				<div class="edit-hk-${hpInHK.hocKi.id}" style="display: none;">
+															<button type="button" onclick="delHPAjax(${ctdt.id}, ${hpInHK.hocKi.id}, ${hpp.id}, this)" class="btn btn-danger" style="width: auto;">Xóa</button>
+														</div>
+	                                     			</td>
+	                                     		</tr>
+	                                     	</c:forEach>
+	                                     </tbody>
+									</table>
 								</div>
-								<c:forEach items="${hpInHK.dsHocPhan}" var="hpp">
-									<div class="row">
+								
+								<div class="edit-hk-${hpInHK.hocKi.id}" style="display: none; margin-top: 6px;">
+									<div id="edit-hk-${hpInHK.hocKi.id}" class="row edit-hk-${hpInHK.hocKi.id}" style="display: none;">
+			
 										<div class="col-sm-4">
 											<div class="form-group">
-												<p>${hpp.vi_name}</p>
+												<p id="error-none-hk-${hpInHK.hocKi.id}" class="text-danger" style="display: none;">Chọn học phần để thêm!</p>
+												<select class="form-control" name="hocPhanId" onChange="fill_hp_properties(this, ${hpInHK.hocKi.id});" required>
+													<option></option>
+													<c:forEach items="${hocPhans}" var="hocPhan">															
+														<option value="${hocPhan.id}">${hocPhan.vi_name}</option>
+													</c:forEach>
+												</select>
 											</div>
 										</div>
 										<div class="col-sm-4">
 											<div class="form-group">
-												<p>${hpp.ma_hoc_phan}</p>
+												<label for="lastname" class="hp-mhp"></label>
 											</div>
 										</div>
-										<div class="col-sm-2">
+										<div class="col-sm-4">
 											<div class="form-group">
-												<p>${hpp.so_tin_chi}</p>
+												<label for="lastname" class="hp-stc"></label>
 											</div>
 										</div>
-										<div class="col-sm-2 edit-hk-${hpInHK.hocKi.id} }" style="display: none;">
-											<form action="<c:url value='/ctdt/delHPInHK' />" method="post">
-												<input type="hidden" name="ctdtId" value="${ctdt.id}">
-												<input type="hidden" name="hocKiId" value="${hpInHK.hocKi.id}">
-												<input type="hidden" name="hocPhanId" value="${hpp.id}">
-												<div class="form-group">
-													<button type="submit" class="btn btn-danger" style="width: auto;">Xóa</button>
-												</div>
-											</form>
-										</div>
-									</div>
-									
-								</c:forEach>
-								<div class="edit-hk-${hpInHK.hocKi.id}" style="display: none;">
-									<div class="row edit-hk-${hpInHK.hocKi.id}" style="display: none;">
-										<form action="<c:url value='/ctdt/addHPToHK' />" method="post">
-											<input type="hidden" name="ctdtId" value="${ctdt.id}">
-											<input type="hidden" name="hocKiId" value="${hpInHK.hocKi.id}">
-											<div class="col-sm-4">
-												<div class="form-group">
-													<select class="form-control" name="hocPhanId" onChange="fill_hp_properties(this);" required>
-														<option></option>
-														<c:forEach items="${hocPhans}" var="hocPhan">															
-															<option value="${hocPhan.id}">${hocPhan.vi_name}</option>
-														</c:forEach>
-													</select>
-												</div>
-											</div>
-											<div class="col-sm-4">
-												<div class="form-group">
-													<label for="lastname" class="hp-mhp"></label>
-												</div>
-											</div>
-											<div class="col-sm-4">
-												<div class="form-group">
-													<label for="lastname" class="hp-stc"></label>
-												</div>
-											</div>
-											<div class="col-sm-10">
-							 			 		<c:choose>
-													<c:when test="${hocPhans.size() > 0}">
-														<button type="submit" class="btn btn-success" style="width: auto;">Thêm học phần</button>
-													</c:when>
-												  	<c:otherwise>
-												    	<p class="text-primary">Không còn học phần nào để thêm!</p>
-												  	</c:otherwise>
-											  	</c:choose>
-										  	</div>
-									  	</form>
+										<div class="col-sm-10">
+						 			 		<c:choose>
+												<c:when test="${hocPhans.size() > 0}">
+													<button onclick="addHPToHKAjax(${ctdt.id}, ${hpInHK.hocKi.id}, this)" type="button" class="btn btn-success" style="width: auto;">Thêm học phần</button>
+												</c:when>
+											  	<c:otherwise>
+											    	<p class="text-primary">Không còn học phần nào để thêm!</p>
+											  	</c:otherwise>
+										  	</c:choose>
+									  	</div>
+									  	
 									</div>
 									<div class="row">
 										<div class="col-sm-10"></div>
@@ -304,7 +291,7 @@
 											<form action="<c:url value='/ctdt/delHocKi' />" method="post">
 												<input type="hidden" name="ctdtId" value="${ctdt.id}">
 												<input type="hidden" name="hocKiId" value="${hpInHK.hocKi.id}">
-												<button type="submit" class="btn btn-danger pull-right" style="width: auto;">Xóa học kì</button>
+												<button onclick="return confirm('Are you sure to delete this item?');" type="submit" class="btn btn-danger pull-right" style="width: auto;">Xóa học kì</button>
 											</form>
 										</div>
 									</div>
@@ -333,8 +320,59 @@ var hocPhanJS = [
 	</c:forEach>  
 ];
 
+function addHPToHKAjax(ctdtId, hocKiId, current){
+	var parent = current.parentElement.parentElement.parentElement.parentElement;
+	var hocPhanId = $('#edit-hk-'+hocKiId).find('option:selected')[0].value;
+	if (hocPhanId != ""){
+		$.ajax({
+		  method: "POST",
+		  url: "<c:url value='/ctdt/addHPToHKAjax' />",
+		  data: { ctdtId: ctdtId, hocKiId: hocKiId, hocPhanId: hocPhanId }
+		}).done(function( msg ) {
+			console.log(msg);
+			$('#edit-hk-'+hocKiId).find('option:selected')[0].remove();
+			$('#tbody-'+hocKiId).append(msg);
+			//$('#edit-hk-'+hocKiId).html(msg);
+		});
+	} else {
+		$('#error-none-hk-'+hocKiId).css({"display": "block"});
+		
+	}
+}
 
-function fill_hp_properties(sel){
+function delHPAjax(ctdtId, hocKiId, hocPhanId, current){
+	$.ajax({
+	  method: "POST",
+	  url: "<c:url value='/ctdt/delHPInHKAjax' />",
+	  data: { ctdtId: ctdtId, hocKiId: hocKiId, hocPhanId: hocPhanId }
+	}).done(function( msg ) {
+		var a = current.parentElement.parentElement.parentElement;
+		current.parentElement.parentElement.parentElement.remove();
+	});
+}
+
+function delHP(current){
+	var hp_ele = current.parentElement.parentElement.parentElement.remove();
+	var arr = [];
+	$('#div-add-hp option:selected').each(function(index, element){
+		if (element.value != "")
+			arr[index] = element.value;
+	});
+	sorted_arr = arr.slice().sort();
+	
+	var i = 0;
+	for (i = 0; i < sorted_arr.length - 1; i++) {
+	    if (sorted_arr[i + 1] == sorted_arr[i]) {
+	        $('#add-hk-error').css({"display": "block"});
+	        break;
+	    }
+	}
+	if (i+1 == sorted_arr.length){
+		$('#add-hk-error').css({"display": "none"});
+	}
+}
+
+function fill_hp_properties(sel, hocKiId){
 	if (sel != undefined){
 		var p = sel.parentElement.parentElement.parentElement;
 		var mhp = p.getElementsByClassName("hp-mhp")[0];
@@ -350,6 +388,7 @@ function fill_hp_properties(sel){
 				break;
 			}
 		}
+		$('#error-none-hk-'+hocKiId).css({"display": "none"});
 	}
 }
 
@@ -372,7 +411,7 @@ function checkDup(sel){
 		$('#add-hk-error').css({"display": "none"});
 	}
 	
-	fill_hp_properties(sel);
+	fill_hp_properties(sel, 0);
 }
 
 function showUpEdit(hkId) {
