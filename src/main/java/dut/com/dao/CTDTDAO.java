@@ -1,11 +1,17 @@
 package dut.com.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import dut.com.dao.rowmapper.CTDTRowMapper;
@@ -37,13 +43,30 @@ public class CTDTDAO {
 		return jdbcTemplate.query(sql, new CTDTRowMapper());
 	}
 	
-	public boolean add(CTDT ctdt) {	
+	public int add(CTDT ctdt) {	
 		try {
 			String sql = "INSERT INTO chuong_trinh_dao_tao(ten, khoa_id, nien_khoa, loai_id) VALUES(?,?,?,?)";
-			jdbcTemplate.update(sql, new Object[]{ctdt.getTen(), ctdt.getKhoaId(), ctdt.getNienKhoa(), ctdt.getLoaiId()});
-			return true;
+			KeyHolder keyHolder = new GeneratedKeyHolder();
+			jdbcTemplate.update(
+			    new PreparedStatementCreator() {
+			        public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+			            PreparedStatement ps =
+			                connection.prepareStatement(sql, new String[] {"id"});
+			            ps.setString(1, ctdt.getTen());
+			            ps.setInt(2, ctdt.getKhoaId());
+			            ps.setString(3, ctdt.getNienKhoa());
+			            ps.setInt(4, ctdt.getLoaiId());
+			            return ps;
+			        }
+			    },
+			    keyHolder);
+		
+			System.out.println("Id: "+ keyHolder.getKey());
+			
+//			jdbcTemplate.update(sql, new Object[]{ctdt.getTen(), ctdt.getKhoaId(), ctdt.getNienKhoa(), ctdt.getLoaiId()});
+			return Integer.parseInt(keyHolder.getKey().toString());
 		} catch (Exception e) {
-			return false;
+			return -1;
 		}
 	}
 	
