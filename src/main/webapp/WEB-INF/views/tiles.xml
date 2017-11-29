@@ -75,4 +75,8 @@
 	<definition name="admin.hocphan.show" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/hocphan/show.jsp"></put-attribute>
 	</definition>
+	<!-- Chuan Dau Ra Hoc Phan -->
+	<definition name="admin.chuandaurahp.add" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/chuandaurahp/add.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
