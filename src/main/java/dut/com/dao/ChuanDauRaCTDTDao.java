@@ -34,7 +34,7 @@ public class ChuanDauRaCTDTDao {
 	
 	public List<ChuanDauRaCTDT> getItems() {
 		String sql = "SELECT * FROM chuan_dau_ra_ctdt";
-		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<ChuanDauRaCTDT>(ChuanDauRaCTDT.class));
+		return jdbcTemplate.query(sql, new ChuanDauRaCTDTRowMapper());
 	}
 	
 	public List<ChuanDauRaCTDT> getListByCTDT(int ctdtId) {
