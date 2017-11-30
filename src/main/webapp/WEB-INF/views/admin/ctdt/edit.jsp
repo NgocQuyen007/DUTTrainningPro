@@ -27,6 +27,7 @@
 								<legend>
 									THÊM CHƯƠNG TRÌNH ĐÀO TẠO
 									<button onclick="enableEditCTDT()" type="button" class="btn btn-default pull-right" style="width: auto;margin-bottom: 5px;">Sửa</button>
+									<a href="<c:url value='/ctdt/chuandaura/add?ctdtId=${ ctdt.id }' />" type="button" class="btn btn-primary stepy-finish pull-right" style="width: auto;margin-bottom: 5px;margin-right: 5px;">Chuẩn đầu ra</a>
 								</legend>
 
 								<div class="row">
@@ -81,12 +82,29 @@
 										</div>
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label for="firstname">Tổng số tín chỉ: ${ctdt.getTongSoTinChi()}</label>
+											<p></p>
+										</div>
+									</div>
+									
+									<div class="col-sm-6">
+										<div class="form-group">
+											
+										</div>
+									</div>
+								</div>
 							</fieldset>
 							<div class="row">
 								<button id="save-ctdt-btn" type="submit" class="btn btn-success stepy-finish pull-right"
 									style="margin-top: 15px;display: none;" >Lưu</button>
+								
 								<button type="button" id="them-hk-btn" class="btn btn-primary stepy-finish pull-right"
 									style="margin-top: 15px;">Thêm học kì</button>
+								
+								
 							</div>
 						</form>
 
@@ -252,7 +270,7 @@
 								<div class="edit-hk-${hpInHK.hocKi.id}" style="display: none; margin-top: 6px;">
 									<div id="edit-hk-${hpInHK.hocKi.id}" class="row edit-hk-${hpInHK.hocKi.id}" style="display: none;">
 			
-										<div class="col-sm-4">
+										<div class="col-sm-5">
 											<div class="form-group">
 												<p id="error-none-hk-${hpInHK.hocKi.id}" class="text-danger" style="display: none;">Chọn học phần để thêm!</p>
 												<select class="form-control" name="hocPhanId" onChange="fill_hp_properties(this, ${hpInHK.hocKi.id});" required>
@@ -263,12 +281,12 @@
 												</select>
 											</div>
 										</div>
-										<div class="col-sm-4">
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label for="lastname" class="hp-mhp"></label>
 											</div>
 										</div>
-										<div class="col-sm-4">
+										<div class="col-sm-3">
 											<div class="form-group">
 												<label for="lastname" class="hp-stc"></label>
 											</div>
@@ -332,6 +350,9 @@ function addHPToHKAjax(ctdtId, hocKiId, current){
 			console.log(msg);
 			$('#edit-hk-'+hocKiId).find('option:selected')[0].remove();
 			$('#tbody-'+hocKiId).append(msg);
+			var p = current.parentElement.parentElement.parentElement;
+			var mhp = p.getElementsByClassName("hp-mhp")[0].innerHTML = "";
+			var stc = p.getElementsByClassName("hp-stc")[0].innerHTML = "";
 			//$('#edit-hk-'+hocKiId).html(msg);
 		});
 	} else {

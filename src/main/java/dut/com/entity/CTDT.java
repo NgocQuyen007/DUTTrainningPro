@@ -1,7 +1,6 @@
 package dut.com.entity;
 
 import java.util.List;
-import java.util.ArrayList;
 
 public class CTDT {
 	private int id;
@@ -17,6 +16,17 @@ public class CTDT {
 	
 	private List<HocPhanHocKiCTDT> hocPhanHocKiCTDTs;
 	
+	public int getTongSoTinChi(){
+		int sum = 0;
+		if (hocPhanHocKiCTDTs != null) {
+			for (HocPhanHocKiCTDT hocPhanHocKiCTDT : hocPhanHocKiCTDTs) {
+				for (HocPhan hp : hocPhanHocKiCTDT.getDsHocPhan()) {
+					sum += hp.getSo_tin_chi();
+				}
+			}
+		}
+		return sum;
+	}
 	
 	public List<HocPhanHocKiCTDT> getHocPhanHocKiCTDTs() {
 		return hocPhanHocKiCTDTs;
