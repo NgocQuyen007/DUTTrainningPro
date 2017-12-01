@@ -69,6 +69,9 @@
 	<definition name="admin.decuonghocphan.show" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/decuonghocphan/show.jsp"></put-attribute>
 	</definition>
+	<definition name="admin.decuonghocphan.export" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/decuonghocphan/export.jsp"></put-attribute>
+	</definition>
 	
 	<!--  Mục Tiêu Học Phần  -->
 	<definition name="admin.muctieuhocphan.add" extends="admin-definition">

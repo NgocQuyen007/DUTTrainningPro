@@ -5,6 +5,7 @@ package dut.com.entity;
  *
  */
 public class HocPhan {
+	
 	private int id;
 	private String vi_name;
 	private String en_name;

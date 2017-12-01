@@ -37,7 +37,14 @@
                             <div class="col-md-12">
                                 <div class="card-box">
                                     <fieldset title="1">
-                                            <legend>Đề Cương Học Phần <span class="label label-info">${hocphan.vi_name}</span></legend>
+                                            <div style='font-size: 24px'class="body-header-left">Đề Cương Học Phần <span class="label label-info">${hocphan.vi_name}</span></div>	
+                                    		<div class="col-md-4 body-header-right btn btn-primary">
+                                    			<a href="<c:url value='/hocphan/${hocphan.id}/decuong/export'/>" class="btn btn-primary">
+                                    				<strong>XUẤT</strong> ĐỀ CƯƠNG CHI TIẾT HỌC PHẦN
+                                    			</a>
+                                    		</div>
+											<br> <br> <hr>
+                                            <div style="clear: both;"></div>
                                             <div class="row m-t-20">
                                             	<div class="form-group">
                                             		<div class="form-group col-sm-6">
@@ -197,7 +204,7 @@
 																        	</span>
 																        </td>
 																        <td>
-																        	<span class="form-control" disabled>
+																        	<span class="form-control" disable>
 																        		${item.mucDoGiangDay}
 																        	</span>
 																        </td>
