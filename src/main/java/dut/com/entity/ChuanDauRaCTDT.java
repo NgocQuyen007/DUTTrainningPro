@@ -4,6 +4,7 @@ public class ChuanDauRaCTDT {
 	private int id;
 	private String tenCDR;
 	private String moTa;
+	private int ctdt_id;
 	
 	public int getId() {
 		return this.id;
@@ -28,4 +29,21 @@ public class ChuanDauRaCTDT {
 	public void setMoTa(String moTa) {
 		this.moTa = moTa;
 	}
+
+	public int getCtdt_id() {
+		return ctdt_id;
+	}
+
+	public void setCtdt_id(int ctdt_id) {
+		this.ctdt_id = ctdt_id;
+	}
+
+	@Override
+	public String toString() {
+		return "ChuanDauRaCTDT [id=" + id + ", tenCDR=" + tenCDR + ", moTa=" + moTa + ", ctdt_id=" + ctdt_id + "]";
+	}
+	
+	
+	
+	
 }

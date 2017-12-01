@@ -17,10 +17,16 @@
                                             <a href="#">DUT</a>
                                         </li>
                                         <li>
+                                            <a href="#">Chương Trình Đào Tạo</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">${ctdtId}</a>
+                                        </li>
+                                        <li>
                                             <a href="#">Học Phần</a>
                                         </li>
                                         <li>
-                                            <a href="#">2</a>
+                                            <a href="#">${hocphanId}</a>
                                         </li>
                                         <li>
                                             <a href="#">Đề Cương</a>
@@ -42,7 +48,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form id="default-wizard" method="POST" action='<c:url value='/hocphan/${hocphanId}/decuong/${decuongId}/nguonhoclieu/add' />'>
+                                    <form id="default-wizard" method="POST" action='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphanId}/decuong/${decuongId}/nguonhoclieu/add' />'>
                                         <fieldset title="1">
                                             <legend>Thêm Nguồn Học Liệu</legend>
 									

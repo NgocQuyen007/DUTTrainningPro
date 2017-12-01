@@ -15,10 +15,13 @@ import dut.com.dao.HocPhanDao;
 import dut.com.dao.MucTieuDUCTDTDao;
 import dut.com.dao.MucTieuHocPhanDao;
 import dut.com.dao.NguonHocLieuDao;
+import dut.com.dao.ChuanDauRaHocPhanDao;
+import dut.com.dao.MucTieuDapUngChuanDauRaHocPhanDao;
+import dut.com.dao.DCHPCTDTDao;
 import dut.com.entity.DeCuongHocPhan;
 
 @Controller
-@RequestMapping("/hocphan/{hocphanId}/decuong")
+@RequestMapping("/ctdt/{ctdtId}/hocphan/{hpId}/decuong")
 public class DeCuongHocPhanController {
 	@Autowired
 	DeCuongHocPhanDao dchpDao;
@@ -32,33 +35,42 @@ public class DeCuongHocPhanController {
 	MucTieuDUCTDTDao mtductdtDao;
 	@Autowired
 	NguonHocLieuDao nhlDao;
+	@Autowired
+	ChuanDauRaHocPhanDao cdrhpDao;
+	@Autowired
+	MucTieuDapUngChuanDauRaHocPhanDao mtducdrhpDao;
+	@Autowired
+	DCHPCTDTDao dchpctdtDao;
 	
 	@GetMapping("/add")
-	public String create(@PathVariable("hocphanId") int id, ModelMap map){
+	public String create(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, ModelMap map){
+		map.addAttribute("ctdtId", ctdtId);
 		map.addAttribute("listGV", gvDao.getItems());
-		map.addAttribute("hocphan", hpDao.getHocPhanById(id));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
 		
 		return "admin.decuonghocphan.add";
 	}
 	
 	@GetMapping("/")
-	public String show(@PathVariable("hocphanId") int hpId, ModelMap map){
-		map.addAttribute("decuonghocphan", dchpDao.getItemByHocPhanId(hpId));
-		map.addAttribute("giangvien", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienId()));
-		map.addAttribute("giangvienass", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienAssId()));
+	public String show(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, ModelMap map){
+		map.addAttribute("decuonghocphan", dchpDao.getItemByCTDTAndHP(ctdtId, hpId));
+		map.addAttribute("giangvien", gvDao.getItem(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getGiangVienId()));
+		map.addAttribute("giangvienass", gvDao.getItem(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getGiangVienAssId()));
 		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
-		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
-		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
-		map.addAttribute("nguonhoclieu", nhlDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
+		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("nguonhoclieu", nhlDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+//		map.addAttribute("chuandaurahp", cdrhpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("muctieutuongung", mtducdrhpDao.getMucTieu(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		
 		return "admin.decuonghocphan.show";
 	}
 	
 	@RequestMapping(path="add", method=RequestMethod.POST)
-	public String store(@PathVariable("hocphanId") int hpId, @ModelAttribute DeCuongHocPhan deCuongHocPhan){
-		deCuongHocPhan.setHocPhanId(hpId);
-		dchpDao.add(deCuongHocPhan);
-		
-		return "redirect:/hocphan/" + hpId + "/decuong/";
+	public String store(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, @ModelAttribute DeCuongHocPhan deCuongHocPhan){
+		int dcId = dchpDao.add(deCuongHocPhan);
+		System.out.println(dcId);
+		dchpctdtDao.update(ctdtId, hpId, dcId);
+		return "redirect:/ctdt/" + ctdtId + "/hocphan/" + hpId + "/decuong/";
 	}
 }

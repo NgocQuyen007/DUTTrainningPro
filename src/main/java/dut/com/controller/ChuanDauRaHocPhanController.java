@@ -16,12 +16,16 @@ import dut.com.dao.GiangVienDao;
 import dut.com.dao.HocPhanDao;
 import dut.com.dao.MucTieuDUCTDTDao;
 import dut.com.dao.MucTieuHocPhanDao;
+import dut.com.dao.ChuanDauRaHocPhanDao;
+import dut.com.dao.MucTieuDapUngChuanDauRaHocPhanDao;
 import dut.com.entity.MucTieuDUCTDT;
 import dut.com.entity.MucTieuHocPhan;
+import dut.com.entity.ChuanDauRaHocPhan;
+import dut.com.entity.MucTieuDapUngChuanDauRaHocPhan;
 
 @Controller
-@RequestMapping("/ctdt/{ctdtId}/hocphan/{hpId}/decuong/{decuongId}/muctieu")
-public class MucTieuHocPhanController {
+@RequestMapping("/ctdt/{ctdtId}/hocphan/{hpId}/decuong/{decuongId}/chuandaurahp")
+public class ChuanDauRaHocPhanController {
 	@Autowired
 	DeCuongHocPhanDao dchpDao;
 	@Autowired
@@ -34,57 +38,59 @@ public class MucTieuHocPhanController {
 	ChuanDauRaCTDTDao cdrCTDTDao;
 	@Autowired
 	MucTieuDUCTDTDao mtduCTDTDao;
+	@Autowired
+	ChuanDauRaHocPhanDao cdrhpDao;
+	@Autowired
+	MucTieuDapUngChuanDauRaHocPhanDao mtducdrhpDao;
 	
 	@GetMapping("/add")
 	public String create(@PathVariable("decuongId") int id, @PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, ModelMap map){
-		map.addAttribute("cdrCTDT", cdrCTDTDao.getListByCTDT(ctdtId));
 		map.addAttribute("decuongId", id);
-		map.addAttribute("ctdtId", ctdtId);
 		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
 		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
-		map.addAttribute("chuanDauRa", mtduCTDTDao.getCDRByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("chuandaurahp", cdrhpDao.getItems());
+		map.addAttribute("muctieutuongung", mtducdrhpDao.getMucTieu(id));
 		
-		return "admin.muctieuhocphan.add";
+		return "admin.chuandaurahp.add";
 	}
 	
 	@RequestMapping(path="add", method=RequestMethod.POST)
 	public String store(
-			@PathVariable("decuongId") int id, @PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId,
+			@PathVariable("hocphanId") int hpId, @PathVariable("decuongId") int decuongId,
 			HttpServletRequest request
 	){
 		int countRow = Integer.parseInt(request.getParameter("countRow"));
-		String chuanDauRa[][] = new String[countRow][];
+		String mucTieuHocPhan[][] = new String[countRow][];
 		for (int i = 0; i<countRow; i++) {
-			chuanDauRa[i] = request.getParameterValues("chuanDauRa"+i);
+			mucTieuHocPhan[i] = request.getParameterValues("chuanDauRa"+i);
 		}
 		String ten[] = request.getParameterValues("ten");
 		String moTa[] = request.getParameterValues("moTa");
-		String trinhDoNangLuc[] = request.getParameterValues("trinhDoNangLuc");
-		
+		String mucDoGiangDay[] = request.getParameterValues("mucDoGiangDay");
 		for (int i=0; i<countRow; i++) {
-			MucTieuHocPhan mthp = new MucTieuHocPhan(ten[i], trinhDoNangLuc[i], id, moTa[i]);
-			int mthpId = mthpDao.add(mthp);
-			for (int j=0; j<chuanDauRa[i].length; j++) {
-				MucTieuDUCTDT mtduCTDT = new MucTieuDUCTDT(mthpId, Integer.parseInt(chuanDauRa[i][j]));
-				mtduCTDTDao.add(mtduCTDT);
+			ChuanDauRaHocPhan cdrhp = new ChuanDauRaHocPhan(ten[i], moTa[i], mucDoGiangDay[i], decuongId);
+			int cdrhpId = cdrhpDao.add(cdrhp);
+			for (int j=0; j<mucTieuHocPhan[i].length; j++) {
+				MucTieuDapUngChuanDauRaHocPhan mtduCDR = new MucTieuDapUngChuanDauRaHocPhan(Integer.parseInt(mucTieuHocPhan[i][j]), cdrhpId);
+				mtducdrhpDao.add(mtduCDR);
 			}
 		}
 		
-		return "redirect:/ctdt/" + ctdtId + "/hocphan/" + hpId + "/decuong/";
+		return "redirect:/hocphan/" + hpId + "/decuong/";
 	}
 	
-	@RequestMapping(path="/{muctieuId}/edit", method=RequestMethod.POST)
-	@ResponseBody
-	public String update(
-			@PathVariable("hpId") int hpId, @PathVariable("decuongId") int decuongId, @PathVariable("muctieuId") int muctieuId,
-			HttpServletRequest request
-			) {
-		int check = mthpDao.update(muctieuId, request.getParameter("moTa"), request.getParameter("trinhDoNangLuc"));
-		if (check > 0) {
-			return "{\"success\":1}";
-		}
-		
-		return "{\"error\":1}";
-	}
+//	@RequestMapping(path="/{muctieuId}/edit", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String update(
+//			@PathVariable("hocphanId") int hpId, @PathVariable("decuongId") int decuongId, @PathVariable("muctieuId") int muctieuId,
+//			HttpServletRequest request
+//			) {
+//		int check = mthpDao.update(muctieuId, request.getParameter("moTa"), request.getParameter("trinhDoNangLuc"));
+//		if (check > 0) {
+//			return "{\"success\":1}";
+//		}
+//		
+//		return "{\"error\":1}";
+//	}
 	
 }

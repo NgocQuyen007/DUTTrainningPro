@@ -11,22 +11,16 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Thêm Mục Tiêu Học Phần</h4>
+                                    <h4 class="page-title">Thêm Chuẩn Đầu Ra Học Phần</h4>
                                     <ol class="breadcrumb p-0 m-0">
                                         <li>
                                             <a href="#">DUT</a>
                                         </li>
                                         <li>
-                                            <a href="#">Chương Trình Đào Tạo</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">2</a>
-                                        </li>
-                                        <li>
                                             <a href="#">Học Phần</a>
                                         </li>
                                         <li>
-                                            <a href="#">2</a>
+                                            <a href="#">${hocphan.vi_name}</a>
                                         </li>
                                         <li>
                                             <a href="#">Đề Cương Học Phần</a>
@@ -45,9 +39,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form id="default-wizard" method="POST" action='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/${decuongId}/muctieu/add' />'>
+                                    <form id="default-wizard" method="POST" action='<c:url value='/hocphan/${hocphan.id}/decuong/${decuongId}/chuandaurahp/add' />'>
                                         <fieldset title="1">
-                                            <legend>Thêm Mục Tiêu Học Phần</legend>
+                                            <legend>Thêm Chuẩn Đầu Ra Học Phần</legend>
                                             <div class="row m-t-20">
                                             	<div class="form-group">
                                             		<div class="form-group col-sm-6">
@@ -60,22 +54,22 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <table class="table text-center table-bordered" id="muc-tieu-hoc-phan-table">
+                                            <table class="table text-center table-bordered" id="chuan-dau-ra-hoc-phan-table">
 											    <thead>
 											      <tr>
-											        <th class="col-md-1 text-center">Mục Tiêu (1)</th>
-											        <th class="col-md-3 text-center">Mô tả mục tiêu (2)</th>
-											        <th class="col-md-3 text-center">Chuẩn đầu ra của CTĐT (3)</th>
-											        <th class="col-md-3 text-center">TĐNL (4)</th>
+											        <th class="col-md-1 text-center">Chuẩn đầu ra (L.O.x.x) [1]</th>
+											        <th class="col-md-2 text-center">Mô tả chuẩn đầu ra [2]</th>
+											        <th class="col-md-2 text-center">Mục tiêu của học phần (3)</th>
+											        <th class="col-md-2 text-center">Mức độ giảng dạy I, T, U (4)</th>
 											        <th class="col-md-1 text-center">Action</th>
 											      </tr>
 											    </thead>
 											    <tbody>
 											    	<c:choose>
-		                                            	<c:when test="${not empty muctieuhp}">
-		                                            		<c:forEach items="${muctieuhp}" var="item" varStatus="loop">
+		                                            	<c:when test="${not empty chuandaurahp}">
+		                                            		<c:forEach items="${chuandaurahp}" var="item" varStatus="loop">
 														    	<tr id="old-row" disabled>
-															        <td class="muc-tieu">
+															        <td class="ten">
 															        	<span class="form-control" disabled>${item.ten}</span>
 															        </td>
 															        <td>
@@ -85,12 +79,17 @@
 															        </td>
 															        <td>
 															        	<span class="form-control" disabled>
-															        		${chuanDauRa.get(loop.count-1).chuanDauRa}
+															        		<c:forEach items="${muctieutuongung}" var="item2" varStatus="loop">
+															        			
+														        				<c:if test="${item2.chuanDauRaId == item.id}">
+														        					${item2.mucTieuHocPhan}
+														        				</c:if>
+															        		</c:forEach>
 															        	</span>
 															        </td>
 															        <td>
 															        	<span class="form-control" disabled>
-															        		${item.trinhDoNangLuc}
+															        		${item.mucDoGiangDay}
 															        	</span>
 															        </td>
 															        <td>
@@ -100,27 +99,24 @@
 		                                            	</c:when>
 		                                            </c:choose>
 											      <tr id="standard-row">
-											        <td class="muc-tieu">
-											        	<input type="text" id="muc-tieu" name="ten" class="form-control" value="G1"/>
+											        <td class="ten">
+											        	<input type="text" id="ten" name="ten" class="form-control" value=""/>
 											        </td>
 											        <td>
 											        	<textarea class="form-control" rows="2" name="moTa" id="mo_ta" required></textarea>
 											        </td>
 											        <td>
-											        	<c:forEach items="${cdrCTDT}" var="item">
+											        	<c:forEach items="${muctieuhp}" var="item">
                                                         	<label class="checkbox-inline">
-														      <input type="checkbox" name="chuanDauRa0" id="cdr" value="${item.id}">
-														      <a href="#" data-toggle="tooltip" title="${item.moTa}">CDR${item.id}</a>
+														      <input type="checkbox" name="chuanDauRa0" id="cdr" value="${item.id}">${item.ten}
 														    </label>
                                                      	</c:forEach>
 											        </td>
 											        <td>
-											        	<select class="form-control" name="trinhDoNangLuc" multiple>
-											        		<option value="(1)">(1)</option>
-											        		<option value="(2)">(2)</option>
-											        		<option value="(3)">(3)</option>
-											        		<option value="(4)">(4)</option>
-											        		<option value="(5)">(5)</option>
+											        	<select name="mucDoGiangDay" class="form-control">
+											        		<option value="I">I</option>
+											        		<option value="T">T</option>
+											        		<option value="U">U</option>
 											        	</select>
 											        </td>
 											        <td>
@@ -131,7 +127,7 @@
 											      </tr>
 											    </tbody>
 										  	</table>
-										  	<button type="button" id="add-row" class="btn-xs btn-warning float-right">Thêm Mục Tiêu Mới</button>
+										  	<button type="button" id="add-row" class="btn-xs btn-warning float-right">Thêm Chuẩn Đầu Ra Mới</button>
                                         </fieldset>
                                         <button type="submit" class="btn btn-primary stepy-finish">Submit</button>
                                     </form>

@@ -5,7 +5,6 @@ public class DeCuongHocPhan {
 	private int id ;
 	private int giangVienId;
 	private int giangVienAssId;
-	private int hocPhanId;
 	private String moTa;
 	
 	
@@ -31,14 +30,6 @@ public class DeCuongHocPhan {
 	
 	public void setGiangVienAssId(int id) {
 		this.giangVienAssId = id;
-	}
-	
-	public int getHocPhanId() {
-		return this.hocPhanId;
-	}
-	
-	public void setHocPhanId(int id) {
-		this.hocPhanId = id;
 	}
 	
 	public String getMoTa() {

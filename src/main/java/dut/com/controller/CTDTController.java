@@ -18,7 +18,6 @@ import dut.com.dao.HocPhanDao;
 import dut.com.dao.KhoaDao;
 import dut.com.dao.LoaiCTDTDAO;
 import dut.com.entity.CTDT;
-import dut.com.entity.HocPhan;
 import dut.com.entity.HocPhanCTDT;
 
 @Controller
@@ -57,10 +56,14 @@ public class CTDTController {
 	}
 	
 	@RequestMapping(path="create", method=RequestMethod.POST)
-	public String create(@RequestParam("khoaId") int khoaId, @RequestParam("loaiId") int loaiId, @RequestParam("ten") String ten, @RequestParam("nienKhoa") String nienKhoa){
+	public String create(ModelMap map, @RequestParam("khoaId") int khoaId, @RequestParam("loaiId") int loaiId, @RequestParam("ten") String ten, @RequestParam("nienKhoa") String nienKhoa){
 		CTDT ctdt = new CTDT(ten, nienKhoa, khoaId, loaiId);
-		ctdtDAO.add(ctdt);
-		return "redirect:/ctdt";
+		int id = ctdtDAO.add(ctdt);
+		if (id == -1){
+			return "redirect:/ctdt/add";
+		}
+		return "redirect:/ctdt/"+ id +"/edit";
+		
 	}
 	
 	@RequestMapping(path="update", method=RequestMethod.POST)
