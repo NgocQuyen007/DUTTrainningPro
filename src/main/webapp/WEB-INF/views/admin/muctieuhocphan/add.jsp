@@ -64,9 +64,9 @@
 											    <thead>
 											      <tr>
 											        <th class="col-md-1 text-center">Mục Tiêu (1)</th>
-											        <th class="col-md-3 text-center">Mô tả mục tiêu (2)</th>
-											        <th class="col-md-3 text-center">Chuẩn đầu ra của CTĐT (3)</th>
-											        <th class="col-md-3 text-center">TĐNL (4)</th>
+											        <th class="col-md-4 text-center">Mô tả mục tiêu (2)</th>
+											        <th class="col-md-4 text-center">Chuẩn đầu ra của CTĐT (3)</th>
+											        <th class="col-md-1 text-center">TĐNL (4)</th>
 											        <th class="col-md-1 text-center">Action</th>
 											      </tr>
 											    </thead>
@@ -110,12 +110,12 @@
 											        	<c:forEach items="${cdrCTDT}" var="item">
                                                         	<label class="checkbox-inline">
 														      <input type="checkbox" name="chuanDauRa0" id="cdr" value="${item.id}">
-														      <a href="#" data-toggle="tooltip" title="${item.moTa}">CDR${item.id}</a>
+														      <a href="#" data-toggle="tooltip" title="${item.moTa}">${item.tenCDR}</a>
 														    </label>
                                                      	</c:forEach>
 											        </td>
 											        <td>
-											        	<select class="form-control" name="trinhDoNangLuc" required>
+											        	<select class="form-control" name="trinhDoNangLuc" required style="width: auto;">
 											        		<option value="(1)">(1)</option>
 											        		<option value="(2)">(2)</option>
 											        		<option value="(3)">(3)</option>
@@ -144,8 +144,8 @@
 
                 </div> <!-- content -->
 
-                <footer class="footer text-right">
-                    2017 Â© Adminox. - Coderthemes.com
+               <footer class="footer text-right">
+                    2017 © Admin. - daotao.dut.udn
                 </footer>
 
             </div>

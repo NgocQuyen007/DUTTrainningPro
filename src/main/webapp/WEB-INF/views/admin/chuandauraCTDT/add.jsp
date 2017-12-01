@@ -90,8 +90,9 @@
 	
 
 
-	<footer class="footer text-right"> 2017 © Adminox. -
-		Coderthemes.com </footer>
+	<footer class="footer text-right">
+                    2017 © Admin. - daotao.dut.udn
+                </footer>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

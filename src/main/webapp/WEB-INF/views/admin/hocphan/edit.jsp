@@ -154,8 +154,8 @@
 
                 </div> <!-- content -->
 
-                <footer class="footer text-right">
-                    2017 © Adminox. - Coderthemes.com
+               <footer class="footer text-right">
+                    2017 © Admin. - daotao.dut.udn
                 </footer>
 
             </div>
