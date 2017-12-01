@@ -1,6 +1,7 @@
 package dut.com.entity;
 
 public class ChuanDauRaCTDT {
+	
 	private int id;
 	private String tenCDR;
 	private String moTa;

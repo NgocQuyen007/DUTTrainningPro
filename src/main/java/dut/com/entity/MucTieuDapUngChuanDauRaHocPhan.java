@@ -1,6 +1,7 @@
 package dut.com.entity;
 
 public class MucTieuDapUngChuanDauRaHocPhan {
+	
 	private int mucTieuHocPhanId;
 	private int chuanDauRaHocPhanId;
 	private String mucDoGiangDay;

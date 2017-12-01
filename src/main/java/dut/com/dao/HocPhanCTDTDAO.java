@@ -33,6 +33,12 @@ public class HocPhanCTDTDAO {
 		String sql  = "SELECT * FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<HocPhanCTDT>(HocPhanCTDT.class), ctdtId);
 	}
+	
+	public int check(int ctdtId, int hpId) {
+		String sql  = "SELECT * FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ? and hoc_phan_id = ? and de_cuong_hoc_phan_id is not null";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+
 
 //	public List<Integer> getHocKiPluck(int ctdtId){
 //		String sql = "SELECT distinct(hoc_ki_id) FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?";

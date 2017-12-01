@@ -8,6 +8,7 @@ public class NguonHocLieu {
 	
 	public NguonHocLieu() {
 		
+		
 	}
 	
 	public NguonHocLieu(String tenHocLieu, int id, int lhlId) {

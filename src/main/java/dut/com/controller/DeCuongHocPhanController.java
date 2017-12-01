@@ -1,6 +1,7 @@
 package dut.com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,11 @@ public class DeCuongHocPhanController {
 	
 	@GetMapping("/")
 	public String show(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, ModelMap map){
-		map.addAttribute("decuonghocphan", dchpDao.getItemByCTDTAndHP(ctdtId, hpId));
+		try {
+			map.addAttribute("decuonghocphan", dchpDao.getItemByCTDTAndHP(ctdtId, hpId));
+		} catch (EmptyResultDataAccessException e) {
+			return "redirect:/ctdt/" + ctdtId + "/hocphan/" + hpId + "/decuong/add";
+		}
 		map.addAttribute("giangvien", gvDao.getItem(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getGiangVienId()));
 		map.addAttribute("giangvienass", gvDao.getItem(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getGiangVienAssId()));
 		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
@@ -69,8 +74,8 @@ public class DeCuongHocPhanController {
 	
 	@RequestMapping(path="add", method=RequestMethod.POST)
 	public String store(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, @ModelAttribute DeCuongHocPhan deCuongHocPhan){
+		deCuongHocPhan.setHocPhanId(hpId);
 		int dcId = dchpDao.add(deCuongHocPhan);
-		System.out.println(dcId);
 		dchpctdtDao.update(ctdtId, hpId, dcId);
 		return "redirect:/ctdt/" + ctdtId + "/hocphan/" + hpId + "/decuong/";
 	}

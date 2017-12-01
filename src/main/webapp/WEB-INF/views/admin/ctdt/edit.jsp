@@ -260,6 +260,7 @@
 	                                     				<div class="edit-hk-${hpInHK.hocKi.id}" style="display: none;">
 															<button type="button" onclick="delHPAjax(${ctdt.id}, ${hpInHK.hocKi.id}, ${hpp.id}, this)" class="btn btn-danger" style="width: auto;">Xóa</button>
 														</div>
+														<a href ="<c:url value='/ctdt/${ctdt.id}/hocphan/${hpp.id}/decuong/' />" class="btn btn-default">Xem Đề Cương</a>
 	                                     			</td>
 	                                     		</tr>
 	                                     	</c:forEach>

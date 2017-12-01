@@ -1,6 +1,7 @@
 package dut.com.entity;
 
 public class KhoiKienThuc {
+	
 	private int id;
 	private String ten;
 		

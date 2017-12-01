@@ -5,7 +5,6 @@ public class TmpClass {
 	String chuanDauRa;
 	
 	
-	
 	public int getMucTieuHocPhanId() {
 		return mucTieuHocPhanId;
 	}

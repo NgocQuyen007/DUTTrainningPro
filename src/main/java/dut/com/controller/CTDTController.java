@@ -81,6 +81,7 @@ public class CTDTController {
 		map.addAttribute("hocPhans", ctdtDAO.getHocPhanRemain(id));
 		map.addAttribute("khoas", khoaDao.getItems());
 		map.addAttribute("loais", loaiCTDTDao.getLoaiCTDT());
+		
 		return "admin.ctdt.edit";
 	}
 	

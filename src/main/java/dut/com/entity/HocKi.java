@@ -3,7 +3,9 @@ package dut.com.entity;
 public class HocKi {
 	private int id;
 	private String ten;
+	
 	public HocKi(){}
+	
 	public HocKi(int id, String ten) {
 		super();
 		this.id = id;

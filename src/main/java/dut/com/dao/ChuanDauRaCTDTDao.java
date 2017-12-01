@@ -12,6 +12,7 @@ import dut.com.entity.ChuanDauRaCTDT;
 @Repository
 public class ChuanDauRaCTDTDao {
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

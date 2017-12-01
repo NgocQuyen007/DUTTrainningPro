@@ -7,6 +7,7 @@ public class ChuanDauRaHocPhan {
 	private String ten;
 	private int deCuongChiTietId;
 	
+	
 	public ChuanDauRaHocPhan() {
 		
 	}

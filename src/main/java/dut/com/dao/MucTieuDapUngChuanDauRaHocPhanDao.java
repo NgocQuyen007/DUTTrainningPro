@@ -12,6 +12,7 @@ import dut.com.entity.TmpClassCDRHP;
 @Repository
 public class MucTieuDapUngChuanDauRaHocPhanDao {
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

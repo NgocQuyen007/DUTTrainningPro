@@ -22,9 +22,10 @@ public class DeCuongHocPhanDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public int add(DeCuongHocPhan deCuongHocPhan) {
-		String sql = "INSERT INTO de_cuong_hoc_phan(giang_vien_id, giang_vien_ass_id, mo_ta) VALUES(?, ?, ?)";
+		String sql = "INSERT INTO de_cuong_hoc_phan(giang_vien_id, giang_vien_ass_id, mo_ta, hoc_phan_id) VALUES(?, ?, ?, ?)";
 		GeneratedKeyHolder holder = new GeneratedKeyHolder();
 
+		
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				// TODO Auto-generated method stub
@@ -32,6 +33,7 @@ public class DeCuongHocPhanDao {
 		        statement.setInt(1, deCuongHocPhan.getGiangVienId());
 		        statement.setInt(2, deCuongHocPhan.getGiangVienAssId());
 		        statement.setString(3, deCuongHocPhan.getMoTa());
+		        statement.setInt(4, deCuongHocPhan.getHocPhanId());
 		        return statement;
 			}
 		}, holder);
