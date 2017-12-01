@@ -129,8 +129,10 @@
                                                     </div>
 													<div style="margin-top: 15px" class="col-sm-4">
                                                         <label for="ma_hoc_phan">Loại Học Phần</label>
-                                                        <form:input type="text" class="form-control" id="loai_hoc_phan" path="loai_hoc_phan" placeholder="" value=""/>
-                                                        <span style="color: red" id="loai_hoc_phan_error"></span>
+                                                        <form:select type="text" class="form-control select2" id="loai_hoc_phan" path="loai_hoc_phan" placeholder="" value="">
+                                                        	<form:option value="Bắt buộc">Bắt buộc</form:option>
+                                                        	<form:option value="Tự chọn">Tự chọn</form:option>
+                                                        </form:select>
                                                     </div>
 													<div style="margin-top: 15px" class="col-sm-4">
                                                         <label for="loai_hoc_phan">Khối Kiến Thức</label>

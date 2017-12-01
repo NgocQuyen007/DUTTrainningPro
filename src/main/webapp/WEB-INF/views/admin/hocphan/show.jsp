@@ -38,14 +38,14 @@
 	                                        		<div class="col-sm-9">
 	                                        			<h3>Xem Chi Tiết Học Phần</h3>
 	                                        		</div>
-	                                        		<div class="col-sm-3">
+<%-- 	                                        		<div class="col-sm-3">
 	                                        			<c:if test="${decuong > 0}">
 	                                        				<a href="<c:url value='/hocphan/${hocphan.id}/decuong/'/>"><button class="btn btn-primary stepy-finish">Xem đề cương học phần</button></a>
 	                                        			</c:if>
 	                                        			<c:if test="${decuong == 0}">
 	                                        				<a href="<c:url value='/hocphan/${hocphan.id}/decuong/add/'/>"><button class="btn btn-primary stepy-finish">Thêm đề cương học phần</button></a>
 	                                        			</c:if>
-	                                        		</div>      			                                     	
+	                                        		</div>    --%>   			                                     	
                                            	</div>
                                         	                                                                                     
                                             <div class="row m-t-20">
@@ -82,6 +82,35 @@
                             </div>
                         </div>
                         <!-- End row -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                    <h4 class="m-t-0 header-title"><b>Học phần thuộc các chương trình đào tạo</b></h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover m-0 mails table-actions-bar">
+                                            <thead>
+                                            <tr>
+                                                <th>Tên Chương Trình Đào Tạo</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${requestScope.listCTDT}" var="i">
+                                            <tr>
+                                                <td>${i.ten}</td>
+                                                <td>
+                                                    <a href="<c:url value=''/>" class="btn-xs btn-success"><i class="mdi mdi-open-in-new"></i></a>
+                                                </td>
+                                            </tr>
+                                            </c:forEach>                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- end col -->                           
+                        </div>
                     </div> <!-- container -->
 
                 </div> <!-- content -->
