@@ -96,10 +96,8 @@ public class HocPhanController {
 		hocphan = daohp.getHocPhanById(id);
 		KhoiKienThuc kkt = new KhoiKienThuc();
 		kkt = daokkt.getKhoiKienThucById(hocphan.getKhoi_kien_thuc_id());
-		int countDCHP = dchpDao.checkExist(id);
 		model.addAttribute("hocphan", hocphan);
 		model.addAttribute("kkt", kkt);
-		model.addAttribute("decuong", countDCHP);
 		List<CTDT> list = ctdtDao.getCTDTByHocPhanId(id);
 		model.addAttribute("listCTDT", list);
 		return "admin.hocphan.show";
