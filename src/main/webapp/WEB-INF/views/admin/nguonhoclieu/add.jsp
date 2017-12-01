@@ -79,7 +79,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-right">
-                    2017 Â© Adminox. - Coderthemes.com
+                    2017 © Admin. - daotao.dut.udn
                 </footer>
 
             </div>

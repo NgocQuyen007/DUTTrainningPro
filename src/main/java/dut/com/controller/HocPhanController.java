@@ -99,6 +99,7 @@ public class HocPhanController {
 		model.addAttribute("kkt", kkt);
 		List<CTDT> list = ctdtDao.getCTDTByHocPhanId(id);
 		model.addAttribute("listCTDT", list);
+		model.addAttribute("hpid", id);
 		return "admin.hocphan.show";
 	}
 	

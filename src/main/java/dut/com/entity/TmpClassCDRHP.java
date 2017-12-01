@@ -1,7 +1,6 @@
 package dut.com.entity;
 
 public class TmpClassCDRHP {
-	
 	int chuanDauRaId;
 	String mucTieuHocPhan;
 	

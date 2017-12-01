@@ -195,14 +195,11 @@
 																        	<span class="form-control" disabled>${item.ten}</span>
 																        </td>
 																        <td>
-																        	<span class="form-control" disabled>
 																        		${item.moTa}
-																        	</span>
 																        </td>
 																        <td>
 																        	<span class="form-control" disabled>
 																        		<c:forEach items="${muctieutuongung}" var="item2" varStatus="loop">
-																        			
 															        				<c:if test="${item2.chuanDauRaId == item.id}">
 															        					${item2.mucTieuHocPhan}
 															        				</c:if>
@@ -210,13 +207,14 @@
 																        	</span>
 																        </td>
 																        <td>
-<<<<<<< HEAD
 																        	<span class="form-control" disable>
-																        		${item.mucDoGiangDay}
-=======
-																        	<span class="form-control" disabled>
-																        		
->>>>>>> 8fcc14226b37d153dcbbd8eaf1c571046f40b524
+																        		<c:set var="count" value="${1}"/>
+																        		<c:forEach items="${mucdogiangday}" var="item2" varStatus="loop">
+															        				<c:if test="${item2.chuanDauRaHocPhanId == item.id && count<2}">
+															        					${item2.mucDoGiangDay}
+															        					<c:set var="count" value="${2}"/>
+															        				</c:if>
+																        		</c:forEach>
 																        	</span>
 																        </td>
 																    </tr>
@@ -243,7 +241,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-right">
-                    2017 Â© Adminox. - Coderthemes.com
+                    2017 © Admin. - daotao.dut.udn
                 </footer>
 
             </div>

@@ -107,7 +107,17 @@
 											    </tbody>
 										  	</table>
                                         </fieldset>
-                                        <button type="submit" class="btn btn-primary stepy-finish">Submit</button>
+                                        <button type="submit" class="btn btn-primary stepy-finish pull-right">Submit</button>
+                                        <div class="row">
+                                        <blockquote class="blockquote">
+                                        	<ul>
+                                        		<li>I: Introduce (Giới thiệu)</li>
+                                        		<li>T: Teach (Dạy)</li>
+                                        		<li>U: Utilize (Sử dụng)</li>
+                                        	</ul>
+                                        </blockquote>
+                                        </div>
+                                        
                                     </form>
 
                                 </div>
@@ -119,7 +129,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-right">
-                    2017 Â© Adminox. - Coderthemes.com
+                    2017 © Admin. - daotao.dut.udn
                 </footer>
 
             </div>

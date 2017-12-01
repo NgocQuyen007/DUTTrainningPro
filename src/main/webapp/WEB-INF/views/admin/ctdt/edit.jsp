@@ -260,7 +260,7 @@
 	                                     				<div class="edit-hk-${hpInHK.hocKi.id}" style="display: none;">
 															<button type="button" onclick="delHPAjax(${ctdt.id}, ${hpInHK.hocKi.id}, ${hpp.id}, this)" class="btn btn-danger" style="width: auto;">Xóa</button>
 														</div>
-														<a href ="<c:url value='/ctdt/${ctdt.id}/hocphan/${hpp.id}/decuong/' />" class="btn btn-default">Xem Đề Cương</a>
+														<a href ="<c:url value='/ctdt/${ctdt.id}/hocphan/${hpp.id}/decuong/'/>" class="btn btn-default xemdecuong">Xem Đề Cương</a>
 	                                     			</td>
 	                                     		</tr>
 	                                     	</c:forEach>
@@ -323,8 +323,9 @@
 		</div>
 	</div>
 
-	<footer class="footer text-right"> 2017 © Adminox. -
-		Coderthemes.com </footer>
+	<footer class="footer text-right">
+                    2017 © Admin. - daotao.dut.udn
+                </footer>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -435,11 +436,17 @@ function checkDup(sel){
 	
 	fill_hp_properties(sel, 0);
 }
-
+check = true;
 function showUpEdit(hkId) {
 	var selectorClassName = "edit-hk-" + hkId;
 	var arr = document.getElementsByClassName(selectorClassName);
-	
+	if (check==true) {
+		$(".xemdecuong").addClass("hidden");
+		check = false;
+	} else {
+		$(".xemdecuong").removeClass("hidden");
+		check = true;
+	}
 	for(var i=0; i<arr.length; i++){
 		if (arr[i].style.display == 'none')
 			arr[i].style.display = 'block';

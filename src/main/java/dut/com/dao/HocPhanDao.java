@@ -73,7 +73,7 @@ public class HocPhanDao {
                   +  " ,gvchinh.ten GVPhuTrach, gvchinh.email EmailGVPT, gvchinh.so_dien_thoai SDTGVPT, kGVPT.ten KHOA_GVPT"
                   +  " ,gvphu.ten GVPhu, gvphu.email EmailGVPhu, gvphu.so_dien_thoai SDTGVPhu, kGVP.ten KHOA_GVP"
                   +  " ,dchp.mo_ta MoTaHocPhan"
-                  +  " FROM hoc_phan hp"
+                  +  "  FROM hoc_phan hp"
 
 				  +  " LEFT JOIN hoc_phan hp_ht"
 				  +  " ON hp.ma_hoc_phan_hoc_truoc = hp_ht.ma_hoc_phan"
@@ -91,8 +91,8 @@ public class HocPhanDao {
 				  +  " JOIN khoa         kGVPT         ON kGVPT.id = gvchinh.khoa_id "
 				  +  " JOIN khoa         kGVP          ON kGVP.id = gvphu.khoa_id"
 				
-				  +  " WHERE hp.id = 9;";
-		return jdbcTemplate.queryForObject(sql, new ThongTinDeCuongHocPhanRowMapper());
+				  +  " WHERE hp.id = ? AND hp_ctdt.chuong_trinh_dao_tao_id = ?";
+		return jdbcTemplate.queryForObject(sql, new ThongTinDeCuongHocPhanRowMapper(), new Object[]{hpID,ctdtId});
 	}
 	
 }

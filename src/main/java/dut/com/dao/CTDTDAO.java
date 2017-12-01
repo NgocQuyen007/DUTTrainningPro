@@ -98,7 +98,7 @@ public class CTDTDAO {
 	}
 	
 	public List<HocKi> getHocKiRemain(int id){
-		String sql = "select * from hoc_ky where id not in (SELECT distinct(hoc_ki_id) FROM trainningpro.hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?);";
+		String sql = "select * from hoc_ky where id not in (SELECT distinct(hoc_ki_id) FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?);";
 		List<HocKi> rs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<HocKi>(HocKi.class), id);
 		return rs;
 	}

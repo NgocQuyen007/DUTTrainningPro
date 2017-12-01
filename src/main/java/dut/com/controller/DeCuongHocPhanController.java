@@ -77,7 +77,7 @@ public class DeCuongHocPhanController {
 		map.addAttribute("chuandaurahp", cdrhpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		map.addAttribute("muctieutuongung", mtducdrhpDao.getMucTieu(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		map.addAttribute("mucdogiangday", mtducdrhpDao.getMucTieuByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
-		
+		System.out.println(mtducdrhpDao.getMucTieuByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()).get(0).toString());
 		return "admin.decuonghocphan.show";
 	}
 	
@@ -92,7 +92,7 @@ public class DeCuongHocPhanController {
 	/** /ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/export **/
 	@RequestMapping(path="export", method=RequestMethod.GET)
 	public String export(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, HttpServletRequest request){
-
+		System.out.println("HP - CTDT: " + hpId + " - " + ctdtId );
 		ThongTinDeCuongHocPhan item = hpDao.getThongTinDCHocPhan(hpId, ctdtId);
 		Map<String, String> maps = mapsItem(item);
 

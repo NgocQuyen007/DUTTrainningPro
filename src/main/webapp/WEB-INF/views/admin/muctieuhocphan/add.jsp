@@ -64,9 +64,9 @@
 											    <thead>
 											      <tr>
 											        <th class="col-md-1 text-center">Mục Tiêu (1)</th>
-											        <th class="col-md-3 text-center">Mô tả mục tiêu (2)</th>
-											        <th class="col-md-3 text-center">Chuẩn đầu ra của CTĐT (3)</th>
-											        <th class="col-md-3 text-center">TĐNL (4)</th>
+											        <th class="col-md-4 text-center">Mô tả mục tiêu (2)</th>
+											        <th class="col-md-4 text-center">Chuẩn đầu ra của CTĐT (3)</th>
+											        <th class="col-md-1 text-center">TĐNL (4)</th>
 											        <th class="col-md-1 text-center">Action</th>
 											      </tr>
 											    </thead>
@@ -110,12 +110,12 @@
 											        	<c:forEach items="${cdrCTDT}" var="item">
                                                         	<label class="checkbox-inline">
 														      <input type="checkbox" name="chuanDauRa0" id="cdr" value="${item.id}">
-														      <a href="#" data-toggle="tooltip" title="${item.moTa}">CDR${item.id}</a>
+														      <a href="#" data-toggle="tooltip" title="${item.moTa}">${item.tenCDR}</a>
 														    </label>
                                                      	</c:forEach>
 											        </td>
 											        <td>
-											        	<select class="form-control" name="trinhDoNangLuc" required>
+											        	<select class="form-control" name="trinhDoNangLuc" required style="width: auto;">
 											        		<option value="(1)">(1)</option>
 											        		<option value="(2)">(2)</option>
 											        		<option value="(3)">(3)</option>
@@ -131,9 +131,19 @@
 											      </tr>
 											    </tbody>
 										  	</table>
-										  	<button type="button" id="add-row" class="btn-xs btn-warning float-right">Thêm Mục Tiêu Mới</button>
+										  	<button type="button" id="add-row" class="btn-xs btn-warning pull-right">Thêm Mục Tiêu Mới</button>
                                         </fieldset>
-                                        <button type="submit" class="btn btn-primary stepy-finish">Submit</button>
+                                        <button type="submit" class="btn btn-primary stepy-finish pull-right">Submit</button>
+                                        <blockquote class="blockquote">
+                                        	<ul>
+                                        		<li>(1): Biết - Có biết/có nghe qua</li>
+                                        		<li>(2): Hiểu - Có hiểu biết/có thể tham gia</li>
+                                        		<li>(3): Ứng dụng - Có khả năng ứng dụng</li>
+                                        		<li>(4): Phân tích - Có khả năng phân tích</li>
+                                        		<li>(5): Đánh giá - Có khả năng đánh giá</li>
+                                        		<li>(6): Sáng tạo - Có khả năng sáng tạo</li>
+                                        	</ul>
+                                        </blockquote>
                                     </form>
 
                                 </div>
@@ -144,8 +154,8 @@
 
                 </div> <!-- content -->
 
-                <footer class="footer text-right">
-                    2017 Â© Adminox. - Coderthemes.com
+               <footer class="footer text-right">
+                    2017 © Admin. - daotao.dut.udn
                 </footer>
 
             </div>

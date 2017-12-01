@@ -42,6 +42,11 @@ public class MucTieuDapUngChuanDauRaHocPhan {
 	public void setDeCuongChiTietId(int deCuongChiTietId) {
 		this.deCuongChiTietId = deCuongChiTietId;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "MucTieuDapUngChuanDauRaHocPhan [mucTieuHocPhanId=" + mucTieuHocPhanId + ", chuanDauRaHocPhanId="
+				+ chuanDauRaHocPhanId + ", mucDoGiangDay=" + mucDoGiangDay + ", deCuongChiTietId=" + deCuongChiTietId
+				+ "]";
+	}
 }

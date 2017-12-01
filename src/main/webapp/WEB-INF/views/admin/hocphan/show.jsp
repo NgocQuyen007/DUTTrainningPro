@@ -99,7 +99,7 @@
                                             <tr>
                                                 <td>${i.ten}</td>
                                                 <td>
-                                                    <a href="<c:url value=''/>" class="btn-xs btn-success"><i class="mdi mdi-open-in-new"></i></a>
+                                                    <a href="<c:url value='/ctdt/${i.id}/hocphan/${hpid}/decuong/'/>" class="btn-xs btn-success"><i class="mdi mdi-open-in-new"></i></a>
                                                 </td>
                                             </tr>
                                             </c:forEach>                                            
@@ -116,7 +116,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-right">
-                    2017 © Adminox. - Coderthemes.com
+                    2017 © Admin. - daotao.dut.udn
                 </footer>
             </div>
 
