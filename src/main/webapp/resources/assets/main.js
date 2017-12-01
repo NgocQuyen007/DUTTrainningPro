@@ -73,6 +73,19 @@ $(document).ready(function() {
 		    });
 		})
 	});
+	$countMucTieu = 8;
+	$("#countRowCDR").val($countMucTieu);
+	$("tbody").children("tr").each(function(index) {
+    	$("tbody").children().eq(index).find("#cdrhp").attr('name', 'chuanDauRa' + (index));
+    })
+	$(".delete-row").click(function() {
+		$countMucTieu--;
+		$("#countRowCDR").val($countMucTieu);
+		$(this).parents(':eq(1)').remove();
+		$("tbody").children("tr").each(function(index) {
+        	$("tbody").children().eq(index).find("#cdrhp").attr('name', 'chuanDauRa' + (index));
+        })
+	})
 })
 
 function hideFormEdit($parentElement) {

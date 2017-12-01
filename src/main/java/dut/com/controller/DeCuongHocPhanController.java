@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +25,13 @@ import dut.com.dao.MucTieuHocPhanDao;
 import dut.com.dao.NguonHocLieuDao;
 import dut.com.dao.ChuanDauRaHocPhanDao;
 import dut.com.dao.MucTieuDapUngChuanDauRaHocPhanDao;
+import dut.com.dao.DCHPCTDTDao;
 import dut.com.entity.DeCuongHocPhan;
 import dut.com.entity.ThongTinDeCuongHocPhan;
 import dut.com.libs.LibWords;
 
 @Controller
-@RequestMapping("/hocphan/{hocphanId}/decuong")
+@RequestMapping("/ctdt/{ctdtId}/hocphan/{hpId}/decuong")
 public class DeCuongHocPhanController {
 	@Autowired
 	DeCuongHocPhanDao dchpDao;
@@ -47,42 +49,51 @@ public class DeCuongHocPhanController {
 	ChuanDauRaHocPhanDao cdrhpDao;
 	@Autowired
 	MucTieuDapUngChuanDauRaHocPhanDao mtducdrhpDao;
+	@Autowired
+	DCHPCTDTDao dchpctdtDao;
 	
 	@GetMapping("/add")
-	public String create(@PathVariable("hocphanId") int id, ModelMap map){
+	public String create(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, ModelMap map){
+		map.addAttribute("ctdtId", ctdtId);
 		map.addAttribute("listGV", gvDao.getItems());
-		map.addAttribute("hocphan", hpDao.getHocPhanById(id));
+		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
 		
 		return "admin.decuonghocphan.add";
 	}
 	
 	@GetMapping("/")
-	public String show(@PathVariable("hocphanId") int hpId, ModelMap map){
-		map.addAttribute("decuonghocphan", dchpDao.getItemByHocPhanId(hpId));
-		map.addAttribute("giangvien", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienId()));
-		map.addAttribute("giangvienass", gvDao.getItem(dchpDao.getItemByHocPhanId(hpId).getGiangVienAssId()));
+	public String show(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, ModelMap map){
+		try {
+			map.addAttribute("decuonghocphan", dchpDao.getItemByCTDTAndHP(ctdtId, hpId));
+		} catch (EmptyResultDataAccessException e) {
+			return "redirect:/ctdt/" + ctdtId + "/hocphan/" + hpId + "/decuong/add";
+		}
+		map.addAttribute("giangvien", gvDao.getItem(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getGiangVienId()));
+		map.addAttribute("giangvienass", gvDao.getItem(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getGiangVienAssId()));
 		map.addAttribute("hocphan", hpDao.getHocPhanById(hpId));
-		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
-		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
-		map.addAttribute("nguonhoclieu", nhlDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
-		map.addAttribute("chuandaurahp", cdrhpDao.getItemsByDeCuongId(dchpDao.getItemByHocPhanId(hpId).getId()));
-		map.addAttribute("muctieutuongung", mtducdrhpDao.getMucTieu(dchpDao.getItemByHocPhanId(hpId).getId()));
+		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("nguonhoclieu", nhlDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("chuandaurahp", cdrhpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("muctieutuongung", mtducdrhpDao.getMucTieu(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("mucdogiangday", mtducdrhpDao.getMucTieuByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		
 		return "admin.decuonghocphan.show";
 	}
 	
 	@RequestMapping(path="add", method=RequestMethod.POST)
-	public String store(@PathVariable("hocphanId") int hpId, @ModelAttribute DeCuongHocPhan deCuongHocPhan){
+	public String store(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, @ModelAttribute DeCuongHocPhan deCuongHocPhan){
 		deCuongHocPhan.setHocPhanId(hpId);
-		dchpDao.add(deCuongHocPhan);
-		
-		return "redirect:/hocphan/" + hpId + "/decuong/";
+		int dcId = dchpDao.add(deCuongHocPhan);
+		dchpctdtDao.update(ctdtId, hpId, dcId);
+		return "redirect:/ctdt/" + ctdtId + "/hocphan/" + hpId + "/decuong/";
 	}
 	
+	/** /ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/export **/
 	@RequestMapping(path="export", method=RequestMethod.GET)
-	public String export(@PathVariable("hocphanId") int hpId, HttpServletRequest request){
-		
-		ThongTinDeCuongHocPhan item = hpDao.getThongTinDCHocPhan(hpId);
+	public String export(@PathVariable("hpId") int hpId, @PathVariable("ctdtId") int ctdtId, HttpServletRequest request){
+
+		ThongTinDeCuongHocPhan item = hpDao.getThongTinDCHocPhan(hpId, ctdtId);
 		Map<String, String> maps = mapsItem(item);
 
 		String fileName = "DCHP.docx";

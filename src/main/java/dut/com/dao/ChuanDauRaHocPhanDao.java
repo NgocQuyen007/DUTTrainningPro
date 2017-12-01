@@ -18,6 +18,7 @@ import dut.com.entity.ChuanDauRaHocPhan;
 @Repository
 public class ChuanDauRaHocPhanDao {
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -48,12 +49,16 @@ public class ChuanDauRaHocPhanDao {
 //		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<ChuanDauRaCTDT>(ChuanDauRaCTDT.class), id);
 //	}
 //	
-//	public List<ChuanDauRaCTDT> getItems() {
-//		String sql = "SELECT * FROM chuan_dau_ra_ctdt";
-//		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<ChuanDauRaCTDT>(ChuanDauRaCTDT.class));
-//	}
+	
+	public List<ChuanDauRaHocPhan> getItems() {
+		String sql = "SELECT * FROM chuan_dau_ra_hoc_phan";
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<ChuanDauRaHocPhan>(ChuanDauRaHocPhan.class));
+	}
+	
 	public List<ChuanDauRaHocPhan> getItemsByDeCuongId(int id) {
-		String sql = "SELECT * FROM chuan_dau_ra_hoc_phan WHERE de_cuong_chi_tiet_id = "+id;
+		String sql = "SELECT * FROM chuan_dau_ra_hoc_phan WHERE id in"
+				+ " (SELECT chuan_dau_ra_hoc_phan_id FROM muc_tieu_hoc_phan_has_chuan_dau_ra_hoc_phan "
+				+ "where de_cuong_chi_tiet_id = " + id +")";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<ChuanDauRaHocPhan>(ChuanDauRaHocPhan.class));
 	}
 }

@@ -4,7 +4,9 @@ public class LoaiCTDT {
 	private int id;
 	private String ten;
 	
-	public LoaiCTDT() {}
+	public LoaiCTDT() {
+		
+	}
 
 	public LoaiCTDT(String ten) {
 		super();

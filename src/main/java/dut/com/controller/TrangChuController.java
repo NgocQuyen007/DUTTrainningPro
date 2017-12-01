@@ -10,6 +10,6 @@ public class TrangChuController {
 	
 	@GetMapping
 	public String index(){
-		return "admin.trangchu.index";
+		return "redirect:/ctdt";
 	}
 }

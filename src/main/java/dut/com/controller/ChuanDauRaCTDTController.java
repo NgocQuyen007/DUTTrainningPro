@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,8 +16,6 @@ import dut.com.dao.HocPhanCTDTDAO;
 import dut.com.dao.HocPhanDao;
 import dut.com.dao.KhoaDao;
 import dut.com.dao.LoaiCTDTDAO;
-import dut.com.entity.ChuanDauRaCTDT;
-import dut.com.entity.HocPhanCTDT;
 
 @Controller
 @RequestMapping("ctdt/chuandaura")
@@ -60,7 +57,7 @@ public class ChuanDauRaCTDTController {
 			String ten[] = request.getParameterValues("ten");
 			String mota[] = request.getParameterValues("mota");
 			
-			for(int i=0; i<ten.length - 1; i++){
+			for(int i=0; i<ten.length; i++){
 				chuanDauRaCTDTDAO.add(ctdtId, ten[i], mota[i]);
 			}
 		}

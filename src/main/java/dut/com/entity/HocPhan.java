@@ -1,9 +1,5 @@
 package dut.com.entity;
 
-/**
- * @author taqua
- *
- */
 public class HocPhan {
 	
 	private int id;

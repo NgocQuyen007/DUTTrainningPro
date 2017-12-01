@@ -24,7 +24,10 @@ public class Khoa {
 		this.giaophuKhoa = giaophuKhoa;
 	}
 	
-	public Khoa() {}
+	public Khoa() {
+		
+	}
+	
 	public Khoa(int id, String ten, GiangVien giaophuKhoa) {
 		super();
 		this.id = id;

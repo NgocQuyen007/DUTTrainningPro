@@ -17,6 +17,12 @@
                                             <a href="#">DUT</a>
                                         </li>
                                         <li>
+                                            <a href="#">Chương Trình Đào Tạo</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">${ctdtId}</a>
+                                        </li>
+                                        <li>
                                             <a href="#">Học Phần</a>
                                         </li>
                                         <li>
@@ -39,7 +45,7 @@
                                     <fieldset title="1">
                                             <div style='font-size: 24px'class="body-header-left">Đề Cương Học Phần <span class="label label-info">${hocphan.vi_name}</span></div>	
                                     		<div class="col-md-4 body-header-right btn btn-primary">
-                                    			<a href="<c:url value='/hocphan/${hocphan.id}/decuong/export'/>" class="btn btn-primary">
+                                    			<a href="<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/export'/>" class="btn btn-primary">
                                     				<strong>XUẤT</strong> ĐỀ CƯƠNG CHI TIẾT HỌC PHẦN
                                     			</a>
                                     		</div>
@@ -129,7 +135,7 @@
 													  	</c:when>
                                                 	</c:choose>
                                                 	<div class="form-group">
-                                                		<a href='<c:url value='/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/muctieu/add' />' class="btn btn-primary">
+                                                		<a href='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/muctieu/add' />' class="btn btn-primary">
 															<span>Thêm Mục Tiêu Học Phần</span>
 														</a>
                                                 	</div>
@@ -149,7 +155,7 @@
 														    	<c:forEach items="${nguonhoclieu}" var="item" varStatus="loop">
 															    	<tr>
 																        <td>
-																        	<span>${item.tenHocLieu}</span>"
+																        	<span>${item.tenHocLieu}</span>
 																        </td>
 																        <td>
 																        	<span>
@@ -164,7 +170,7 @@
 													  	</c:when>
                                                 	</c:choose>
                                                 	<div class="form-group">
-                                                		<a href='<c:url value='/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/nguonhoclieu/add' />' class="btn btn-primary">
+                                                		<a href='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/nguonhoclieu/add' />' class="btn btn-primary">
 															<span>Thêm Nguồn Học Liệu</span>
 														</a>
                                                 	</div>
@@ -204,8 +210,13 @@
 																        	</span>
 																        </td>
 																        <td>
+<<<<<<< HEAD
 																        	<span class="form-control" disable>
 																        		${item.mucDoGiangDay}
+=======
+																        	<span class="form-control" disabled>
+																        		
+>>>>>>> 8fcc14226b37d153dcbbd8eaf1c571046f40b524
 																        	</span>
 																        </td>
 																    </tr>
@@ -215,7 +226,7 @@
 		                                            	</c:when>
 		                                            </c:choose>
                                                 	<div class="form-group">
-                                                		<a href='<c:url value='/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/chuandaurahp/add' />' class="btn btn-primary">
+                                                		<a href='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/${decuonghocphan.id}/chuandaurahp/add' />' class="btn btn-primary">
 															<span>Thêm Chuẩn Đầu Ra Học Phần</span>
 														</a>
                                                 	</div>

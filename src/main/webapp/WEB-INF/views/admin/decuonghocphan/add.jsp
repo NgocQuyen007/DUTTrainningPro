@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form id="default-wizard" method="POST" action='<c:url value='/hocphan/${hocphan.id}/decuong/add' />'>
+                                    <form id="default-wizard" method="POST" action='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/add' />'>
                                         <fieldset title="1">
                                             <legend>Thêm Đề Cương Học Phần</legend>
 									

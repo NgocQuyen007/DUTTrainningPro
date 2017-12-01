@@ -19,6 +19,7 @@ import dut.com.entity.MucTieuHocPhan;
 @Repository
 public class MucTieuHocPhanDao {
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

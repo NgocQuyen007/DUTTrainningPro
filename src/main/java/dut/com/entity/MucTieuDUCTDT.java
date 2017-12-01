@@ -4,6 +4,7 @@ public class MucTieuDUCTDT {
 	private int mucTieuHPId;
 	private int cdrCTDTId;
 	
+	
 	public MucTieuDUCTDT(int id1, int id2) {
 		this.mucTieuHPId = id1;
 		this.cdrCTDTId = id2;

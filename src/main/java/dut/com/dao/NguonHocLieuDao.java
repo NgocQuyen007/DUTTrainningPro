@@ -7,11 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import dut.com.entity.GiangVien;
-import dut.com.entity.MucTieuHocPhan;
 import dut.com.entity.NguonHocLieu;
-import dut.com.libs.LibDate;
-import dut.com.libs.LibString;
 
 @Repository
 public class NguonHocLieuDao {

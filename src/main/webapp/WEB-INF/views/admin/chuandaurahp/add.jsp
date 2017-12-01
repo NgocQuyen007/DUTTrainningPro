@@ -39,7 +39,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form id="default-wizard" method="POST" action='<c:url value='/hocphan/${hocphan.id}/decuong/${decuongId}/chuandaurahp/add' />'>
+                                    <form id="default-wizard" method="POST" action='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/${decuongId}/chuandaurahp/add' />'>
+                                    	<input type="hidden" name="countRow" id="countRowCDR">
                                         <fieldset title="1">
                                             <legend>Thêm Chuẩn Đầu Ra Học Phần</legend>
                                             <div class="row m-t-20">
@@ -70,64 +71,41 @@
 		                                            		<c:forEach items="${chuandaurahp}" var="item" varStatus="loop">
 														    	<tr id="old-row" disabled>
 															        <td class="ten">
-															        	<span class="form-control" disabled>${item.ten}</span>
+															        	<span class="form-control">${item.ten}</span>
+															        	<input type="hidden" name="cdrid" value="${item.id}">
 															        </td>
 															        <td>
-															        	<span class="form-control" disabled>
+															        	<span class="form-control">
 															        		${item.moTa}
 															        	</span>
 															        </td>
 															        <td>
-															        	<span class="form-control" disabled>
-															        		<c:forEach items="${muctieutuongung}" var="item2" varStatus="loop">
-															        			
-														        				<c:if test="${item2.chuanDauRaId == item.id}">
-														        					${item2.mucTieuHocPhan}
-														        				</c:if>
-															        		</c:forEach>
+															        	<span class="form-control">
+															        		<c:forEach items="${muctieuhp}" var="item">
+					                                                        	<label class="checkbox-inline">
+																			      <input type="checkbox" name="chuanDauRa0" id="cdrhp" value="${item.id}">${item.ten}
+																			    </label>
+					                                                     	</c:forEach>
 															        	</span>
 															        </td>
 															        <td>
-															        	<span class="form-control" disabled>
-															        		${item.mucDoGiangDay}
-															        	</span>
+															        	<select name="mucDoGiangDay" class="form-control">
+															        		<option value="I">I</option>
+															        		<option value="T">T</option>
+															        		<option value="U">U</option>
+															        	</select>
 															        </td>
 															        <td>
+															        	<button type="button" id="delete-row" class="btn-xs btn-danger delete-row">
+															        		<span class="fa fa-remove"></span>
+															        	</button>
 															        </td>
 															    </tr>
 														    </c:forEach>
 		                                            	</c:when>
 		                                            </c:choose>
-											      <tr id="standard-row">
-											        <td class="ten">
-											        	<input type="text" id="ten" name="ten" class="form-control" value=""/>
-											        </td>
-											        <td>
-											        	<textarea class="form-control" rows="2" name="moTa" id="mo_ta" required></textarea>
-											        </td>
-											        <td>
-											        	<c:forEach items="${muctieuhp}" var="item">
-                                                        	<label class="checkbox-inline">
-														      <input type="checkbox" name="chuanDauRa0" id="cdr" value="${item.id}">${item.ten}
-														    </label>
-                                                     	</c:forEach>
-											        </td>
-											        <td>
-											        	<select name="mucDoGiangDay" class="form-control">
-											        		<option value="I">I</option>
-											        		<option value="T">T</option>
-											        		<option value="U">U</option>
-											        	</select>
-											        </td>
-											        <td>
-											        	<button type="button" id="delete-row" class="btn-xs btn-danger hidden">
-											        		<span class="fa fa-remove"></span>
-											        	</button>
-											        </td>
-											      </tr>
 											    </tbody>
 										  	</table>
-										  	<button type="button" id="add-row" class="btn-xs btn-warning float-right">Thêm Chuẩn Đầu Ra Mới</button>
                                         </fieldset>
                                         <button type="submit" class="btn btn-primary stepy-finish">Submit</button>
                                     </form>

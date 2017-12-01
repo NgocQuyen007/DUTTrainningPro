@@ -17,7 +17,10 @@ public class HocVi {
 	public void setHocVi(String hocVi) {
 		this.hocVi = hocVi;
 	}
-	public HocVi() {}
+	public HocVi() {
+		
+	}
+	
 	public HocVi(int id, String hocVi) {
 		super();
 		this.id = id;

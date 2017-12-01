@@ -64,7 +64,8 @@ public class HocPhanDao {
 		jdbcTemplate.update(sql,id);
 	}
 	
-	public ThongTinDeCuongHocPhan getThongTinDCHocPhan(int hpID){
+
+	public ThongTinDeCuongHocPhan getThongTinDCHocPhan(int hpID, int ctdtId){
 		String sql = "SELECT hp.id, hp.ma_hoc_phan, hp.vi_name, hp.en_name, hp.ma_hoc_phan_hoc_truoc, hp.ma_hoc_phan_song_hanh, hp.ma_hoc_phan_tien_quyet" 
                   +  " ,hp_ht.vi_name HocPhanHocTruoc, hp_sh.vi_name HocPhanSongHanh, hp_tq.vi_name HocPhanTienQuyet" 
                   +  " ,ctdt.id MaCTDT, ctdt.ten TEN_CTDT, l.ten LOAI_CTDT, hp.so_tiet_ly_thuyet STLT , hp.so_tiet_thuc_hanh STTH"

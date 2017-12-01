@@ -2,6 +2,7 @@ package dut.com.entity;
 
 public class MucTieuHocPhan {
 	
+	
 	private int id;
 	private String ten;
 	private String trinhDoNangLuc;

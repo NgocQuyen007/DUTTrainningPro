@@ -17,6 +17,12 @@
                                             <a href="#">DUT</a>
                                         </li>
                                         <li>
+                                            <a href="#">Chương Trình Đào Tạo</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">2</a>
+                                        </li>
+                                        <li>
                                             <a href="#">Học Phần</a>
                                         </li>
                                         <li>
@@ -39,7 +45,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <form id="default-wizard" method="POST" action='<c:url value='/hocphan/${hocphan.id}/decuong/${decuongId}/muctieu/add' />'>
+                                    <form id="default-wizard" method="POST" action='<c:url value='/ctdt/${ctdtId}/hocphan/${hocphan.id}/decuong/${decuongId}/muctieu/add' />'>
                                         <fieldset title="1">
                                             <legend>Thêm Mục Tiêu Học Phần</legend>
                                             <div class="row m-t-20">
@@ -58,8 +64,8 @@
 											    <thead>
 											      <tr>
 											        <th class="col-md-1 text-center">Mục Tiêu (1)</th>
-											        <th class="col-md-6 text-center">Mô tả mục tiêu (2)</th>
-											        <th class="col-md-6 text-center">Chuẩn đầu ra của CTĐT (3)</th>
+											        <th class="col-md-3 text-center">Mô tả mục tiêu (2)</th>
+											        <th class="col-md-3 text-center">Chuẩn đầu ra của CTĐT (3)</th>
 											        <th class="col-md-3 text-center">TĐNL (4)</th>
 											        <th class="col-md-1 text-center">Action</th>
 											      </tr>
@@ -103,12 +109,19 @@
 											        <td>
 											        	<c:forEach items="${cdrCTDT}" var="item">
                                                         	<label class="checkbox-inline">
-														      <input type="checkbox" name="chuanDauRa0" id="cdr" value="${item.id}">CDR${item.id}
+														      <input type="checkbox" name="chuanDauRa0" id="cdr" value="${item.id}">
+														      <a href="#" data-toggle="tooltip" title="${item.moTa}">CDR${item.id}</a>
 														    </label>
                                                      	</c:forEach>
 											        </td>
 											        <td>
-											        	<input type="text" class="form-control" name="trinhDoNangLuc" required>
+											        	<select class="form-control" name="trinhDoNangLuc" required>
+											        		<option value="(1)">(1)</option>
+											        		<option value="(2)">(2)</option>
+											        		<option value="(3)">(3)</option>
+											        		<option value="(4)">(4)</option>
+											        		<option value="(5)">(5)</option>
+											        	</select>
 											        </td>
 											        <td>
 											        	<button type="button" id="delete-row" class="btn-xs btn-danger hidden">

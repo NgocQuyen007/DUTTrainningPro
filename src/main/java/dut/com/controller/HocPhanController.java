@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dut.com.dao.CTDTDAO;
 import dut.com.dao.HocPhanDao;
 import dut.com.dao.KhoiKienThucDao;
 import dut.com.dao.DeCuongHocPhanDao;
+import dut.com.entity.CTDT;
 import dut.com.entity.HocPhan;
 import dut.com.entity.KhoiKienThuc;
-import dut.com.entity.DeCuongHocPhan;
 
 @Controller
 @RequestMapping("hocphan")
@@ -33,23 +34,12 @@ public class HocPhanController {
 	@Autowired
 	DeCuongHocPhanDao dchpDao;
 	
+	@Autowired
+	CTDTDAO ctdtDao;
 	@GetMapping
 	public String index(ModelMap model){
 		List<HocPhan> list = new ArrayList<HocPhan>();
 		list = daohp.getAll();
-		model.addAttribute("list",list);
-		return "admin.hocphan.index";
-	}
-	
-	@RequestMapping(path="/{pageid}", method=RequestMethod.GET)
-	public String viewpage(@PathVariable int pageid, ModelMap model){
-		 int total = 10;  
-	        if(pageid==1){}  
-	        else{  
-	            pageid=(pageid-1)*total+1;  
-	        }  
-		List<HocPhan> list = new ArrayList<HocPhan>();
-		list = daohp.getHocPhanByPage(pageid, total);
 		model.addAttribute("list",list);
 		return "admin.hocphan.index";
 	}
@@ -105,10 +95,10 @@ public class HocPhanController {
 		hocphan = daohp.getHocPhanById(id);
 		KhoiKienThuc kkt = new KhoiKienThuc();
 		kkt = daokkt.getKhoiKienThucById(hocphan.getKhoi_kien_thuc_id());
-		int countDCHP = dchpDao.checkExist(id);
 		model.addAttribute("hocphan", hocphan);
 		model.addAttribute("kkt", kkt);
-		model.addAttribute("decuong", countDCHP);
+		List<CTDT> list = ctdtDao.getCTDTByHocPhanId(id);
+		model.addAttribute("listCTDT", list);
 		return "admin.hocphan.show";
 	}
 	
