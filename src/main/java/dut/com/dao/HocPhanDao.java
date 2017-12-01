@@ -61,4 +61,5 @@ public class HocPhanDao {
 		String sql = "DELETE FROM hoc_phan where id=?";
 		jdbcTemplate.update(sql,id);
 	}
+	
 }
