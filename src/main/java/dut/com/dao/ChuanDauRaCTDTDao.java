@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import dut.com.dao.rowmapper.ChuanDauRaCTDTRowMapper;
 import dut.com.entity.ChuanDauRaCTDT;
 
 @Repository
@@ -33,6 +34,34 @@ public class ChuanDauRaCTDTDao {
 	
 	public List<ChuanDauRaCTDT> getItems() {
 		String sql = "SELECT * FROM chuan_dau_ra_ctdt";
-		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<ChuanDauRaCTDT>(ChuanDauRaCTDT.class));
+		return jdbcTemplate.query(sql, new ChuanDauRaCTDTRowMapper());
+	}
+	
+	public List<ChuanDauRaCTDT> getListByCTDT(int ctdtId) {
+		String sql = "SELECT * FROM chuan_dau_ra_ctdt where ctdt_id = ?";
+		return jdbcTemplate.query(sql, new ChuanDauRaCTDTRowMapper(), ctdtId);
+	}
+
+	public boolean add(int ctdtId, String ten, String mota) {
+		try {
+			String sql = "INSERT INTO chuan_dau_ra_ctdt(ten_cdr, mota, ctdt_id) VALUES(?,?,?)";
+			jdbcTemplate.update(sql, new Object[]{ ten, mota, ctdtId });
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
+
+	public boolean deleteAll(int ctdtId) {
+		try {
+			String sql = "DELETE from chuan_dau_ra_ctdt WHERE ctdt_id = ?";
+			jdbcTemplate.update(sql, new Object[]{ ctdtId });
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		
 	}
 }

@@ -57,6 +57,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/admin/ctdt/addHPToHKAjax.jsp"></put-attribute>
 	</definition>
 	
+	<!-- Chuan dau ra CTDT -->
+	<definition name="admin.chuandauractdt.add" extends="admin-definition">
+		<put-attribute name="content" value="/WEB-INF/views/admin/chuandauraCTDT/add.jsp"></put-attribute>
+	</definition>
+	
 	<!--  Đề Cương Học Phần  -->
 	<definition name="admin.decuonghocphan.add" extends="admin-definition">
 		<put-attribute name="content" value="/WEB-INF/views/admin/decuonghocphan/add.jsp"></put-attribute>
