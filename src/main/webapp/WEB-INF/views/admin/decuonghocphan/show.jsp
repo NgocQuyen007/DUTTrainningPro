@@ -142,7 +142,7 @@
 														    	<c:forEach items="${nguonhoclieu}" var="item" varStatus="loop">
 															    	<tr>
 																        <td>
-																        	<span>${item.tenHocLieu}</span>"
+																        	<span>${item.tenHocLieu}</span>
 																        </td>
 																        <td>
 																        	<span>
