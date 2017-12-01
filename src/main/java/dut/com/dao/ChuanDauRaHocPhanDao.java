@@ -55,7 +55,9 @@ public class ChuanDauRaHocPhanDao {
 	}
 	
 	public List<ChuanDauRaHocPhan> getItemsByDeCuongId(int id) {
-		String sql = "SELECT * FROM chuan_dau_ra_hoc_phan WHERE de_cuong_chi_tiet_id = "+id;
+		String sql = "SELECT * FROM chuan_dau_ra_hoc_phan WHERE id in"
+				+ " (SELECT chuan_dau_ra_hoc_phan_id FROM muc_tieu_hoc_phan_has_chuan_dau_ra_hoc_phan "
+				+ "where de_cuong_chi_tiet_id = " + id +")";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<ChuanDauRaHocPhan>(ChuanDauRaHocPhan.class));
 	}
 }

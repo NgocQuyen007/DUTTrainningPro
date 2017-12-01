@@ -60,8 +60,9 @@ public class DeCuongHocPhanController {
 		map.addAttribute("muctieuhp", mthpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		map.addAttribute("chuanDauRa", mtductdtDao.getCDRByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		map.addAttribute("nguonhoclieu", nhlDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
-//		map.addAttribute("chuandaurahp", cdrhpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("chuandaurahp", cdrhpDao.getItemsByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		map.addAttribute("muctieutuongung", mtducdrhpDao.getMucTieu(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
+		map.addAttribute("mucdogiangday", mtducdrhpDao.getMucTieuByDeCuongId(dchpDao.getItemByCTDTAndHP(ctdtId, hpId).getId()));
 		
 		return "admin.decuonghocphan.show";
 	}

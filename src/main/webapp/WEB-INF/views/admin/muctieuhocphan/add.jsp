@@ -115,7 +115,7 @@
                                                      	</c:forEach>
 											        </td>
 											        <td>
-											        	<select class="form-control" name="trinhDoNangLuc" multiple>
+											        	<select class="form-control" name="trinhDoNangLuc" multiple required>
 											        		<option value="(1)">(1)</option>
 											        		<option value="(2)">(2)</option>
 											        		<option value="(3)">(3)</option>

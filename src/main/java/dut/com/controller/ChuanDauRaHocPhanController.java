@@ -56,7 +56,7 @@ public class ChuanDauRaHocPhanController {
 	
 	@RequestMapping(path="add", method=RequestMethod.POST)
 	public String store(
-			@PathVariable("hocphanId") int hpId, @PathVariable("decuongId") int decuongId,
+			@PathVariable("hpId") int hpId, @PathVariable("decuongId") int decuongId, @PathVariable("ctdtId") int ctdtId,
 			HttpServletRequest request
 	){
 		int countRow = Integer.parseInt(request.getParameter("countRow"));
@@ -64,19 +64,16 @@ public class ChuanDauRaHocPhanController {
 		for (int i = 0; i<countRow; i++) {
 			mucTieuHocPhan[i] = request.getParameterValues("chuanDauRa"+i);
 		}
-		String ten[] = request.getParameterValues("ten");
-		String moTa[] = request.getParameterValues("moTa");
 		String mucDoGiangDay[] = request.getParameterValues("mucDoGiangDay");
+		String cdrId[] = request.getParameterValues("cdrid");
 		for (int i=0; i<countRow; i++) {
-			ChuanDauRaHocPhan cdrhp = new ChuanDauRaHocPhan(ten[i], moTa[i], mucDoGiangDay[i], decuongId);
-			int cdrhpId = cdrhpDao.add(cdrhp);
 			for (int j=0; j<mucTieuHocPhan[i].length; j++) {
-				MucTieuDapUngChuanDauRaHocPhan mtduCDR = new MucTieuDapUngChuanDauRaHocPhan(Integer.parseInt(mucTieuHocPhan[i][j]), cdrhpId);
+				MucTieuDapUngChuanDauRaHocPhan mtduCDR = new MucTieuDapUngChuanDauRaHocPhan(Integer.parseInt(mucTieuHocPhan[i][j]), Integer.parseInt(cdrId[i]), mucDoGiangDay[i], decuongId);
 				mtducdrhpDao.add(mtduCDR);
 			}
 		}
 		
-		return "redirect:/hocphan/" + hpId + "/decuong/";
+		return "redirect:/ctdt/" + ctdtId + "/hocphan/" + hpId + "/decuong/";
 	}
 	
 //	@RequestMapping(path="/{muctieuId}/edit", method=RequestMethod.POST)
