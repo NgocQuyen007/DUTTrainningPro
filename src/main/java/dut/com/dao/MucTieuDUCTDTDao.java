@@ -12,6 +12,7 @@ import dut.com.entity.TmpClass;
 @Repository
 public class MucTieuDUCTDTDao {
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

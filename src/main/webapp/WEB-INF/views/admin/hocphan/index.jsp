@@ -93,12 +93,6 @@
 												</c:forEach>	                                                                                  		
                                             </tbody>
                                         </table>
-                                        <ul class="pagination">
-										  <li><a href="<c:url value='/hocphan/1' />">1</a></li>
-										  <li><a href="<c:url value='/hocphan/2' />">2</a></li>
-										  <li><a href="<c:url value='/hocphan/3' />">3</a></li>
-										  <li><a href="<c:url value='/hocphan/4' />">4</a></li>
-										</ul>
                                     </div>
                                 </div> 							                        
                         </div>

@@ -12,6 +12,7 @@ public class LibString {
         
     public static String md5(String input) {
         String result = input;
+        
         MessageDigest md = null; 
         if(input != null) {
             try {

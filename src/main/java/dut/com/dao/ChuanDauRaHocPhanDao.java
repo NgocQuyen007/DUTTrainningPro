@@ -18,6 +18,7 @@ import dut.com.entity.ChuanDauRaHocPhan;
 @Repository
 public class ChuanDauRaHocPhanDao {
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

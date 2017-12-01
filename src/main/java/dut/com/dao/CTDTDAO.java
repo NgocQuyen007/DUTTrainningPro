@@ -42,7 +42,12 @@ public class CTDTDAO {
 					+ "JOIN loai l ON l.id = ctdt.loai_id;";
 		return jdbcTemplate.query(sql, new CTDTRowMapper());
 	}
-	
+	public List<CTDT> getCTDTByHocPhanId(int id){
+		String sql = "select * from chuong_trinh_dao_tao where chuong_trinh_dao_tao.id "
+				+ "in (select hoc_phan_ctdt.chuong_trinh_dao_tao_id "
+				+ "from hoc_phan_ctdt where hoc_phan_id = ?)";;
+		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<CTDT>(CTDT.class), id);
+	}
 	public int add(CTDT ctdt) {	
 		try {
 			String sql = "INSERT INTO chuong_trinh_dao_tao(ten, khoa_id, nien_khoa, loai_id) VALUES(?,?,?,?)";
@@ -93,7 +98,7 @@ public class CTDTDAO {
 	}
 	
 	public List<HocKi> getHocKiRemain(int id){
-		String sql = "select * from hoc_ky where id not in (SELECT distinct(hoc_ki_id) FROM trainningpro.hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?);";
+		String sql = "select * from hoc_ky where id not in (SELECT distinct(hoc_ki_id) FROM hoc_phan_ctdt where chuong_trinh_dao_tao_id = ?);";
 		List<HocKi> rs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<HocKi>(HocKi.class), id);
 		return rs;
 	}

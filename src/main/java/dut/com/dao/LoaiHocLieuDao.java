@@ -12,6 +12,7 @@ import dut.com.entity.LoaiHocLieu;
 @Repository
 public class LoaiHocLieuDao {
 	
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

@@ -13,6 +13,7 @@ import dut.com.entity.KhoiKienThuc;
 
 @Repository
 public class KhoiKienThucDao {
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
