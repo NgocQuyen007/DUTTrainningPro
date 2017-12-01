@@ -6,13 +6,8 @@
                 <div class="topbar-left">
                     <!--<a href="index.jsp" class="logo"><span>Code<span>Fox</span></span><i class="mdi mdi-layers"></i></a>-->
                     <!-- Image logo -->
-                    <a href="index.jsp" class="logo">
-                        <span>
-                            <img src="<c:url value='/resources/admin/bootstrap/images/logo.png'/>" alt="" height="25">
-                        </span>
-                        <i>
-                            <img src="<c:url value='/resources/admin/bootstrap/images/logo_sm.png'/>" alt="" height="28">
-                        </i>
+                    <a href="<c:url value="/" />" class="">
+                        
                     </a>
                 </div>
 

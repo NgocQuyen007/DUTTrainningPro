@@ -60,7 +60,7 @@ public class ChuanDauRaCTDTController {
 			String ten[] = request.getParameterValues("ten");
 			String mota[] = request.getParameterValues("mota");
 			
-			for(int i=0; i<ten.length - 1; i++){
+			for(int i=0; i<ten.length; i++){
 				chuanDauRaCTDTDAO.add(ctdtId, ten[i], mota[i]);
 			}
 		}

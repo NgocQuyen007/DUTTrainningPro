@@ -10,11 +10,7 @@
                         <ul class="metisMenu nav" id="side-menu">
                             <li class="menu-title">Navigation</li>
                             <li>
-                                <a href="<c:url value="/" />" aria-expanded="true"><i class="fi-air-play"></i><span> Trang Chủ </span></a>
-                            </li>
-
-                            <li>
-                                <a href="<c:url value="/ctdt" />" aria-expanded="true"><i class="fi-target"></i> <span>Chương trình đào tạo </span></a>
+                                <a href="<c:url value="/ctdt" />" aria-expanded="true"><i class="fi-air-play"></i><span>Chương trình đào tạo </span></a>
                             </li>
 
                             <li>

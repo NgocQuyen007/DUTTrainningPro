@@ -27,7 +27,7 @@
 						<form method="post" action='<c:url value='/ctdt/chuandaura/create' />' id="default-wizard">
 							<fieldset title="Học kì 1" style="margin-bottom: 20px;">
 								<legend>THÊM CHUẨN ĐẦU RA</legend>
-								<h4>Chương trình đào tạo: ${ctdt.ten}</h4>
+								<p>Chương trình đào tạo: <b><a href='<c:url value='/ctdt/${ctdt.id }/edit' />'>${ctdt.ten}</a></b></p>
 								<input type="hidden" name="ctdtId" value="${ctdt.id}" />
 								<table class="table text-center table-bordered" style="margin-bottom: 0px;">
 								    <thead>
@@ -55,23 +55,6 @@
 									      </tr>
 									    </c:forEach>
 								    </tbody>
-								    <tbody id="cdr-element" style="display: none;">
-								      <tr>
-								        <td>
-								        	<input type="text" name="ten" class="form-control"/>
-								        </td>
-								        <td>
-								        	<textarea name="mota" rows="" cols="" class="form-control"></textarea>
-								        </td>
-								        <td>
-								        	<button type="button" class="btn-xs btn-danger" onclick="delCrdTr(this)">
-								        		<span class="fa fa-remove"></span>
-								        	</button>
-								        </td>
-								      </tr>
-								    </tbody>
-								    
-								    
 							  	</table>
 							  	<button id="them-crd-btn" type="button" class="btn btn-primary stepy-finish" style="margin-top: 2px;">Thêm</button>
 							</fieldset>
@@ -81,7 +64,23 @@
 							</div>
 							
 						</form>
-
+						<table style="display: none;">
+						<tbody id="cdr-element" style="display: none;">
+					      <tr>
+					        <td>
+					        	<input type="text" name="ten" class="form-control" required/>
+					        </td>
+					        <td>
+					        	<textarea name="mota" rows="" cols="" class="form-control" required></textarea>
+					        </td>
+					        <td>
+					        	<button type="button" class="btn-xs btn-danger" onclick="delCrdTr(this)">
+					        		<span class="fa fa-remove"></span>
+					        	</button>
+					        </td>
+					      </tr>
+					    </tbody>
+					    </table>
 					</div>
 				</div>
 			</div>
