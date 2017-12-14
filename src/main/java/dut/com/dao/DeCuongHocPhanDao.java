@@ -21,8 +21,8 @@ public class DeCuongHocPhanDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public int add(DeCuongHocPhan deCuongHocPhan) {
-		String sql = "INSERT INTO de_cuong_hoc_phan(giang_vien_id, giang_vien_ass_id, mo_ta, hoc_phan_id) VALUES(?, ?, ?, ?)";
+	public int add(final DeCuongHocPhan deCuongHocPhan) {
+		final String sql = "INSERT INTO de_cuong_hoc_phan(giang_vien_id, giang_vien_ass_id, mo_ta, hoc_phan_id) VALUES(?, ?, ?, ?)";
 		GeneratedKeyHolder holder = new GeneratedKeyHolder();
 
 		

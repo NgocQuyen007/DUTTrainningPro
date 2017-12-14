@@ -63,7 +63,7 @@ public class GiangVienController {
 	}
 
 	@RequestMapping(path = "add", method = RequestMethod.POST)
-	public String add(@Valid @ModelAttribute("giangvien") GiangVien giangvien,BindingResult bindingResult,@RequestParam(value="delete_picture",required=false) String key, @RequestParam("idHocVi") int idHocVi,@RequestParam("idKhoa") int idKhoa,  @RequestParam("picture") CommonsMultipartFile commonsMultipartFile, HttpServletRequest request,ModelMap map) {
+	public String add(@Valid @ModelAttribute("giangvien") GiangVien giangvien,BindingResult bindingResult,@RequestParam(value="delete_picture",required=false) String key, @RequestParam("idHocVi") int idHocVi,@RequestParam("idKhoa") int idKhoa,  @RequestParam("picture") CommonsMultipartFile commonsMultipartFile, HttpServletRequest request,ModelMap map) throws IllegalStateException, IOException {
 		System.out.println("ADD POST: " + giangvien.toString());
 		if(bindingResult.hasErrors()){
 			map.addAttribute("giangvien", giangvien);
@@ -102,9 +102,9 @@ public class GiangVienController {
 		try {
 			if (dao.add(giangvien) > 0) {
 				if (!giangvien.getAvatar().equals("")) {
-					try {
-						commonsMultipartFile.transferTo(new File(urldir + File.separator + picture));
-					} catch (IllegalStateException | IOException e) {}
+					
+					commonsMultipartFile.transferTo(new File(urldir + File.separator + picture));
+					
 				}
 				return "redirect:/giangvien?msg=add";
 			}
@@ -129,7 +129,7 @@ public class GiangVienController {
 	}
 	
 	@RequestMapping(path = "edit/{id}", method = RequestMethod.POST)
-	public String edit(@Valid @ModelAttribute GiangVien giangvien,BindingResult bindingResult,@PathVariable int id,@RequestParam(value="delete_picture",required=false) String key, @RequestParam("idHocVi") int idHocVi,@RequestParam("idKhoa") int idKhoa,  @RequestParam("picture") CommonsMultipartFile commonsMultipartFile, HttpServletRequest request) {
+	public String edit(@Valid @ModelAttribute GiangVien giangvien,BindingResult bindingResult,@PathVariable int id,@RequestParam(value="delete_picture",required=false) String key, @RequestParam("idHocVi") int idHocVi,@RequestParam("idKhoa") int idKhoa,  @RequestParam("picture") CommonsMultipartFile commonsMultipartFile, HttpServletRequest request) throws Exception, IOException {
 		
 		if(bindingResult.hasErrors()){
 			return "redirect:/giangvien/edit/"+id+"?msg=2";
@@ -175,9 +175,9 @@ public class GiangVienController {
 			if (dao.edit(giangvien) > 0) {
 				// Khác rỗng và khác ảnh cũ
 				if (!giangvien.getAvatar().equals("") && !giangvien.getAvatar().equals(old_picture)) {
-					try {
+				
 						commonsMultipartFile.transferTo(new File(urldir + File.separator + picture));
-					} catch (IllegalStateException | IOException e) {}
+	
 				}
 				return "redirect:/giangvien?msg=edit";
 			}

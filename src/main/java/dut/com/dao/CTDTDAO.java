@@ -48,9 +48,9 @@ public class CTDTDAO {
 				+ "from hoc_phan_ctdt where hoc_phan_id = ?)";;
 		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<CTDT>(CTDT.class), id);
 	}
-	public int add(CTDT ctdt) {	
+	public int add(final CTDT ctdt) {	
 		try {
-			String sql = "INSERT INTO chuong_trinh_dao_tao(ten, khoa_id, nien_khoa, loai_id) VALUES(?,?,?,?)";
+			final String sql = "INSERT INTO chuong_trinh_dao_tao(ten, khoa_id, nien_khoa, loai_id) VALUES(?,?,?,?)";
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			jdbcTemplate.update(
 			    new PreparedStatementCreator() {

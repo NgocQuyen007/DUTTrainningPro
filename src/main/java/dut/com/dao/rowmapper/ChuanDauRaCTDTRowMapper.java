@@ -9,7 +9,6 @@ import dut.com.entity.ChuanDauRaCTDT;
 
 public class ChuanDauRaCTDTRowMapper implements RowMapper<ChuanDauRaCTDT> {
 
-	@Override
 	public ChuanDauRaCTDT mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ChuanDauRaCTDT cdr = new ChuanDauRaCTDT();
 		cdr.setId(rs.getInt("id"));
